@@ -8,3 +8,4 @@
     * gemma-3-270m-it-Q8_0
     * gemma-3-270m-it-qat-Q4_0
     * GLM-4.6V-Flash-Q4_K_M
+    * translategemma-4b-it-q8_0

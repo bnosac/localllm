@@ -19,6 +19,7 @@ def localllm_download_model(
         - "gemma-3-270m-it-Q8_0": Google Gemma 3 270M it model (Q8_0 quantization)
         - "gemma-3-270m-it-qat-Q4_0": Google Gemma 3 270M it model (Q4_0 quantization)
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
+        - "translategemma-4b-it-q8_0": TranslateGemma 4B it model (Q8_0 quantization)
         
     model_dir : str or None, default=None
         Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR 
@@ -47,8 +48,15 @@ def localllm_download_model(
     >>> path = os.getcwd()
     >>> model_path = localllm_download_model(model_dir=path)
     Downloading...
+    >>> ## More models
     >>> os.remove(model_path)  # Clean up downloaded file
-    
+    >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True)
+    Downloading...
+    >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True)
+    Downloading...
+    >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True)
+    Downloading...
+
     Notes
     -----
     The function creates the target directory if it doesn't exist.
@@ -68,7 +76,11 @@ def localllm_download_model(
         "GLM-4.6V-Flash-Q4_K_M": {
             "url": "https://huggingface.co/ggml-org/GLM-4.6V-Flash-GGUF/resolve/main/GLM-4.6V-Flash-Q4_K_M.gguf",
             "filename": "GLM-4.6V-Flash-Q4_K_M.gguf"
-        },                
+        },
+        "translategemma-4b-it-q8_0": {
+            "url": "https://huggingface.co/NikolayKozloff/translategemma-4b-it-Q8_0-GGUF/resolve/main/translategemma-4b-it-q8_0.gguf",
+            "filename": "translategemma-4b-it-q8_0.gguf"
+        },        
     }
     
     # Validate model type
