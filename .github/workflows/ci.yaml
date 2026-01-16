@@ -21,7 +21,7 @@ jobs:
       matrix:
         #os: [ubuntu-latest, macos-latest, windows-latest]
         os: [ubuntu-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
       max-parallel: 3
     name: Pytest python ${{ matrix.python-version }}
     steps:
@@ -34,7 +34,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install uv
-          uv pip install .[dev]
+          uv pip install --system .[dev]
       - name: Pytest
         run: python -m pytest --cov
   deploy-docs:
@@ -60,7 +60,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install uv
-          uv pip install .[dev]
+          uv pip install --system .[dev]
           Rscript -e "reticulate::py_install('.[dev]')"
           quartodoc build --config docs/_quarto.yml          
       - name: Publish to GitHub Pages (and render)
