@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dspy.localllm – textalignment</title>
+<title>dspy.localllm – localllm</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">textalignment</span>
+    <span class="navbar-title">localllm</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> transformer(<span class="st">"Hoeveel is 4x4"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> dspy.configure(lm <span class="op">=</span> LocalLLM(transformer))</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Go(dspy.Signature):</span>
