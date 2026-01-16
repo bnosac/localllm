@@ -7,7 +7,7 @@ website:
   site-url: https://bnosac.github.io/localllm/
   repo-url: https://github.com/bnosac/localllm
   repo-actions: [issue]
-  page-footer: 
+  page-footer:
     left: "LocalLLM - &copy; BNOSAC"
   navbar:
     pinned: true
@@ -20,7 +20,7 @@ website:
     right:
       - icon: github
         href: https://github.com/bnosac/localllm
-        aria-label: GitHub repository    
+        aria-label: GitHub repository
 
 # tell quarto to read the generated sidebar
 metadata-files:
@@ -44,4 +44,3 @@ quartodoc:
       desc: Use a LocalLLM model with DSPy
       contents:
         - name: dspy.LocalLLM
-

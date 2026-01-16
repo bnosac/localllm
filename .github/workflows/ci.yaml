@@ -1,14 +1,14 @@
-name: ci 
+name: ci
 
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
   push:
     branches:
-      - master 
+      - master
       - main
   pull_request:
     branches:
-      - master 
+      - master
       - main
 
 permissions:
@@ -60,7 +60,7 @@ jobs:
             any::reticulate
       - name: Configure reticulate to use system Python
         run: |
-          Rscript -e "writeLines(sprintf('RETICULATE_PYTHON=%s', Sys.which('python3')), '~/.Renviron')"                      
+          Rscript -e "writeLines(sprintf('RETICULATE_PYTHON=%s', Sys.which('python3')), '~/.Renviron')"
       - name: Build reference documentation
         run: |
           pip install --upgrade pip
@@ -68,7 +68,7 @@ jobs:
           uv pip install --system --group dev
           uv pip install --system .
           #Rscript -e "reticulate::py_install('.[dev]')"
-          quartodoc build --config docs/_quarto.yml          
+          quartodoc build --config docs/_quarto.yml
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
