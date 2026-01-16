@@ -33,6 +33,8 @@ def localllm_download_model(
         
     Examples
     --------
+    
+    >>> from localllm import localllm_download_model
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0")                      # doctest: +SKIP    
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=True)
     Downloading...
