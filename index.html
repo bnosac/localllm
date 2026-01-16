@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'id': 'cmpl-525626a2-b983-4bea-9460-7e116fe3e639', 'object': 'text_completion', 'created': 1768568764, 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf', 'choices': [{'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x', 'index': 0, 'logprobs': None, 'finish_reason': 'length'}], 'usage': {'prompt_tokens': 8, 'completion_tokens': 16, 'total_tokens': 24}}</code></pre>
+<pre><code>{'id': 'cmpl-dccb541a-8912-4b1c-bd2f-8f9a2e614c64', 'object': 'text_completion', 'created': 1768569780, 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf', 'choices': [{'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x', 'index': 0, 'logprobs': None, 'finish_reason': 'length'}], 'usage': {'prompt_tokens': 8, 'completion_tokens': 16, 'total_tokens': 24}}</code></pre>
 </div>
 </div>
 </section>
@@ -204,6 +204,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>'Paris'</code></pre>
 </div>
+</div>
+</section>
+<section id="another-example-with-a-translation-model" class="level3">
+<h3 class="anchored" data-anchor-id="another-example-with-a-translation-model">Another example with a translation model</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_download_model, LocalLLM</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> LocalLLM(transformer)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"role"</span>: <span class="st">"system"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"content"</span>: <span class="st">"You are a professional Dutch (nl) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the English translation, without any additional explanations or commentary. Please translate the following Dutch text into English:"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"role"</span>: <span class="st">"user"</span>, </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"content"</span>: <span class="st">"Wij heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?"</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>llm(messages <span class="op">=</span> messages)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
