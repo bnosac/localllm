@@ -1,0 +1,73 @@
+name: ci 
+
+on:
+  push:
+    branches:
+      - master 
+      - main
+  pull_request:
+    branches:
+      - master 
+      - main
+
+permissions:
+  contents: write
+  pages: write
+
+jobs:
+  install-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        #os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+      max-parallel: 3
+    name: Pytest python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: "x64"
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install uv
+          uv pip install --system --group dev
+      - name: Pytest
+        run: |
+          pytest --cov .
+  deploy-docs:
+    name: Deploy Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages:
+            any::knitr
+            any::rmarkdown
+            any::reticulate
+      - name: Build reference documentation
+        run: |
+          pip install --upgrade pip
+          pip install uv
+          uv pip install --system --group dev
+          uv pip install --system .
+          #Rscript -e "reticulate::py_install('.[dev]')"
+          quartodoc build --config docs/_quarto.yml          
+      - name: Publish to GitHub Pages (and render)
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          path: docs
+          render: true
