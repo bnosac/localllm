@@ -1,0 +1,46 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  title: "textalignment"
+  site-url: https://bnosac.github.io/localllm/
+  repo-url: https://github.com/bnosac/localllm
+  repo-actions: [issue]
+  page-footer: 
+    left: "LocalLLM - &copy; BNOSAC"
+  navbar:
+    pinned: true
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "Reference"
+        file: reference/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/bnosac/localllm
+        aria-label: GitHub repository    
+
+# tell quarto to read the generated sidebar
+metadata-files:
+  - _sidebar.yml
+
+format:
+  html:
+    theme:
+      - flatly
+
+quartodoc:
+  package: localllm
+  title: Functions
+  style: pkgdown  
+  sections:
+    - title: LocalLLM Functions
+    - subtitle: Download Model and use the LocalLLM
+      desc: LocalLLM
+      contents:
+        - localllm_download_model
+        - LocalLLM
+
+          
