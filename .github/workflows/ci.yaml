@@ -37,7 +37,6 @@ jobs:
           uv pip install --system --group dev
       - name: Pytest
         run: |
-          uv add --system --dev pytest-cov
           uv run pytest --cov
   deploy-docs:
     name: Deploy Documentation
