@@ -33,14 +33,17 @@ def localllm_download_model(
         
     Examples
     --------
-    >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0")
+    >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0")                      # doctest: +ELLIPSIS    
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=True)
+    Downloading...
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=False)
     >>> model_path = localllm_download_model("not-existing-model")                        # doctest: +SKIP
     >>> 
     >>> import os
     >>> path = os.getcwd()
     >>> model_path = localllm_download_model(model_dir=path)
+    Downloading...
+    >>> os.remove(model_path)  # Clean up downloaded file
     
     Notes
     -----
@@ -81,6 +84,8 @@ def localllm_download_model(
     # Check if file already exists
     if os.path.exists(model_path) and not overwrite:
         return model_path
+    if os.path.exists(model_path) and overwrite:
+        os.remove(model_path)
     
     # Download the model
     print(f"Downloading {type} model...")
