@@ -57,6 +57,9 @@ jobs:
             any::knitr
             any::rmarkdown
             any::reticulate
+      - name: Configure reticulate to use system Python
+        run: |
+          Rscript -e "writeLines(sprintf('RETICULATE_PYTHON=%s', Sys.which('python3')), '~/.Renviron')"                      
       - name: Build reference documentation
         run: |
           pip install --upgrade pip
@@ -71,3 +74,5 @@ jobs:
           target: gh-pages
           path: docs
           render: true
+        env:
+          RETICULATE_PYTHON_ENV: /usr
