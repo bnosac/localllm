@@ -19,8 +19,9 @@ dev = [
     "pytest>=8.3.4",
     "pytest-cov",
     "ruff>=0.8.6",    
+    "quartodoc",
     "dspy",
-    "llama-cpp-python",
+    "llama-cpp-python",    
 ]
 
 [tool.pytest.ini_options]
