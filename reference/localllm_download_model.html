@@ -169,9 +169,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="caption-top table">
 <colgroup>
 <col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 87%">
-<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 89%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -185,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>type</td>
 <td>str</td>
-<td>The type/name of the model to download. Currently supports: - “gemma-3-270m-it-Q8_0”: Google Gemma 3 270M it model (Q8_0 quantization) - “gemma-3-270m-it-qat-Q4_0”: Google Gemma 3 270M it model (Q4_0 quantization) - “GLM-4.6V-Flash-Q4_K_M”: GLM 4.6V Flash model (Q4_K_M quantization) - “translategemma-4b-it-q8_0”: TranslateGemma 4B it model (Q8_0 quantization)</td>
+<td>The type/name of the model to download. Currently supports: - “gemma-3-270m-it-Q8_0”: Google Gemma 3 270M it model (Q8_0 quantization) - “gemma-3-270m-it-qat-Q4_0”: Google Gemma 3 270M it model (Q4_0 quantization) - “gemma-3-4b-it-Q4_K_M”: Google Gemma 3 4b it model (Q4_K_M quantization) - “GLM-4.6V-Flash-Q4_K_M”: GLM 4.6V Flash model (Q4_K_M quantization) - “translategemma-4b-it-q8_0”: TranslateGemma 4B it model (Q8_0 quantization)</td>
 <td><code>"gemma-3-270m-it-Q8_0"</code></td>
 </tr>
 <tr class="even">
@@ -239,10 +239,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)  <span class="co"># Clean up downloaded file</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"GLM-4.6V-Flash-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-4b-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Downloading...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"GLM-4.6V-Flash-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>Downloading...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="notes" class="level2 doc-section doc-section-notes">
 <h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
