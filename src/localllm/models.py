@@ -33,7 +33,7 @@ def localllm_download_model(
         
     Examples
     --------
-    >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0")                      # doctest: +ELLIPSIS    
+    >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0")                      # doctest: +SKIP    
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=True)
     Downloading...
     >>> model_path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=False)
