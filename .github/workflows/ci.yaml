@@ -34,7 +34,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install uv
-          uv pip install --system .[dev]
+          uv pip install --system --group dev
       - name: Pytest
         run: |
           uv add --dev pytest-cov
@@ -62,7 +62,7 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install uv
-          uv pip install --system .[dev]
+          uv pip install --system --group dev
           Rscript -e "reticulate::py_install('.[dev]')"
           quartodoc build --config docs/_quarto.yml          
       - name: Publish to GitHub Pages (and render)
