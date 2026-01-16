@@ -6,4 +6,5 @@
 * Added functionality run a local model (with llama-cpp) alongside dspy: LocalLLM
 * localllm_download_model:
     * gemma-3-270m-it-Q8_0
-    * gemma-3-270m-it-qat-Q4_0.gguf
+    * gemma-3-270m-it-qat-Q4_0
+    * GLM-4.6V-Flash-Q4_K_M

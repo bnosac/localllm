@@ -18,6 +18,7 @@ def localllm_download_model(
         The type/name of the model to download. Currently supports:
         - "gemma-3-270m-it-Q8_0": Google Gemma 3 270M it model (Q8_0 quantization)
         - "gemma-3-270m-it-qat-Q4_0": Google Gemma 3 270M it model (Q4_0 quantization)
+        - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
         
     model_dir : str or None, default=None
         Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR 
@@ -63,7 +64,11 @@ def localllm_download_model(
         "gemma-3-270m-it-qat-Q4_0": {
             "url": "https://huggingface.co/ggml-org/gemma-3-270m-it-qat-GGUF/resolve/main/gemma-3-270m-it-qat-Q4_0.gguf",
             "filename": "gemma-3-270m-it-qat-Q4_0.gguf"
-        }        
+        },
+        "GLM-4.6V-Flash-Q4_K_M": {
+            "url": "https://huggingface.co/ggml-org/GLM-4.6V-Flash-GGUF/resolve/main/GLM-4.6V-Flash-Q4_K_M.gguf",
+            "filename": "GLM-4.6V-Flash-Q4_K_M.gguf"
+        },                
     }
     
     # Validate model type
