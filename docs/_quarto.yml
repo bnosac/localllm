@@ -33,14 +33,15 @@ format:
 
 quartodoc:
   package: localllm
-  title: Functions
-  style: pkgdown  
+  style: pkgdown
   sections:
-    - title: LocalLLM Functions
-    - subtitle: Download Model and use the LocalLLM
-      desc: LocalLLM
+    - title: LocalLLM utilities
+    - subtitle: Utilities
+      desc: Download common local LLM Models
       contents:
         - localllm_download_model
-        - LocalLLM
+    - subtitle: LocalLLM alongside DSPy
+      desc: Use a LocalLLM model with DSPy
+      contents:
+        - name: dspy.LocalLLM
 
-          
