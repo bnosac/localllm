@@ -37,7 +37,7 @@ jobs:
           uv pip install --system --group dev
       - name: Pytest
         run: |
-          uv run pytest --cov
+          pytest --cov
   deploy-docs:
     name: Deploy Documentation
     runs-on: ubuntu-latest
