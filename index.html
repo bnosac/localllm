@@ -159,8 +159,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="welcome-to-localllm" class="level1">
 <h1>Welcome to localllm</h1>
 <p>Python package localllm provides functionalities to use a Local LLM object which alongside dspy</p>
-<section id="example-looking-up-one-element-in-a-text" class="level3">
-<h3 class="anchored" data-anchor-id="example-looking-up-one-element-in-a-text">Example looking up one element in a text</h3>
+<section id="download-a-model" class="level3">
+<h3 class="anchored" data-anchor-id="download-a-model">Download a model</h3>
+<p>For the list of all models, look to the help of localllm_download_model</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
@@ -173,6 +174,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>'/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf'</code></pre>
 </div>
 </div>
+</section>
+<section id="test-the-local-model" class="level3">
+<h3 class="anchored" data-anchor-id="test-the-local-model">Test the local model</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -181,9 +185,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>{'id': 'cmpl-50e96008-3949-4e0a-bd7b-0304bd602580', 'object': 'text_completion', 'created': 1768566434, 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf', 'choices': [{'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x', 'index': 0, 'logprobs': None, 'finish_reason': 'length'}], 'usage': {'prompt_tokens': 8, 'completion_tokens': 16, 'total_tokens': 24}}</code></pre>
+<pre><code>{'id': 'cmpl-6a58c516-1192-4cad-a504-db7af70cb32f', 'object': 'text_completion', 'created': 1768567768, 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf', 'choices': [{'text': '?\n\n4x4 = 4 * 4 = 16\n\n', 'index': 0, 'logprobs': None, 'finish_reason': 'length'}], 'usage': {'prompt_tokens': 8, 'completion_tokens': 16, 'total_tokens': 24}}</code></pre>
 </div>
 </div>
+</section>
+<section id="use-the-model-directly-alongside-dspy" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-model-directly-alongside-dspy">Use the model directly alongside dspy</h3>
 <p>Use dspy alongside the local model</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dspy.configure(lm <span class="op">=</span> LocalLLM(transformer))</span>
