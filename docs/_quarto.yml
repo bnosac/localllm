@@ -3,7 +3,7 @@ project:
 
 website:
   page-navigation: true
-  title: "textalignment"
+  title: "localllm"
   site-url: https://bnosac.github.io/localllm/
   repo-url: https://github.com/bnosac/localllm
   repo-actions: [issue]

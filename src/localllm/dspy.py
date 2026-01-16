@@ -38,7 +38,7 @@ class LocalLLM(dspy.BaseLM):
     >>> path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite = True) # doctest: +ELLIPSIS    
     Downloading...
     >>> transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)
-    >>> out = transformer("Hoeveel is 4x4")
+    >>> out = transformer("How much is 4x4")
     >>>
     >>> dspy.configure(lm = LocalLLM(transformer))
     >>> class Go(dspy.Signature):
