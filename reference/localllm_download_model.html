@@ -162,7 +162,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span><span class="op">=</span><span class="st">'gemma-3-270m-it-Q8_0'</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    model_dir<span class="op">=</span><span class="va">None</span>,</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    overwrite<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    trace<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Download a local gguf LLM model</p>
 <section id="parameters" class="level2 doc-section doc-section-parameters">
 <h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
@@ -199,6 +200,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>bool</td>
 <td>If True, re-download the model even if it already exists. If False, skip download if the model file is already present.</td>
 <td><code>False</code></td>
+</tr>
+<tr class="even">
+<td>trace</td>
+<td>bool</td>
+<td>If True, shows download progress.</td>
+<td><code>True</code></td>
 </tr>
 </tbody>
 </table>
@@ -237,16 +244,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co">## More models</span></span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)  <span class="co"># Clean up downloaded file</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-1b-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>Downloading...    </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-4b-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"GLM-4.6V-Flash-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>Downloading...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-1b-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-4b-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"GLM-4.6V-Flash-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="notes" class="level2 doc-section doc-section-notes">
 <h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
