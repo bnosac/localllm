@@ -36,8 +36,7 @@ class LocalLLM(dspy.BaseLM):
     >>> import dspy
     >>> from llama_cpp import Llama
     >>> from localllm import LocalLLM, localllm_download_model
-    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite = True) # doctest: +ELLIPSIS
-    Downloading...
+    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite = True, trace = False)
     >>> transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)
     >>> out = transformer("How much is 4x4")
     >>>
