@@ -256,20 +256,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> dspy</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> localllm <span class="im">import</span> LocalLLM, localllm_download_model</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite <span class="op">=</span> <span class="va">True</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> dspy.configure(lm <span class="op">=</span> LocalLLM(transformer))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Go(dspy.Signature):</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>...     sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>...     value <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"A city"</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model <span class="op">=</span> dspy.Predict(Go)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> model(sentence<span class="op">=</span><span class="st">"What is the capital of France"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out[<span class="st">"value"</span>]</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">'Paris'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite <span class="op">=</span> <span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> dspy.configure(lm <span class="op">=</span> LocalLLM(transformer))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Go(dspy.Signature):</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>...     sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>...     value <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"A city"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model <span class="op">=</span> dspy.Predict(Go)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> model(sentence<span class="op">=</span><span class="st">"What is the capital of France"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out[<span class="st">"value"</span>]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">'Paris'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
