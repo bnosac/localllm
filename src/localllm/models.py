@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Optional
 
 
-def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optional[str] = None, overwrite: bool = False) -> str:
+def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optional[str] = None, overwrite: bool = False, trace: bool = True) -> str:
     """
     Download a local gguf LLM model
 
@@ -28,6 +28,9 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         If True, re-download the model even if it already exists.
         If False, skip download if the model file is already present.
 
+    trace : bool, default=True
+        If True, shows download progress.
+
     Returns
     -------
     str
@@ -49,16 +52,11 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     Downloading...
     >>> ## More models
     >>> os.remove(model_path)  # Clean up downloaded file
-    >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True)   # doctest: +ELLIPSIS
-    Downloading...
-    >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True)         # doctest: +ELLIPSIS
-    Downloading...    
-    >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True)       # doctest: +ELLIPSIS
-    Downloading...
-    >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True)      # doctest: +ELLIPSIS
-    Downloading...
-    >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True)  # doctest: +ELLIPSIS
-    Downloading...
+    >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True, trace = False)
+    >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True, trace = False)
+    >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True, trace = False)
+    >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True, trace = False)
+    >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True, trace = False)
 
     Notes
     -----
@@ -122,11 +120,6 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     if os.path.exists(model_path) and overwrite:
         os.remove(model_path)
 
-    # Download the model
-    print(f"Downloading {type} model...")
-    print(f"From: {model_info['url']}")
-    print(f"To: {model_path}")
-
     def download_progress(block_num, block_size, total_size):
         """Display download progress."""
         downloaded = block_num * block_size
@@ -136,7 +129,14 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         print(f"\rProgress: {percent:.1f}% ({mb_downloaded:.1f}/{mb_total:.1f} MB)", end="")
 
     try:
-        urllib.request.urlretrieve(model_info["url"], model_path, reporthook=download_progress)
+        # Download the model
+        if trace:            
+            print(f"Downloading {type} model...")
+            print(f"From: {model_info['url']}")
+            print(f"To: {model_path}")
+            urllib.request.urlretrieve(model_info["url"], model_path, reporthook=download_progress)
+        else:
+            urllib.request.urlretrieve(model_info["url"], model_path)
         return model_path
 
     except Exception as e:
