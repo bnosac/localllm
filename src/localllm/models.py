@@ -49,15 +49,15 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     Downloading...
     >>> ## More models
     >>> os.remove(model_path)  # Clean up downloaded file
-    >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True)
+    >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True)   # doctest: +ELLIPSIS
     Downloading...
-    >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True)
+    >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True)         # doctest: +ELLIPSIS
     Downloading...    
-    >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True)
+    >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True)       # doctest: +ELLIPSIS
     Downloading...
-    >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True)
+    >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True)      # doctest: +ELLIPSIS
     Downloading...
-    >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True)
+    >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True)  # doctest: +ELLIPSIS
     Downloading...
 
     Notes
