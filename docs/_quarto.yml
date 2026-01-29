@@ -44,3 +44,5 @@ quartodoc:
       desc: Use a LocalLLM model with DSPy
       contents:
         - name: dspy.LocalLLM
+        - name: dspy.LocalChatAdapter
+        - name: dspy.dspy_signature_defaults

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.0
+
+* Added LocalChatAdapter to parse out the LLM response which are wrongly formatted more gracefully defaulting to dspy_signature_defaults in case of complete failure
+* Added dspy_signature_defaults
+
 ## 0.1.0
 
 * Added functionality to download a model: localllm_download_model
