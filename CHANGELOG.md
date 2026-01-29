@@ -4,6 +4,10 @@
 
 * Added LocalChatAdapter to parse out the LLM response which are wrongly formatted more gracefully defaulting to dspy_signature_defaults in case of complete failure
 * Added dspy_signature_defaults
+* localllm_download_model, added:
+    * gemma-3-12b-it-qat-Q4_0
+    * Qwen3-8B-Q4_K_M
+    * LFM2.5-1.2B-Instruct-Q4_K_M  
 
 ## 0.1.0
 
