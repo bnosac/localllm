@@ -155,7 +155,7 @@ class LocalChatAdapter(ChatAdapter):
                 return self._lenient_parse(signature, completion, original_error=e)
             except Exception as lenient_error:
                 if self.trace:
-                    print("Could not parse the leniently parse the LLM response.")
+                    print("Could not leniently parse the LLM response.")
                 # If all strategies fail, return default empty values
                 if self.return_defaults_on_failure:
                     return dspy_signature_defaults(signature)
