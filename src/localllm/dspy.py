@@ -400,13 +400,14 @@ def dspy_signature_defaults(signature: dspy.Signature) -> Dict[str, Any]:
     
     Examples
     --------
-
+    
+    >>> import dspy
+    >>> from localllm import dspy_signature_defaults
     >>> class MySignature(dspy.Signature):
     ...     question: str = dspy.InputField()
     ...     answer: str = dspy.OutputField()
     ...     names: list[str] = dspy.OutputField()
     ...     count: int = dspy.OutputField()
-    >>> 
     >>> defaults = dspy_signature_defaults(MySignature)
     >>> defaults
     {'answer': None, 'names': [], 'count': None}
