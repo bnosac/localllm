@@ -144,7 +144,10 @@ class LocalChatAdapter(ChatAdapter):
         Override parse method with fallback strategies for malformed JSON.
         """
         # Try the standard ChatAdapter parsing first
-        try:
+        if self.trace > 1:
+            print("====================== Parsing LLM completion ======================")
+            print(completion)
+        try:            
             return super().parse(signature, completion)
         except (AdapterParseError, json.JSONDecodeError, Exception) as e:
             # If strict parsing fails, try progressive fallback strategies            
