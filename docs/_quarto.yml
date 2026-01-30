@@ -46,3 +46,9 @@ quartodoc:
         - name: dspy.LocalLLM
         - name: dspy.LocalChatAdapter
         - name: dspy.dspy_signature_defaults
+    - subtitle: Lookup utilities
+      desc: Lookup utilities to locate text spans in a larger text lookup up with an LLM
+      contents:
+        - txt_locate_all
+        - txt_locate
+        - merge_spans
