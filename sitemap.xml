@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bnosac.github.io/localllm/reference/txt_locate.html</loc>
-    <lastmod>2026-02-05T10:19:14.509Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.209Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/merge_spans.html</loc>
-    <lastmod>2026-02-05T10:19:14.513Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.214Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/dspy.LocalLLM.html</loc>
-    <lastmod>2026-02-05T10:19:14.493Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.191Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/dspy.dspy_signature_defaults.html</loc>
-    <lastmod>2026-02-05T10:19:14.502Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.201Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/index.html</loc>
-    <lastmod>2026-02-05T10:15:13.425Z</lastmod>
+    <lastmod>2026-02-05T10:28:01.795Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/localllm_download_model.html</loc>
-    <lastmod>2026-02-05T10:19:14.488Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.184Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/index.html</loc>
-    <lastmod>2026-02-05T10:19:14.465Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.156Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/dspy.LocalChatAdapter.html</loc>
-    <lastmod>2026-02-05T10:19:14.499Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.197Z</lastmod>
   </url>
   <url>
     <loc>https://bnosac.github.io/localllm/reference/txt_locate_all.html</loc>
-    <lastmod>2026-02-05T10:19:14.506Z</lastmod>
+    <lastmod>2026-02-05T10:32:08.205Z</lastmod>
   </url>
 </urlset>
