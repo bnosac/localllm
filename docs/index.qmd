@@ -12,7 +12,7 @@ For the list of all models, look to the help of localllm_download_model
 
 ```{python}
 #| output: false
-from localllm import LocalLLM, localllm_download_model
+from localllm import LocalLLM, LocalChatAdapter, localllm_download_model
 path = localllm_download_model("gemma-3-270m-it-Q8_0")
 ```
 
@@ -35,7 +35,7 @@ Use dspy alongside the local model
 
 ```{python}
 import dspy
-dspy.configure(lm = LocalLLM(transformer))
+dspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
     value = dspy.OutputField(desc="A city")
@@ -65,7 +65,7 @@ messages = [
     },
     {
         "role": "user",
-        "content": "Wij heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?"
+        "content": "Wie heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?"
     },
 ]
 llm(messages = messages)
