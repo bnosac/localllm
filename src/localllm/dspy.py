@@ -3,6 +3,7 @@ import json
 import re
 from typing import Any, Dict, get_origin, get_args
 from dspy.adapters import ChatAdapter
+from dspy.adapters.baml_adapter import BAMLAdapter
 from dspy.utils.exceptions import AdapterParseError
 
 class LocalLLM(dspy.BaseLM):
@@ -96,7 +97,7 @@ class LocalLLM(dspy.BaseLM):
 
 
 
-class LocalChatAdapter(ChatAdapter):
+class LocalChatAdapter(BAMLAdapter):
     """
     A DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails. 
     Falls back to empty default values if all parsing strategies fail.
@@ -114,8 +115,8 @@ class LocalChatAdapter(ChatAdapter):
     Returns
     --------
 
-    dspy.ChatAdapter
-        An object of type dspy.ChatAdapter
+    LocalChatAdapter
+        An object of type LocalChatAdapter, extending BAMLAdapter
 
     Examples
     --------
