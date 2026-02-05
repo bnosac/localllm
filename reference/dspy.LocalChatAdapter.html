@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>dspy.localllm – localllm</title>
+<title>dspy.localchatadapter – localllm</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,27 +156,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="localllm.dspy.LocalLLM" class="level1">
-<h1>dspy.LocalLLM</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dspy.LocalLLM(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">object</span><span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">'LocalLLM'</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    model_type<span class="op">=</span><span class="st">'chat'</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    temperature<span class="op">=</span><span class="fl">0.0</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    max_tokens<span class="op">=</span><span class="dv">1000</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    cache<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    trace<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">**</span>kwargs,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Create a Local LLM object which you can use alongside dspy</p>
+<section id="localllm.dspy.LocalChatAdapter" class="level1">
+<h1>dspy.LocalChatAdapter</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dspy.LocalChatAdapter(return_defaults_on_failure<span class="op">=</span><span class="va">True</span>, trace<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails. Falls back to empty default values if all parsing strategies fail.</p>
 <section id="parameters" class="level2 doc-section doc-section-parameters">
 <h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 5%">
-<col style="width: 73%">
-<col style="width: 10%">
+<col style="width: 16%">
+<col style="width: 4%">
+<col style="width: 71%">
+<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -188,45 +179,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>object</td>
-<td></td>
-<td>An object of class ‘llama_cpp.llama.Llama’ as returned by Llama from the llama-cpp-python package</td>
-<td><code>None</code></td>
-</tr>
-<tr class="even">
-<td>model</td>
-<td></td>
-<td>A name that you provide to the model. Defaults to ‘LocalLLM’</td>
-<td><code>'LocalLLM'</code></td>
-</tr>
-<tr class="odd">
-<td>model_type</td>
-<td></td>
-<td>String with the type of model. e.g.&nbsp;‘chat’, ‘responses’. Currently only tested with type: ‘chat’</td>
-<td><code>'chat'</code></td>
-</tr>
-<tr class="even">
-<td>temperature</td>
-<td></td>
-<td>The model temperature to use. Defaults to 0</td>
-<td><code>0.0</code></td>
-</tr>
-<tr class="odd">
-<td>max_tokens</td>
-<td></td>
-<td>Maximum number of tokens. Defaults to 1000</td>
-<td><code>1000</code></td>
-</tr>
-<tr class="even">
-<td>cache</td>
-<td></td>
-<td>Use the cache to avoid recomputing the same llm call twice. Defaults to True.</td>
+<td>return_defaults_on_failure</td>
+<td>bool</td>
+<td>If True, returns default empty values when all parsing strategies fail. If False, raises the original parsing error.</td>
 <td><code>True</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>trace</td>
-<td></td>
-<td>Boolean indicating to log internal calls. Defaults to False.</td>
+<td>bool</td>
+<td>If True, prints debug information during parsing attempts.</td>
 <td><code>False</code></td>
 </tr>
 </tbody>
@@ -245,8 +206,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td></td>
-<td>dspy.BaseLM</td>
-<td>An object of type dspy.BaseLM</td>
+<td>dspy.ChatAdapter</td>
+<td>An object of type dspy.ChatAdapter</td>
 </tr>
 </tbody>
 </table>
@@ -255,22 +216,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> dspy</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> localllm <span class="im">import</span> LocalLLM, localllm_download_model</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite <span class="op">=</span> <span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> localllm <span class="im">import</span> LocalLLM, localllm_download_model, LocalChatAdapter</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> transformer <span class="op">=</span> Llama(model_path<span class="op">=</span>path, n_gpu_layers<span class="op">=-</span><span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">False</span>, n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, seed <span class="op">=</span> <span class="dv">4321</span>, verbose <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> transformer(<span class="st">"How much is 4x4"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> dspy.configure(lm <span class="op">=</span> LocalLLM(transformer))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Go(dspy.Signature):</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>...     sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>...     answer: <span class="bu">str</span> <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"A city name"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model <span class="op">=</span> dspy.Predict(Go)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> model(sentence<span class="op">=</span><span class="st">"What is the capital of France"</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out[<span class="st">"answer"</span>]</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">'Paris'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> dspy.configure(lm <span class="op">=</span> LocalLLM(transformer, trace <span class="op">=</span> <span class="va">False</span>), adapter <span class="op">=</span> LocalChatAdapter(return_defaults_on_failure <span class="op">=</span> <span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="kw">class</span> Go(dspy.Signature):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>...     sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>...     answer: <span class="bu">str</span> <span class="op">=</span> dspy.OutputField(desc<span class="op">=</span><span class="st">"A city name"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span>    </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model <span class="op">=</span> dspy.Predict(Go)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> out <span class="op">=</span> model(sentence<span class="op">=</span><span class="st">"What city is the Capital of Belgium"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="#localllm.dspy.LocalChatAdapter.parse">parse</a></td>
+<td>Override parse method with fallback strategies for malformed JSON.</td>
+</tr>
+</tbody>
+</table>
+<section id="localllm.dspy.LocalChatAdapter.parse" class="level3">
+<h3 class="anchored" data-anchor-id="localllm.dspy.LocalChatAdapter.parse">parse</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dspy.LocalChatAdapter.parse(signature, completion)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Override parse method with fallback strategies for malformed JSON.</p>
 
 
+</section>
 </section>
 </section>
 
