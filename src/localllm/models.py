@@ -57,13 +57,21 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> ## More models
     >>> os.remove(model_path)  # Clean up downloaded file
     >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-3-12b-it-qat-Q4_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("GLM-4.6V-Flash-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3-8B-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
 
     Notes
     -----
