@@ -2,7 +2,6 @@ import dspy
 import json
 import re
 from typing import Any, Dict, get_origin, get_args
-from dspy.adapters import ChatAdapter
 from dspy.adapters.baml_adapter import BAMLAdapter
 from dspy.utils.exceptions import AdapterParseError
 
