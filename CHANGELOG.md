@@ -8,6 +8,7 @@
     * gemma-3-12b-it-qat-Q4_0
     * Qwen3-8B-Q4_K_M
     * LFM2.5-1.2B-Instruct-Q4_K_M  
+    * LFM2.5-1.2B-Instruct-Q8_0
 
 ## 0.1.0
 

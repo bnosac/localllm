@@ -21,6 +21,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
         - "translategemma-4b-it-q8_0": TranslateGemma 4B it model (Q8_0 quantization)
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
+        - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
         
 
@@ -70,6 +71,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)    
     >>> model_path = localllm_download_model("Qwen3-8B-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
 
@@ -114,6 +117,10 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
             "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
             "filename": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
         },      
+        "LFM2.5-1.2B-Instruct-Q8_0": {
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q8_0.gguf",
+            "filename": "LFM2.5-1.2B-Instruct-Q8_0.gguf",
+        },              
         "Qwen3-8B-Q4_K_M": {
             "url": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF/resolve/main/Qwen_Qwen3-8B-Q4_K_M.gguf",            
             "filename": "Qwen_Qwen3-8B-Q4_K_M.gguf",
