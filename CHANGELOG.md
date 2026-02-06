@@ -9,7 +9,7 @@
     * Qwen3-8B-Q4_K_M
     * LFM2.5-1.2B-Instruct-Q4_K_M  
     * LFM2.5-1.2B-Instruct-Q8_0
-* Added localllm.config.localllm_use
+* Added localllm.config.localllm_connect
 
 ## 0.1.0
 
