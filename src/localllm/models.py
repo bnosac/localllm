@@ -23,6 +23,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
+        - "Qwen3-4B-Instruct-Q4_K_M": Qwen 3 4B Instruct model (Q4_K_M quantization)
         
 
     model_dir : str or None, default=None
@@ -75,6 +76,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)    
     >>> model_path = localllm_download_model("Qwen3-8B-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)    
 
     Notes
     -----
@@ -124,7 +127,11 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         "Qwen3-8B-Q4_K_M": {
             "url": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF/resolve/main/Qwen_Qwen3-8B-Q4_K_M.gguf",            
             "filename": "Qwen_Qwen3-8B-Q4_K_M.gguf",
-        },                      
+        },
+        "Qwen3-4B-Instruct-Q4_K_M": {
+            "url": "https://huggingface.co/bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",            
+            "filename": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        },           
     }
 
     # Validate model type
