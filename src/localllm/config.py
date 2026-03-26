@@ -38,9 +38,10 @@ def localllm_connect(
     --------
 
     >>> from localllm.config import localllm_connect
-    >>>
+    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0") # doctest: +ELLIPSIS
+    ...
     >>> ## Connect to an LLM with llama_cpp_python
-    >>> llm = localllm_connect("localllm/gemma-3-270m-it-Q8_0")
+    >>> llm = localllm_connect("localllm/gemma-3-270m-it-Q8_0")    
     >>> type(llm)
     <class 'localllm.dspy.LocalLLM'>
     >>> ## Connect to an LLM with dspy - e.g. to connect to lmstudio or another model
