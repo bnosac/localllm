@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.27">
+<meta name="generator" content="quarto-1.9.36">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>localllm_download_model – localllm</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -66,15 +69,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-845c23b38eaddc0f92fda52bfe77a8c8.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-960d9d362f81d399278ec3e29b622b37.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-baf333abd407eb98d8b56c64a19f8930.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -171,8 +173,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <colgroup>
 <col style="width: 1%">
 <col style="width: 1%">
-<col style="width: 93%">
-<col style="width: 3%">
+<col style="width: 94%">
+<col style="width: 2%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -186,7 +188,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td>type</td>
 <td>str</td>
-<td>The type/name of the model to download. Currently supports: - “gemma-3-270m-it-Q8_0”: Google Gemma 3 270M it model (Q8_0 quantization) - “gemma-3-270m-it-qat-Q4_0”: Google Gemma 3 270M it model (Q4_0 quantization) - “gemma-3-1b-it-Q8_0”: Google Gemma 3 1B it model (Q8_0 quantization) - “gemma-3-4b-it-Q4_K_M”: Google Gemma 3 4b it model (Q4_K_M quantization) - “gemma-3-12b-it-qat-Q4_0”: Google Gemma 3 12B it model (Q4_0 quantization) - “GLM-4.6V-Flash-Q4_K_M”: GLM 4.6V Flash model (Q4_K_M quantization) - “translategemma-4b-it-q8_0”: TranslateGemma 4B it model (Q8_0 quantization) - “LFM2.5-1.2B-Instruct-Q4_K_M”: LFM2.5 1.2B Instruct model (Q4_K_M quantization) - “Qwen3-8B-Q4_K_M”: Qwen 3 8B model (Q4_K_M quantization)</td>
+<td>The type/name of the model to download. Currently supports: - “gemma-3-270m-it-Q8_0”: Google Gemma 3 270M it model (Q8_0 quantization) - “gemma-3-270m-it-qat-Q4_0”: Google Gemma 3 270M it model (Q4_0 quantization) - “gemma-3-1b-it-Q8_0”: Google Gemma 3 1B it model (Q8_0 quantization) - “gemma-3-4b-it-Q4_K_M”: Google Gemma 3 4b it model (Q4_K_M quantization) - “gemma-3-12b-it-qat-Q4_0”: Google Gemma 3 12B it model (Q4_0 quantization) - “GLM-4.6V-Flash-Q4_K_M”: GLM 4.6V Flash model (Q4_K_M quantization) - “translategemma-4b-it-q8_0”: TranslateGemma 4B it model (Q8_0 quantization) - “LFM2.5-1.2B-Instruct-Q4_K_M”: LFM2.5 1.2B Instruct model (Q4_K_M quantization) - “LFM2.5-1.2B-Instruct-Q8_0”: LFM2.5 1.2B Instruct model (Q8_0 quantization) - “Qwen3-8B-Q4_K_M”: Qwen 3 8B model (Q4_K_M quantization) - “Qwen3-4B-Instruct-Q4_K_M”: Qwen 3 4B Instruct model (Q4_K_M quantization)</td>
 <td><code>"gemma-3-270m-it-Q8_0"</code></td>
 </tr>
 <tr class="even">
@@ -258,8 +260,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"LFM2.5-1.2B-Instruct-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3-8B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"LFM2.5-1.2B-Instruct-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3-8B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3-4B-Instruct-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="notes" class="level2 doc-section doc-section-notes">
 <h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
