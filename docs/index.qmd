@@ -12,7 +12,7 @@ For the list of all models, look to the help of localllm_download_model
 
 ```{python}
 #| output: false
-import pprint 
+import pprint
 from localllm import LocalLLM, LocalChatAdapter, localllm_download_model
 path = localllm_download_model("gemma-3-270m-it-Q8_0")
 ```
