@@ -1,115 +1,38 @@
 [
   {
-    "objectID": "reference/merge_spans.html",
-    "href": "reference/merge_spans.html",
-    "title": "merge_spans",
+    "objectID": "reference/dspy.LocalChatAdapter.html",
+    "href": "reference/dspy.LocalChatAdapter.html",
+    "title": "dspy.LocalChatAdapter",
     "section": "",
-    "text": "merge_spans(text, spans, skip_spaces=True)\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string where spans are extracted from\nrequired\n\n\nspans\nList[TextSpan]\nA list of TextSpan objects to look for overlaps and to combine\nrequired\n\n\nskip_spaces\nbool\nIf True, combine spans which are not overlapping but which do have only whitespace between them\nTrue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test find the world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\") + txt_locate_all(text, \" wor\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=37, end=42), TextSpan(text=' wor', start=5, end=9), TextSpan(text=' wor', start=36, end=40)]\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; combined\n[TextSpan(text=' world', start=5, end=11), TextSpan(text=' world', start=36, end=42)]"
+    "text": "dspy.LocalChatAdapter(return_defaults_on_failure=True, trace=False)\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails. Falls back to empty default values if all parsing strategies fail.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nreturn_defaults_on_failure\nbool\nIf True, returns default empty values when all parsing strategies fail. If False, raises the original parsing error.\nTrue\n\n\ntrace\nbool\nIf True, prints debug information during parsing attempts.\nFalse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nLocalChatAdapter\nAn object of type LocalChatAdapter, extending ChatAdapter\n\n\n\n\n\n\n&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from llama_cpp import Llama\n&gt;&gt;&gt; from localllm import LocalLLM, localllm_download_model, LocalChatAdapter\n&gt;&gt;&gt; path = localllm_download_model(\"gemma-3-270m-it-Q8_0\", trace = False)\n&gt;&gt;&gt; transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n&gt;&gt;&gt; dspy.configure(lm = LocalLLM(transformer, trace = False), adapter = LocalChatAdapter(return_defaults_on_failure = True, trace = False))\n&gt;&gt;&gt; class Go(dspy.Signature):\n...     sentence: str = dspy.InputField(desc = \"A question\")\n...     answer: str = dspy.OutputField(desc=\"A city name\")\n&gt;&gt;&gt;    \n&gt;&gt;&gt; model = dspy.Predict(Go)\n&gt;&gt;&gt; out = model(sentence=\"What city is the Capital of Belgium\")\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nparse\nOverride parse method with fallback strategies for malformed JSON.\n\n\n\n\n\ndspy.LocalChatAdapter.parse(signature, completion)\nOverride parse method with fallback strategies for malformed JSON."
   },
   {
-    "objectID": "reference/merge_spans.html#parameters",
-    "href": "reference/merge_spans.html#parameters",
-    "title": "merge_spans",
+    "objectID": "reference/dspy.LocalChatAdapter.html#parameters",
+    "href": "reference/dspy.LocalChatAdapter.html#parameters",
+    "title": "dspy.LocalChatAdapter",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string where spans are extracted from\nrequired\n\n\nspans\nList[TextSpan]\nA list of TextSpan objects to look for overlaps and to combine\nrequired\n\n\nskip_spaces\nbool\nIf True, combine spans which are not overlapping but which do have only whitespace between them\nTrue"
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nreturn_defaults_on_failure\nbool\nIf True, returns default empty values when all parsing strategies fail. If False, raises the original parsing error.\nTrue\n\n\ntrace\nbool\nIf True, prints debug information during parsing attempts.\nFalse"
   },
   {
-    "objectID": "reference/merge_spans.html#returns",
-    "href": "reference/merge_spans.html#returns",
-    "title": "merge_spans",
+    "objectID": "reference/dspy.LocalChatAdapter.html#returns",
+    "href": "reference/dspy.LocalChatAdapter.html#returns",
+    "title": "dspy.LocalChatAdapter",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions"
+    "text": "Name\nType\nDescription\n\n\n\n\n\nLocalChatAdapter\nAn object of type LocalChatAdapter, extending ChatAdapter"
   },
   {
-    "objectID": "reference/merge_spans.html#examples",
-    "href": "reference/merge_spans.html#examples",
-    "title": "merge_spans",
+    "objectID": "reference/dspy.LocalChatAdapter.html#examples",
+    "href": "reference/dspy.LocalChatAdapter.html#examples",
+    "title": "dspy.LocalChatAdapter",
     "section": "",
-    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test find the world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\") + txt_locate_all(text, \" wor\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=37, end=42), TextSpan(text=' wor', start=5, end=9), TextSpan(text=' wor', start=36, end=40)]\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; combined\n[TextSpan(text=' world', start=5, end=11), TextSpan(text=' world', start=36, end=42)]"
+    "text": "&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from llama_cpp import Llama\n&gt;&gt;&gt; from localllm import LocalLLM, localllm_download_model, LocalChatAdapter\n&gt;&gt;&gt; path = localllm_download_model(\"gemma-3-270m-it-Q8_0\", trace = False)\n&gt;&gt;&gt; transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n&gt;&gt;&gt; dspy.configure(lm = LocalLLM(transformer, trace = False), adapter = LocalChatAdapter(return_defaults_on_failure = True, trace = False))\n&gt;&gt;&gt; class Go(dspy.Signature):\n...     sentence: str = dspy.InputField(desc = \"A question\")\n...     answer: str = dspy.OutputField(desc=\"A city name\")\n&gt;&gt;&gt;    \n&gt;&gt;&gt; model = dspy.Predict(Go)\n&gt;&gt;&gt; out = model(sentence=\"What city is the Capital of Belgium\")"
   },
   {
-    "objectID": "reference/dspy.dspy_signature_defaults.html",
-    "href": "reference/dspy.dspy_signature_defaults.html",
-    "title": "dspy.dspy_signature_defaults",
+    "objectID": "reference/dspy.LocalChatAdapter.html#methods",
+    "href": "reference/dspy.LocalChatAdapter.html#methods",
+    "title": "dspy.LocalChatAdapter",
     "section": "",
-    "text": "dspy.dspy_signature_defaults(signature)\nGenerate default empty values for all output fields in a DSPy signature.\nThis function extracts all output fields from a DSPy signature and creates a dictionary with appropriate default empty values for each field based on its type annotation.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsignature\ndspy.Signature\nA DSPy signature object containing field definitions with type annotations\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDict[str, Any]\nA dictionary mapping field names to their default empty values. Only includes fields marked as output fields.\n\n\n\n\n\n\n&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from localllm import dspy_signature_defaults\n&gt;&gt;&gt; class MySignature(dspy.Signature):\n...     question: str = dspy.InputField()\n...     answer: str = dspy.OutputField()\n...     names: list[str] = dspy.OutputField()\n...     count: int = dspy.OutputField()\n&gt;&gt;&gt; defaults = dspy_signature_defaults(MySignature)\n&gt;&gt;&gt; defaults\n{'answer': None, 'names': [], 'count': None}\n\n\n\n\nOnly processes fields with __dspy_field_type == “output”\nInput fields are excluded from the result\nUses get_default_for_type() to determine appropriate defaults"
-  },
-  {
-    "objectID": "reference/dspy.dspy_signature_defaults.html#parameters",
-    "href": "reference/dspy.dspy_signature_defaults.html#parameters",
-    "title": "dspy.dspy_signature_defaults",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nsignature\ndspy.Signature\nA DSPy signature object containing field definitions with type annotations\nrequired"
-  },
-  {
-    "objectID": "reference/dspy.dspy_signature_defaults.html#returns",
-    "href": "reference/dspy.dspy_signature_defaults.html#returns",
-    "title": "dspy.dspy_signature_defaults",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nDict[str, Any]\nA dictionary mapping field names to their default empty values. Only includes fields marked as output fields."
-  },
-  {
-    "objectID": "reference/dspy.dspy_signature_defaults.html#examples",
-    "href": "reference/dspy.dspy_signature_defaults.html#examples",
-    "title": "dspy.dspy_signature_defaults",
-    "section": "",
-    "text": "&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from localllm import dspy_signature_defaults\n&gt;&gt;&gt; class MySignature(dspy.Signature):\n...     question: str = dspy.InputField()\n...     answer: str = dspy.OutputField()\n...     names: list[str] = dspy.OutputField()\n...     count: int = dspy.OutputField()\n&gt;&gt;&gt; defaults = dspy_signature_defaults(MySignature)\n&gt;&gt;&gt; defaults\n{'answer': None, 'names': [], 'count': None}"
-  },
-  {
-    "objectID": "reference/dspy.dspy_signature_defaults.html#notes",
-    "href": "reference/dspy.dspy_signature_defaults.html#notes",
-    "title": "dspy.dspy_signature_defaults",
-    "section": "",
-    "text": "Only processes fields with __dspy_field_type == “output”\nInput fields are excluded from the result\nUses get_default_for_type() to determine appropriate defaults"
-  },
-  {
-    "objectID": "reference/index.html",
-    "href": "reference/index.html",
-    "title": "Function reference",
-    "section": "",
-    "text": "Download common local LLM Models\n\n\n\nlocalllm_download_model\nDownload a local gguf LLM model\n\n\n\n\n\n\nUse a LocalLLM model with DSPy\n\n\n\ndspy.LocalLLM\nCreate a Local LLM object which you can use alongside dspy\n\n\ndspy.LocalChatAdapter\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails.\n\n\ndspy.dspy_signature_defaults\nGenerate default empty values for all output fields in a DSPy signature.\n\n\n\n\n\n\nLookup utilities to locate text spans in a larger text lookup up with an LLM\n\n\n\ntxt_locate_all\nFind all occurrences of a text element (in case it appears multiple times).\n\n\ntxt_locate\nFind start and end positions of text elements in a larger text.\n\n\nmerge_spans\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them."
-  },
-  {
-    "objectID": "reference/index.html#localllm-utilities",
-    "href": "reference/index.html#localllm-utilities",
-    "title": "Function reference",
-    "section": "",
-    "text": "Download common local LLM Models\n\n\n\nlocalllm_download_model\nDownload a local gguf LLM model\n\n\n\n\n\n\nUse a LocalLLM model with DSPy\n\n\n\ndspy.LocalLLM\nCreate a Local LLM object which you can use alongside dspy\n\n\ndspy.LocalChatAdapter\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails.\n\n\ndspy.dspy_signature_defaults\nGenerate default empty values for all output fields in a DSPy signature.\n\n\n\n\n\n\nLookup utilities to locate text spans in a larger text lookup up with an LLM\n\n\n\ntxt_locate_all\nFind all occurrences of a text element (in case it appears multiple times).\n\n\ntxt_locate\nFind start and end positions of text elements in a larger text.\n\n\nmerge_spans\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them."
-  },
-  {
-    "objectID": "reference/txt_locate_all.html",
-    "href": "reference/txt_locate_all.html",
-    "title": "txt_locate_all",
-    "section": "",
-    "text": "txt_locate_all(text, elements)\nFind all occurrences of a text element (in case it appears multiple times).\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nstr | list[str]\nA string to lookup in text or a list of strings to find in text\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test find the a world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]\n&gt;&gt;&gt; loc = txt_locate_all(text, \"notinthetext\")\n&gt;&gt;&gt; loc\n[]\n&gt;&gt;&gt; loc = txt_locate_all(text, [\"test\", \"a\", \"world\"])\n&gt;&gt;&gt; loc\n[TextSpan(text='test', start=23, end=27), TextSpan(text='a', start=21, end=22), TextSpan(text='a', start=37, end=38), TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]"
-  },
-  {
-    "objectID": "reference/txt_locate_all.html#parameters",
-    "href": "reference/txt_locate_all.html#parameters",
-    "title": "txt_locate_all",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nstr | list[str]\nA string to lookup in text or a list of strings to find in text\nrequired"
-  },
-  {
-    "objectID": "reference/txt_locate_all.html#returns",
-    "href": "reference/txt_locate_all.html#returns",
-    "title": "txt_locate_all",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions"
-  },
-  {
-    "objectID": "reference/txt_locate_all.html#examples",
-    "href": "reference/txt_locate_all.html#examples",
-    "title": "txt_locate_all",
-    "section": "",
-    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test find the a world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]\n&gt;&gt;&gt; loc = txt_locate_all(text, \"notinthetext\")\n&gt;&gt;&gt; loc\n[]\n&gt;&gt;&gt; loc = txt_locate_all(text, [\"test\", \"a\", \"world\"])\n&gt;&gt;&gt; loc\n[TextSpan(text='test', start=23, end=27), TextSpan(text='a', start=21, end=22), TextSpan(text='a', start=37, end=38), TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to localllm",
-    "section": "",
-    "text": "Welcome to localllm\nPython package localllm provides functionalities to use a Local LLM object which alongside dspy\n\nDownload a model\nFor the list of all models, look to the help of localllm_download_model\n\nimport pprint\nfrom localllm import LocalLLM, LocalChatAdapter, localllm_download_model\npath = localllm_download_model(\"gemma-3-270m-it-Q8_0\")\n\n\npath\n\n'/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf'\n\n\n\n\nTest the local model\n\nfrom llama_cpp import Llama\ntransformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n\nllama_kv_cache_iswa: using full-size SWA cache (ref: https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)\n\nout = transformer(\"How much is 4x4\")\npprint.pprint(out)\n\n{'choices': [{'finish_reason': 'length',\n              'index': 0,\n              'logprobs': None,\n              'text': '?\\n\\n4 * 4 = 16\\n\\nTherefore, 4x'}],\n 'created': 1774562445,\n 'id': 'cmpl-956892c2-620d-48db-951d-ed9e000a2bdc',\n 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf',\n 'object': 'text_completion',\n 'usage': {'completion_tokens': 16, 'prompt_tokens': 8, 'total_tokens': 24}}\n\n\n\n\nUse the model directly alongside dspy\nUse dspy alongside the local model\n\nimport dspy\ndspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())\nclass Go(dspy.Signature):\n    sentence: str = dspy.InputField(desc = \"A question\")\n    value = dspy.OutputField(desc=\"A city\")\n\nmodel = dspy.Predict(Go)\nout = model(sentence=\"What is the capital of France\")\npprint.pprint(out)\n\nPrediction(\n    value=None\n)\n\nout[\"value\"]\n\n\n\nAnother example with a translation model\n\nfrom localllm import localllm_download_model, LocalLLM\nfrom llama_cpp import Llama\npath = localllm_download_model(\"translategemma-4b-it-q8_0\")\n\n\ntransformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n\nllama_context: n_ctx_seq (32768) &lt; n_ctx_train (131072) -- the full capacity of the model will not be utilized\nllama_kv_cache_iswa: using full-size SWA cache (ref: https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)\n\nllm = LocalLLM(transformer)\nmessages = [\n    {\n        \"role\": \"system\",\n        \"content\": \"You are a professional Dutch (nl) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the English translation, without any additional explanations or commentary. Please translate the following Dutch text into English:\",\n    },\n    {\n        \"role\": \"user\",\n        \"content\": \"Wie heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?\"\n    },\n]\nllm(messages = messages)\n\n['\\nWho won the 100-meter sprint during the last Olympic Games?\\n']\n\n\n\ntext = \"\\nPatient Profile:\\n- Name: Ms. Suzy Rickie Hackett\\n- Contact Number: 555-359-4515 (Home)\\n- Date of Birth: 1941-09-09\\n- Deceased on: 2021-08-03 at 01:47:39 (+02:00)\\n- Address: 292 Buckridge Port, Massachusetts, 01532, US\\n- Not a multiple birth\\n- Language Spoken: English (United States)\\n\\nEncounter Details:\\n1. Encounter Status: Finished\\n   - Description: Well child visit procedure\\n   - Attending Doctor: Dr. Valentine Leannon\\n   - Visit START: 1941-09-09 at 20:43:56 (+02:00)\\n   - Visit END: 1941-09-09 at 20:58:56 (+02:00)\\n   - Relationship with patient: Primary performer\\n\\n2. Encounter Status: Unknown\\n   - Description: Well child visit procedure\\n   - Provider Organisation: SUNRISE HEALTHCARE LLC\\n   - Visit START: 1950-09-12 at 19:43:56 (+01:00)\\n   - Visit END: 1950-09-12 at 19:58:56 (+01:00)\\n\\n2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.\\n\\nOrganization Information:\\n- Name: SUNRISE HEALTHCARE LLC\\n- Contact Number: 6176509959\\n- Active: Yes\\n- Type: Healthcare Provider\\n\\n\\n\"\nmessages = [\n    {\n        \"role\": \"system\",\n        \"content\": \"You are a professional English (en) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the French translation, without any additional explanations or commentary. Please translate the following English text into French:\",\n    },\n    {\n        \"role\": \"user\",\n        \"content\": text\n    },\n]\ntrans = llm(messages = messages)\ntrans\n\n[\"\\nProfil du patient\\xa0:\\n- Nom\\xa0: Mme. Suzy Rickie Hackett\\n- Numéro de téléphone\\xa0: 555-359-4515 (Domicile)\\n- Date de naissance\\xa0: 09\\xa0septembre 1941\\n- Décédée le\\xa0: 03\\xa0août 2021 à 01\\xa0h\\xa047\\xa039 (+02\\xa0h)\\n- Adresse\\xa0: 292 Buckridge Port, Massachusetts, 01532, États-Unis\\n- Pas de naissance multiple\\n- Langue parlée\\xa0: Anglais (États-Unis)\\n\\nDétails de la consultation\\xa0:\\n1. Statut de la consultation\\xa0: Terminé\\n   - Description\\xa0: Consultation de routine pour un enfant en bonne santé\\n   - Médecin traitant\\xa0: Dr. Valentine Leannon\\n   - Début de la consultation\\xa0: 09\\xa0septembre 1941 à 20\\xa0h\\xa043\\xa056 (+02\\xa0h)\\n   - Fin de la consultation\\xa0: 09\\xa0septembre 1941 à 20\\xa0h\\xa058\\xa056 (+02\\xa0h)\\n   - Relation avec le patient\\xa0: Personne responsable\\n\\n2. Statut de la consultation\\xa0: Inconnu\\n   - Description\\xa0: Consultation de routine pour un enfant en bonne santé\\n   - Organisation de soins\\xa0: SUNRISE HEALTHCARE LLC\\n   - Début de la consultation\\xa0: 12\\xa0septembre 1950 à 19\\xa0h\\xa043\\xa056 (+01\\xa0h)\\n   - Fin de la consultation\\xa0: 12\\xa0septembre 1950 à 19\\xa0h\\xa058\\xa056 (+01\\xa0h)\\n\\n2 Procédures enregistrées pour Mme. Suzy Rickie Hackett, dont le statut est inconnu.\\n\\nInformations sur l'organisation\\xa0:\\n- Nom\\xa0: SUNRISE HEALTHCARE LLC\\n- Numéro de téléphone\\xa0: 6176509959\\n- Actif\\xa0: Oui\\n- Type\\xa0: Prestataire de soins de santé\\n[/INST]\"]"
+    "text": "Name\nDescription\n\n\n\n\nparse\nOverride parse method with fallback strategies for malformed JSON.\n\n\n\n\n\ndspy.LocalChatAdapter.parse(signature, completion)\nOverride parse method with fallback strategies for malformed JSON."
   },
   {
     "objectID": "reference/dspy.LocalLLM.html",
@@ -140,32 +63,32 @@
     "text": "&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from llama_cpp import Llama\n&gt;&gt;&gt; from localllm import LocalLLM, localllm_download_model\n&gt;&gt;&gt; path = localllm_download_model(\"gemma-3-270m-it-Q8_0\", overwrite = True, trace = False)\n&gt;&gt;&gt; transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n&gt;&gt;&gt; out = transformer(\"How much is 4x4\")\n&gt;&gt;&gt;\n&gt;&gt;&gt; dspy.configure(lm = LocalLLM(transformer))\n&gt;&gt;&gt; class Go(dspy.Signature):\n...     sentence: str = dspy.InputField(desc = \"A question\")\n...     answer: str = dspy.OutputField(desc=\"A city name\")\n&gt;&gt;&gt;\n&gt;&gt;&gt; model = dspy.Predict(Go)\n&gt;&gt;&gt; out = model(sentence=\"What is the capital of France\")\n&gt;&gt;&gt; out[\"answer\"]\n'Paris'"
   },
   {
-    "objectID": "reference/txt_locate.html",
-    "href": "reference/txt_locate.html",
-    "title": "txt_locate",
+    "objectID": "reference/merge_spans.html",
+    "href": "reference/merge_spans.html",
+    "title": "merge_spans",
     "section": "",
-    "text": "txt_locate(text, elements)\nFind start and end positions of text elements in a larger text.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nList[str]\nA list of strings to find in text\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with the first start/end positions of elements in text. The list is the same length as elements\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test.\"\n&gt;&gt;&gt; elements = [\"world\", \"test\", \"notfound\"]\n&gt;&gt;&gt; loc = txt_locate(text, elements)\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='test', start=23, end=27), None]"
+    "text": "merge_spans(text, spans, skip_spaces=True)\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string where spans are extracted from\nrequired\n\n\nspans\nList[TextSpan]\nA list of TextSpan objects to look for overlaps and to combine\nrequired\n\n\nskip_spaces\nbool\nIf True, combine spans which are not overlapping but which do have only whitespace between them\nTrue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test find the world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\") + txt_locate_all(text, \" wor\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=37, end=42), TextSpan(text=' wor', start=5, end=9), TextSpan(text=' wor', start=36, end=40)]\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; combined\n[TextSpan(text=' world', start=5, end=11), TextSpan(text=' world', start=36, end=42)]"
   },
   {
-    "objectID": "reference/txt_locate.html#parameters",
-    "href": "reference/txt_locate.html#parameters",
-    "title": "txt_locate",
+    "objectID": "reference/merge_spans.html#parameters",
+    "href": "reference/merge_spans.html#parameters",
+    "title": "merge_spans",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nList[str]\nA list of strings to find in text\nrequired"
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string where spans are extracted from\nrequired\n\n\nspans\nList[TextSpan]\nA list of TextSpan objects to look for overlaps and to combine\nrequired\n\n\nskip_spaces\nbool\nIf True, combine spans which are not overlapping but which do have only whitespace between them\nTrue"
   },
   {
-    "objectID": "reference/txt_locate.html#returns",
-    "href": "reference/txt_locate.html#returns",
-    "title": "txt_locate",
+    "objectID": "reference/merge_spans.html#returns",
+    "href": "reference/merge_spans.html#returns",
+    "title": "merge_spans",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with the first start/end positions of elements in text. The list is the same length as elements"
+    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions"
   },
   {
-    "objectID": "reference/txt_locate.html#examples",
-    "href": "reference/txt_locate.html#examples",
-    "title": "txt_locate",
+    "objectID": "reference/merge_spans.html#examples",
+    "href": "reference/merge_spans.html#examples",
+    "title": "merge_spans",
     "section": "",
-    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test.\"\n&gt;&gt;&gt; elements = [\"world\", \"test\", \"notfound\"]\n&gt;&gt;&gt; loc = txt_locate(text, elements)\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='test', start=23, end=27), None]"
+    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test find the world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\") + txt_locate_all(text, \" wor\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=37, end=42), TextSpan(text=' wor', start=5, end=9), TextSpan(text=' wor', start=36, end=40)]\n&gt;&gt;&gt; combined = merge_spans(text, loc, skip_spaces=True)\n&gt;&gt;&gt; combined\n[TextSpan(text=' world', start=5, end=11), TextSpan(text=' world', start=36, end=42)]"
   },
   {
     "objectID": "reference/localllm_download_model.html",
@@ -203,38 +126,115 @@
     "text": "The function creates the target directory if it doesn’t exist. Progress is displayed during download."
   },
   {
-    "objectID": "reference/dspy.LocalChatAdapter.html",
-    "href": "reference/dspy.LocalChatAdapter.html",
-    "title": "dspy.LocalChatAdapter",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to localllm",
     "section": "",
-    "text": "dspy.LocalChatAdapter(return_defaults_on_failure=True, trace=False)\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails. Falls back to empty default values if all parsing strategies fail.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nreturn_defaults_on_failure\nbool\nIf True, returns default empty values when all parsing strategies fail. If False, raises the original parsing error.\nTrue\n\n\ntrace\nbool\nIf True, prints debug information during parsing attempts.\nFalse\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nLocalChatAdapter\nAn object of type LocalChatAdapter, extending ChatAdapter\n\n\n\n\n\n\n&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from llama_cpp import Llama\n&gt;&gt;&gt; from localllm import LocalLLM, localllm_download_model, LocalChatAdapter\n&gt;&gt;&gt; path = localllm_download_model(\"gemma-3-270m-it-Q8_0\", trace = False)\n&gt;&gt;&gt; transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n&gt;&gt;&gt; dspy.configure(lm = LocalLLM(transformer, trace = False), adapter = LocalChatAdapter(return_defaults_on_failure = True, trace = False))\n&gt;&gt;&gt; class Go(dspy.Signature):\n...     sentence: str = dspy.InputField(desc = \"A question\")\n...     answer: str = dspy.OutputField(desc=\"A city name\")\n&gt;&gt;&gt;    \n&gt;&gt;&gt; model = dspy.Predict(Go)\n&gt;&gt;&gt; out = model(sentence=\"What city is the Capital of Belgium\")\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nparse\nOverride parse method with fallback strategies for malformed JSON.\n\n\n\n\n\ndspy.LocalChatAdapter.parse(signature, completion)\nOverride parse method with fallback strategies for malformed JSON."
+    "text": "Welcome to localllm\nPython package localllm provides functionalities to use a Local LLM object which alongside dspy\n\nDownload a model\nFor the list of all models, look to the help of localllm_download_model\n\nimport pprint\nfrom localllm import LocalLLM, LocalChatAdapter, localllm_download_model\npath = localllm_download_model(\"gemma-3-270m-it-Q8_0\")\n\n\npath\n\n'/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf'\n\n\n\n\nTest the local model\n\nfrom llama_cpp import Llama\ntransformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n\nllama_kv_cache_iswa: using full-size SWA cache (ref: https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)\n\nout = transformer(\"How much is 4x4\")\npprint.pprint(out)\n\n{'choices': [{'finish_reason': 'length',\n              'index': 0,\n              'logprobs': None,\n              'text': '?\\n\\n4 * 4 = 16\\n\\nTherefore, 4x'}],\n 'created': 1774563306,\n 'id': 'cmpl-892a9cc2-6b7b-4e45-97f6-efb016d43b15',\n 'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf',\n 'object': 'text_completion',\n 'usage': {'completion_tokens': 16, 'prompt_tokens': 8, 'total_tokens': 24}}\n\n\n\n\nUse the model directly alongside dspy\nUse dspy alongside the local model\n\nimport dspy\ndspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())\nclass Go(dspy.Signature):\n    sentence: str = dspy.InputField(desc = \"A question\")\n    value = dspy.OutputField(desc=\"A city\")\n\nmodel = dspy.Predict(Go)\nout = model(sentence=\"What is the capital of France\")\npprint.pprint(out)\n\nPrediction(\n    value=None\n)\n\nout[\"value\"]\n\n\n\nAnother example with a translation model\n\nfrom localllm import localllm_download_model, LocalLLM\nfrom llama_cpp import Llama\npath = localllm_download_model(\"translategemma-4b-it-q8_0\")\n\n\ntransformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n\nllama_context: n_ctx_seq (32768) &lt; n_ctx_train (131072) -- the full capacity of the model will not be utilized\nllama_kv_cache_iswa: using full-size SWA cache (ref: https://github.com/ggml-org/llama.cpp/pull/13194#issuecomment-2868343055)\n\nllm = LocalLLM(transformer)\nmessages = [\n    {\n        \"role\": \"system\",\n        \"content\": \"You are a professional Dutch (nl) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the English translation, without any additional explanations or commentary. Please translate the following Dutch text into English:\",\n    },\n    {\n        \"role\": \"user\",\n        \"content\": \"Wie heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?\"\n    },\n]\nllm(messages = messages)\n\n['\\nWho won the 100-meter sprint during the last Olympic Games?\\n']\n\n\n\ntext = \"\\nPatient Profile:\\n- Name: Ms. Suzy Rickie Hackett\\n- Contact Number: 555-359-4515 (Home)\\n- Date of Birth: 1941-09-09\\n- Deceased on: 2021-08-03 at 01:47:39 (+02:00)\\n- Address: 292 Buckridge Port, Massachusetts, 01532, US\\n- Not a multiple birth\\n- Language Spoken: English (United States)\\n\\nEncounter Details:\\n1. Encounter Status: Finished\\n   - Description: Well child visit procedure\\n   - Attending Doctor: Dr. Valentine Leannon\\n   - Visit START: 1941-09-09 at 20:43:56 (+02:00)\\n   - Visit END: 1941-09-09 at 20:58:56 (+02:00)\\n   - Relationship with patient: Primary performer\\n\\n2. Encounter Status: Unknown\\n   - Description: Well child visit procedure\\n   - Provider Organisation: SUNRISE HEALTHCARE LLC\\n   - Visit START: 1950-09-12 at 19:43:56 (+01:00)\\n   - Visit END: 1950-09-12 at 19:58:56 (+01:00)\\n\\n2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.\\n\\nOrganization Information:\\n- Name: SUNRISE HEALTHCARE LLC\\n- Contact Number: 6176509959\\n- Active: Yes\\n- Type: Healthcare Provider\\n\\n\\n\"\nmessages = [\n    {\n        \"role\": \"system\",\n        \"content\": \"You are a professional English (en) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the French translation, without any additional explanations or commentary. Please translate the following English text into French:\",\n    },\n    {\n        \"role\": \"user\",\n        \"content\": text\n    },\n]\ntrans = llm(messages = messages)\ntrans\n\n[\"\\nProfil du patient\\xa0:\\n- Nom\\xa0: Mme. Suzy Rickie Hackett\\n- Numéro de téléphone\\xa0: 555-359-4515 (Domicile)\\n- Date de naissance\\xa0: 09\\xa0septembre 1941\\n- Décédée le\\xa0: 03\\xa0août 2021 à 01\\xa0h\\xa047\\xa039 (+02\\xa0h)\\n- Adresse\\xa0: 292 Buckridge Port, Massachusetts, 01532, États-Unis\\n- Pas de naissance multiple\\n- Langue parlée\\xa0: Anglais (États-Unis)\\n\\nDétails de la consultation\\xa0:\\n1. Statut de la consultation\\xa0: Terminé\\n   - Description\\xa0: Consultation de routine pour un enfant en bonne santé\\n   - Médecin traitant\\xa0: Dr. Valentine Leannon\\n   - Début de la consultation\\xa0: 09\\xa0septembre 1941 à 20\\xa0h\\xa043\\xa056 (+02\\xa0h)\\n   - Fin de la consultation\\xa0: 09\\xa0septembre 1941 à 20\\xa0h\\xa058\\xa056 (+02\\xa0h)\\n   - Relation avec le patient\\xa0: Personne responsable\\n\\n2. Statut de la consultation\\xa0: Inconnu\\n   - Description\\xa0: Consultation de routine pour un enfant en bonne santé\\n   - Organisation de soins\\xa0: SUNRISE HEALTHCARE LLC\\n   - Début de la consultation\\xa0: 12\\xa0septembre 1950 à 19\\xa0h\\xa043\\xa056 (+01\\xa0h)\\n   - Fin de la consultation\\xa0: 12\\xa0septembre 1950 à 19\\xa0h\\xa058\\xa056 (+01\\xa0h)\\n\\n2 Procédures enregistrées pour Mme. Suzy Rickie Hackett, dont le statut est inconnu.\\n\\nInformations sur l'organisation\\xa0:\\n- Nom\\xa0: SUNRISE HEALTHCARE LLC\\n- Numéro de téléphone\\xa0: 6176509959\\n- Actif\\xa0: Oui\\n- Type\\xa0: Prestataire de soins de santé\\n[/INST]\"]"
   },
   {
-    "objectID": "reference/dspy.LocalChatAdapter.html#parameters",
-    "href": "reference/dspy.LocalChatAdapter.html#parameters",
-    "title": "dspy.LocalChatAdapter",
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "Function reference",
     "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nreturn_defaults_on_failure\nbool\nIf True, returns default empty values when all parsing strategies fail. If False, raises the original parsing error.\nTrue\n\n\ntrace\nbool\nIf True, prints debug information during parsing attempts.\nFalse"
+    "text": "Download common local LLM Models\n\n\n\nlocalllm_download_model\nDownload a local gguf LLM model\n\n\n\n\n\n\nUse a LocalLLM model with DSPy\n\n\n\ndspy.LocalLLM\nCreate a Local LLM object which you can use alongside dspy\n\n\ndspy.LocalChatAdapter\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails.\n\n\ndspy.dspy_signature_defaults\nGenerate default empty values for all output fields in a DSPy signature.\n\n\n\n\n\n\nLookup utilities to locate text spans in a larger text lookup up with an LLM\n\n\n\ntxt_locate_all\nFind all occurrences of a text element (in case it appears multiple times).\n\n\ntxt_locate\nFind start and end positions of text elements in a larger text.\n\n\nmerge_spans\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them."
   },
   {
-    "objectID": "reference/dspy.LocalChatAdapter.html#returns",
-    "href": "reference/dspy.LocalChatAdapter.html#returns",
-    "title": "dspy.LocalChatAdapter",
+    "objectID": "reference/index.html#localllm-utilities",
+    "href": "reference/index.html#localllm-utilities",
+    "title": "Function reference",
     "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\n\nLocalChatAdapter\nAn object of type LocalChatAdapter, extending ChatAdapter"
+    "text": "Download common local LLM Models\n\n\n\nlocalllm_download_model\nDownload a local gguf LLM model\n\n\n\n\n\n\nUse a LocalLLM model with DSPy\n\n\n\ndspy.LocalLLM\nCreate a Local LLM object which you can use alongside dspy\n\n\ndspy.LocalChatAdapter\nA DSPy adapter that attempts progressively more lenient parsing strategies when strict JSON parsing fails.\n\n\ndspy.dspy_signature_defaults\nGenerate default empty values for all output fields in a DSPy signature.\n\n\n\n\n\n\nLookup utilities to locate text spans in a larger text lookup up with an LLM\n\n\n\ntxt_locate_all\nFind all occurrences of a text element (in case it appears multiple times).\n\n\ntxt_locate\nFind start and end positions of text elements in a larger text.\n\n\nmerge_spans\nCombine TextSpan elements which are either overlapping or adjacent where only whitespace separates them."
   },
   {
-    "objectID": "reference/dspy.LocalChatAdapter.html#examples",
-    "href": "reference/dspy.LocalChatAdapter.html#examples",
-    "title": "dspy.LocalChatAdapter",
+    "objectID": "reference/dspy.dspy_signature_defaults.html",
+    "href": "reference/dspy.dspy_signature_defaults.html",
+    "title": "dspy.dspy_signature_defaults",
     "section": "",
-    "text": "&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from llama_cpp import Llama\n&gt;&gt;&gt; from localllm import LocalLLM, localllm_download_model, LocalChatAdapter\n&gt;&gt;&gt; path = localllm_download_model(\"gemma-3-270m-it-Q8_0\", trace = False)\n&gt;&gt;&gt; transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)\n&gt;&gt;&gt; dspy.configure(lm = LocalLLM(transformer, trace = False), adapter = LocalChatAdapter(return_defaults_on_failure = True, trace = False))\n&gt;&gt;&gt; class Go(dspy.Signature):\n...     sentence: str = dspy.InputField(desc = \"A question\")\n...     answer: str = dspy.OutputField(desc=\"A city name\")\n&gt;&gt;&gt;    \n&gt;&gt;&gt; model = dspy.Predict(Go)\n&gt;&gt;&gt; out = model(sentence=\"What city is the Capital of Belgium\")"
+    "text": "dspy.dspy_signature_defaults(signature)\nGenerate default empty values for all output fields in a DSPy signature.\nThis function extracts all output fields from a DSPy signature and creates a dictionary with appropriate default empty values for each field based on its type annotation.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsignature\ndspy.Signature\nA DSPy signature object containing field definitions with type annotations\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nDict[str, Any]\nA dictionary mapping field names to their default empty values. Only includes fields marked as output fields.\n\n\n\n\n\n\n&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from localllm import dspy_signature_defaults\n&gt;&gt;&gt; class MySignature(dspy.Signature):\n...     question: str = dspy.InputField()\n...     answer: str = dspy.OutputField()\n...     names: list[str] = dspy.OutputField()\n...     count: int = dspy.OutputField()\n&gt;&gt;&gt; defaults = dspy_signature_defaults(MySignature)\n&gt;&gt;&gt; defaults\n{'answer': None, 'names': [], 'count': None}\n\n\n\n\nOnly processes fields with __dspy_field_type == “output”\nInput fields are excluded from the result\nUses get_default_for_type() to determine appropriate defaults"
   },
   {
-    "objectID": "reference/dspy.LocalChatAdapter.html#methods",
-    "href": "reference/dspy.LocalChatAdapter.html#methods",
-    "title": "dspy.LocalChatAdapter",
+    "objectID": "reference/dspy.dspy_signature_defaults.html#parameters",
+    "href": "reference/dspy.dspy_signature_defaults.html#parameters",
+    "title": "dspy.dspy_signature_defaults",
     "section": "",
-    "text": "Name\nDescription\n\n\n\n\nparse\nOverride parse method with fallback strategies for malformed JSON.\n\n\n\n\n\ndspy.LocalChatAdapter.parse(signature, completion)\nOverride parse method with fallback strategies for malformed JSON."
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nsignature\ndspy.Signature\nA DSPy signature object containing field definitions with type annotations\nrequired"
+  },
+  {
+    "objectID": "reference/dspy.dspy_signature_defaults.html#returns",
+    "href": "reference/dspy.dspy_signature_defaults.html#returns",
+    "title": "dspy.dspy_signature_defaults",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nDict[str, Any]\nA dictionary mapping field names to their default empty values. Only includes fields marked as output fields."
+  },
+  {
+    "objectID": "reference/dspy.dspy_signature_defaults.html#examples",
+    "href": "reference/dspy.dspy_signature_defaults.html#examples",
+    "title": "dspy.dspy_signature_defaults",
+    "section": "",
+    "text": "&gt;&gt;&gt; import dspy\n&gt;&gt;&gt; from localllm import dspy_signature_defaults\n&gt;&gt;&gt; class MySignature(dspy.Signature):\n...     question: str = dspy.InputField()\n...     answer: str = dspy.OutputField()\n...     names: list[str] = dspy.OutputField()\n...     count: int = dspy.OutputField()\n&gt;&gt;&gt; defaults = dspy_signature_defaults(MySignature)\n&gt;&gt;&gt; defaults\n{'answer': None, 'names': [], 'count': None}"
+  },
+  {
+    "objectID": "reference/dspy.dspy_signature_defaults.html#notes",
+    "href": "reference/dspy.dspy_signature_defaults.html#notes",
+    "title": "dspy.dspy_signature_defaults",
+    "section": "",
+    "text": "Only processes fields with __dspy_field_type == “output”\nInput fields are excluded from the result\nUses get_default_for_type() to determine appropriate defaults"
+  },
+  {
+    "objectID": "reference/txt_locate_all.html",
+    "href": "reference/txt_locate_all.html",
+    "title": "txt_locate_all",
+    "section": "",
+    "text": "txt_locate_all(text, elements)\nFind all occurrences of a text element (in case it appears multiple times).\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nstr | list[str]\nA string to lookup in text or a list of strings to find in text\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test find the a world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]\n&gt;&gt;&gt; loc = txt_locate_all(text, \"notinthetext\")\n&gt;&gt;&gt; loc\n[]\n&gt;&gt;&gt; loc = txt_locate_all(text, [\"test\", \"a\", \"world\"])\n&gt;&gt;&gt; loc\n[TextSpan(text='test', start=23, end=27), TextSpan(text='a', start=21, end=22), TextSpan(text='a', start=37, end=38), TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]"
+  },
+  {
+    "objectID": "reference/txt_locate_all.html#parameters",
+    "href": "reference/txt_locate_all.html#parameters",
+    "title": "txt_locate_all",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nstr | list[str]\nA string to lookup in text or a list of strings to find in text\nrequired"
+  },
+  {
+    "objectID": "reference/txt_locate_all.html#returns",
+    "href": "reference/txt_locate_all.html#returns",
+    "title": "txt_locate_all",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with start/end positions"
+  },
+  {
+    "objectID": "reference/txt_locate_all.html#examples",
+    "href": "reference/txt_locate_all.html#examples",
+    "title": "txt_locate_all",
+    "section": "",
+    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test find the a world in here.\"\n&gt;&gt;&gt; loc = txt_locate_all(text, \"world\")\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]\n&gt;&gt;&gt; loc = txt_locate_all(text, \"notinthetext\")\n&gt;&gt;&gt; loc\n[]\n&gt;&gt;&gt; loc = txt_locate_all(text, [\"test\", \"a\", \"world\"])\n&gt;&gt;&gt; loc\n[TextSpan(text='test', start=23, end=27), TextSpan(text='a', start=21, end=22), TextSpan(text='a', start=37, end=38), TextSpan(text='world', start=6, end=11), TextSpan(text='world', start=39, end=44)]"
+  },
+  {
+    "objectID": "reference/txt_locate.html",
+    "href": "reference/txt_locate.html",
+    "title": "txt_locate",
+    "section": "",
+    "text": "txt_locate(text, elements)\nFind start and end positions of text elements in a larger text.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nList[str]\nA list of strings to find in text\nrequired\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with the first start/end positions of elements in text. The list is the same length as elements\n\n\n\n\n\n\n&gt;&gt;&gt; text = \"Hello world! This is a test.\"\n&gt;&gt;&gt; elements = [\"world\", \"test\", \"notfound\"]\n&gt;&gt;&gt; loc = txt_locate(text, elements)\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='test', start=23, end=27), None]"
+  },
+  {
+    "objectID": "reference/txt_locate.html#parameters",
+    "href": "reference/txt_locate.html#parameters",
+    "title": "txt_locate",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\ntext\nstr\nA text string to search for elements within it.\nrequired\n\n\nelements\nList[str]\nA list of strings to find in text\nrequired"
+  },
+  {
+    "objectID": "reference/txt_locate.html#returns",
+    "href": "reference/txt_locate.html#returns",
+    "title": "txt_locate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\n\nList[TextSpan]\nList of TextSpan objects with the first start/end positions of elements in text. The list is the same length as elements"
+  },
+  {
+    "objectID": "reference/txt_locate.html#examples",
+    "href": "reference/txt_locate.html#examples",
+    "title": "txt_locate",
+    "section": "",
+    "text": "&gt;&gt;&gt; text = \"Hello world! This is a test.\"\n&gt;&gt;&gt; elements = [\"world\", \"test\", \"notfound\"]\n&gt;&gt;&gt; loc = txt_locate(text, elements)\n&gt;&gt;&gt; loc\n[TextSpan(text='world', start=6, end=11), TextSpan(text='test', start=23, end=27), None]"
   }
 ]
