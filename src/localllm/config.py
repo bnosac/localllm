@@ -44,7 +44,7 @@ def localllm_connect(
     >>> type(llm)
     <class 'localllm.dspy.LocalLLM'>
     >>> ## Connect to an LLM with dspy - e.g. to connect to lmstudio or another model
-    >>> config = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = False, response_format= dict(type = "text"))
+    >>> config = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = False, response_format = dict(type = "text"))
     >>> llm = localllm_connect("openai/translategemma-4b-it", model_kwargs = config)
     >>> type(llm)
     <class 'dspy.clients.lm.LM'>
