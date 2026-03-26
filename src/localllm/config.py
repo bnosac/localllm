@@ -38,13 +38,18 @@ def localllm_connect(
     --------
 
     >>> from localllm.config import localllm_connect
-    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0") # doctest: +ELLIPSIS
-    ...
+    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0"), overwrite=True)
+    Downloading...
+    >>> ################################################################################
     >>> ## Connect to an LLM with llama_cpp_python
+    >>> ## 
     >>> llm = localllm_connect("localllm/gemma-3-270m-it-Q8_0")    
     >>> type(llm)
     <class 'localllm.dspy.LocalLLM'>
+    >>>
+    >>> ################################################################################    
     >>> ## Connect to an LLM with dspy - e.g. to connect to lmstudio or another model
+    >>> ##    
     >>> config = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = False, response_format = dict(type = "text"))
     >>> llm = localllm_connect("openai/translategemma-4b-it", model_kwargs = config)
     >>> type(llm)
