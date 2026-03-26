@@ -1,12 +1,14 @@
-from typing import List, Tuple, Optional
+from typing import List, Optional
 from dataclasses import dataclass
-#import re
+# import re
+
 
 @dataclass
 class TextSpan:
     text: str
     start: int
-    end: int    
+    end: int
+
     def __repr__(self):
         return f"TextSpan(text='{self.text}', start={self.start}, end={self.end})"
 
@@ -14,7 +16,7 @@ class TextSpan:
 def txt_locate(text: str, elements: List[str]) -> List[Optional[TextSpan]]:
     """
     Find start and end positions of text elements in a larger text.
-    
+
     Parameters
     ----------
 
@@ -23,23 +25,23 @@ def txt_locate(text: str, elements: List[str]) -> List[Optional[TextSpan]]:
 
     elements : List[str]
         A list of strings to find in text
-        
+
     Returns
     -------
 
     List[TextSpan]
-        List of TextSpan objects with the first start/end positions of elements in text. 
+        List of TextSpan objects with the first start/end positions of elements in text.
         The list is the same length as elements
 
     Examples
     --------
 
     >>> text = "Hello world! This is a test."
-    >>> elements = ["world", "test", "notfound"]    
+    >>> elements = ["world", "test", "notfound"]
     >>> loc = txt_locate(text, elements)
     >>> loc
     [TextSpan(text='world', start=6, end=11), TextSpan(text='test', start=23, end=27), None]
-        
+
     """
     results = []
     for element in elements:
@@ -55,7 +57,7 @@ def txt_locate(text: str, elements: List[str]) -> List[Optional[TextSpan]]:
 def txt_locate_all(text: str, elements: str | list[str]) -> List[TextSpan]:
     """
     Find all occurrences of a text element (in case it appears multiple times).
-    
+
     Parameters
     ----------
 
@@ -64,13 +66,13 @@ def txt_locate_all(text: str, elements: str | list[str]) -> List[TextSpan]:
 
     elements : str | list[str]
         A string to lookup in text or a list of strings to find in text
-        
+
     Returns
     -------
 
     List[TextSpan]
         List of TextSpan objects with start/end positions
-    
+
 
     Examples
     --------
@@ -92,8 +94,8 @@ def txt_locate_all(text: str, elements: str | list[str]) -> List[TextSpan]:
     if isinstance(elements, list):
         for element in elements:
             results.extend(txt_locate_all(text, element))
-        return results    
-    element = elements   
+        return results
+    element = elements
     while True:
         pos = text.find(element, start)
         if pos == -1:
@@ -103,24 +105,22 @@ def txt_locate_all(text: str, elements: str | list[str]) -> List[TextSpan]:
     return results
 
 
-
-
 def merge_spans(text: str, spans: List[TextSpan], skip_spaces: bool = True) -> List[TextSpan]:
     """
     Combine TextSpan elements which are either overlapping or adjacent where only whitespace separates them.
-    
+
     Parameters
     ----------
-        
+
     text : str
         A text string where spans are extracted from
-    
+
     spans: List[TextSpan]
         A list of TextSpan objects to look for overlaps and to combine
 
     skip_spaces: bool
         If True, combine spans which are not overlapping but which do have only whitespace between them
-        
+
     Returns
     -------
 
@@ -143,25 +143,25 @@ def merge_spans(text: str, spans: List[TextSpan], skip_spaces: bool = True) -> L
     result = []
     size = len(spans)
     if not spans or size == 0:
-        return     
+        return
     # Sort spans by start position
     sorted_spans = sorted(spans, key=lambda x: x.start)
-    # Loop over all spans and combine if overlapping or adjacent    
-    #nws = re.compile(r'[^a-zA-Z0-9]')
-    #ws = re.compile(r'\s+')    
-    current = sorted_spans[0]    
+    # Loop over all spans and combine if overlapping or adjacent
+    # nws = re.compile(r'[^a-zA-Z0-9]')
+    # ws = re.compile(r'\s+')
+    current = sorted_spans[0]
     for next_span in sorted_spans[1:]:
         # Overlapping or touching - merge them
-        if next_span.start <= current.end:            
+        if next_span.start <= current.end:
             end = max(current.end, next_span.end)
-            current = TextSpan(text=text[current.start:end], start=current.start, end=end)
+            current = TextSpan(text=text[current.start : end], start=current.start, end=end)
         elif skip_spaces:
             # Check if there's only whitespace between spans
-            between_text = text[current.end:next_span.start]
-            #if re.sub(ws, '', between_text.strip()) == "":     
-            if between_text.isspace() or between_text == "":            
+            between_text = text[current.end : next_span.start]
+            # if re.sub(ws, '', between_text.strip()) == "":
+            if between_text.isspace() or between_text == "":
                 end = max(current.end, next_span.end)
-                current = TextSpan(text=text[current.start:end], start=current.start, end=end)
+                current = TextSpan(text=text[current.start : end], start=current.start, end=end)
             else:
                 # No overlap and more than just whitespace between the spans
                 result.append(current)
@@ -171,11 +171,9 @@ def merge_spans(text: str, spans: List[TextSpan], skip_spaces: bool = True) -> L
             result.append(current)
             current = next_span
     # Don't forget the last span
-    result.append(current)    
+    result.append(current)
     # If we combined spans, maybe we need to combine again if there are several of the same
     if size != len(result):
         result = merge_spans(text, result, skip_spaces=skip_spaces)
     result = sorted(result, key=lambda x: x.start)
     return result
-
-
