@@ -38,7 +38,7 @@ def localllm_connect(
     --------
 
     >>> from localllm.config import localllm_connect
-    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0"), overwrite=True)
+    >>> path = localllm_download_model("gemma-3-270m-it-Q8_0", overwrite=True)
     Downloading...
     >>> ################################################################################
     >>> ## Connect to an LLM with llama_cpp_python
