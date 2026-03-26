@@ -72,3 +72,19 @@ messages = [
 ]
 llm(messages = messages)
 ```
+
+```{python}
+text = "\nPatient Profile:\n- Name: Ms. Suzy Rickie Hackett\n- Contact Number: 555-359-4515 (Home)\n- Date of Birth: 1941-09-09\n- Deceased on: 2021-08-03 at 01:47:39 (+02:00)\n- Address: 292 Buckridge Port, Massachusetts, 01532, US\n- Not a multiple birth\n- Language Spoken: English (United States)\n\nEncounter Details:\n1. Encounter Status: Finished\n   - Description: Well child visit procedure\n   - Attending Doctor: Dr. Valentine Leannon\n   - Visit START: 1941-09-09 at 20:43:56 (+02:00)\n   - Visit END: 1941-09-09 at 20:58:56 (+02:00)\n   - Relationship with patient: Primary performer\n\n2. Encounter Status: Unknown\n   - Description: Well child visit procedure\n   - Provider Organisation: SUNRISE HEALTHCARE LLC\n   - Visit START: 1950-09-12 at 19:43:56 (+01:00)\n   - Visit END: 1950-09-12 at 19:58:56 (+01:00)\n\n2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.\n\nOrganization Information:\n- Name: SUNRISE HEALTHCARE LLC\n- Contact Number: 6176509959\n- Active: Yes\n- Type: Healthcare Provider\n\n\n"
+messages = [
+    {
+        "role": "system",
+        "content": "You are a professional English (en) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the French translation, without any additional explanations or commentary. Please translate the following English text into French:",
+    },
+    {
+        "role": "user",
+        "content": text
+    },
+]
+trans = llm(messages = messages)
+trans
+```
