@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+* Exported localllm_connect
+
 ## 0.2.0
 
 * Added LocalChatAdapter (extending BAMLAdapator) to parse out the LLM response which are wrongly formatted more gracefully defaulting to dspy_signature_defaults in case of complete failure
