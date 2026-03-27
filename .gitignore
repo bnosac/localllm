@@ -1,3 +1,4 @@
 /build/
 /docs/reference/
 *.egg-info
+/dev/
