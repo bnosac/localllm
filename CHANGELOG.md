@@ -11,6 +11,7 @@
     * LFM2.5-1.2B-Instruct-Q4_K_M
     * LFM2.5-1.2B-Instruct-Q8_0
 * Added localllm.config.localllm_connect
+* Bump dependencies to llama-cpp-python>=0.3.8 and dspy>=3.0.0
 
 ## 0.1.0
 
