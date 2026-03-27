@@ -39,7 +39,7 @@ import dspy
 dspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
-    value = dspy.OutputField(desc="A city")
+    value: str    = dspy.OutputField(desc = "A city")
 
 model = dspy.Predict(Go)
 out = model(sentence="What is the capital of France")
@@ -87,4 +87,25 @@ messages = [
 ]
 trans = llm(messages = messages)
 trans
+```
+
+
+### Directly use the model
+
+- localllm_connect downloads the model if it does not exist
+
+```{python}
+import dspy
+from localllm import localllm_connect, LocalChatAdapter
+llm = localllm_connect("localllm/gemma-3-270m-it-Q8_0", 
+                       model_kwargs = dict(n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, verbose = True),
+                       adapter = LocalChatAdapter(trace = True)) 
+
+class Go(dspy.Signature):
+    sentence: str = dspy.InputField(desc = "A question")
+    value: str    = dspy.OutputField(desc = "A city")
+
+predict = dspy.Predict(Go)
+out = predict(sentence = "What is the capital of Hungary")
+out
 ```
