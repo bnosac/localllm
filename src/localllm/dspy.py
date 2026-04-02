@@ -79,8 +79,10 @@ class LocalLLM(dspy.BaseLM):
             response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
             # Return in the format DSPy expects: list of strings
             out = [response.choices[0].message.content]
-        except:
-            out = [""]
+        except Exception as e: 
+            if self.trace:
+                print(e)
+            out = [None]
         if self.trace:
             print("====================== DONE (__call__) ======================")        
         return out

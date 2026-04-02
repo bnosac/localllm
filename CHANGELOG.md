@@ -10,7 +10,7 @@
     * Qwen3.5-0.8B-Q8_0
     * LFM2.5-350M-Q8_0
 * LocalLLM
-    * put __call__ in try-catch block and return "" in case of an error (e.g. context to big for the model)
+    * put __call__ in try-catch block and return [None] in case of an error (e.g. context to big for the model) + log the error in case of trace
     * in __call__ trace more arguments if requested
 
 ## 0.2.0
