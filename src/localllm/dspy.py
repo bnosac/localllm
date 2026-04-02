@@ -70,15 +70,20 @@ class LocalLLM(dspy.BaseLM):
             messages = [{"role": "user", "content": prompt}]
         elif messages is None:
             raise ValueError("Either prompt or messages must be provided")
+        call_kwargs = {**self.kwargs, **kwargs}
         if self.trace:
             print("====================== START (__call__) ======================")
-            print(list(kwargs.keys()))
-        call_kwargs = {**self.kwargs, **kwargs}
-        response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+            print(list(kwargs.keys()))        
+            print(list(call_kwargs.keys()))
+        try:
+            response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+            # Return in the format DSPy expects: list of strings
+            out = [response.choices[0].message.content]
+        except:
+            out = [""]
         if self.trace:
-            print("====================== DONE (__call__) ======================")
-        # Return in the format DSPy expects: list of strings
-        return [response.choices[0].message.content]
+            print("====================== DONE (__call__) ======================")        
+        return out
 
     def forward(self, prompt=None, messages=None, **kwargs):
         if self.trace:
