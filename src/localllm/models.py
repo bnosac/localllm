@@ -23,8 +23,10 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
-        - "Qwen3-4B-Instruct-Q4_K_M": Qwen 3 4B Instruct model (Q4_K_M quantization)
-
+        - "Qwen3.5-9B-Q4_K_M": Qwen 3.5 9B model (Q4_K_M quantization)
+        - "Qwen3.5-4B-Q4_K_M": Qwen 3.5 4B model (Q4_K_M quantization)
+        - "Qwen3.5-2B-Q4_K_M": Qwen 3.5 2B model (Q4_K_M quantization)
+        - "Qwen3.5-0.8B-Q8_0": Qwen 3.5 0.8B model (Q8_0 quantization)
 
     model_dir : str or None, default=None
         Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR
@@ -77,6 +79,14 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> model_path = localllm_download_model("Qwen3-8B-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("Qwen3.5-9B-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("Qwen3.5-4B-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("Qwen3.5-2B-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("Qwen3.5-0.8B-Q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
 
     Notes
@@ -132,6 +142,22 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
             "url": "https://huggingface.co/bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
             "filename": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
         },
+        "Qwen3.5-9B-Q4_K_M": {
+            "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-9B-Q4_K_M.gguf",
+        }, 
+        "Qwen3.5-4B-Q4_K_M": {
+            "url": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+        },
+        "Qwen3.5-2B-Q4_K_M": {
+            "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-2B-Q4_K_M.gguf",
+        }, 
+        "Qwen3.5-0.8B-Q8_0": {
+            "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q8_0.gguf",
+            "filename": "Qwen3.5-0.8B-Q8_0.gguf",
+        },                                   
     }
 
     # Validate model type
