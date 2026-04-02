@@ -27,6 +27,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "Qwen3.5-4B-Q4_K_M": Qwen 3.5 4B model (Q4_K_M quantization)
         - "Qwen3.5-2B-Q4_K_M": Qwen 3.5 2B model (Q4_K_M quantization)
         - "Qwen3.5-0.8B-Q8_0": Qwen 3.5 0.8B model (Q8_0 quantization)
+        - "LFM2.5-350M-Q8_0": LFM2.5 350M model (Q8_0 quantization)        
 
     model_dir : str or None, default=None
         Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR
@@ -88,6 +89,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3.5-0.8B-Q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-350M-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)    
 
     Notes
     -----
@@ -157,7 +160,11 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         "Qwen3.5-0.8B-Q8_0": {
             "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q8_0.gguf",
             "filename": "Qwen3.5-0.8B-Q8_0.gguf",
-        },                                   
+        },        
+        "LFM2.5-350M-Q8_0": {
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q8_0.gguf",
+            "filename": "LFM2.5-350M-Q8_0.gguf",
+        },                                      
     }
 
     # Validate model type
