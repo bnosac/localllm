@@ -1,12 +1,13 @@
 import os
 import dspy
+from typing import Union
 from .dspy import LocalLLM, LocalChatAdapter
 from .models import localllm_download_model
 
 
 def localllm_connect(
     lm: str = "localllm/gemma-3-270m-it-Q8_0",
-    model_kwargs: dict = {"n_ctx": 32768, "n_gpu_layers": -1, "n_threads": 1, "flash_attn": True, "verbose": False},
+    model_kwargs: Union[dict, None] = None,
     adapter=None,
     trace: bool = False,
 ):
@@ -19,8 +20,11 @@ def localllm_connect(
         The name of the localllm model.
         Passed on to localllm_download_model if the string starts with "localllm". If not uses dspy.LM to connect to an API.
 
-    model_kwargs : dict
-        A dictionary of model arguments passed on to Llama in case of a localllm model or passed on to dspy.LM in case of an API
+    model_kwargs : Union[dict, None]
+        A dictionary of model arguments passed on to Llama in case of a localllm model or passed on to dspy.LM in case of an API.
+        If not provided, defaults to 
+            - if lm starts with "localllm": dict(n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, verbose = False, chat_format = None)       
+            - else: dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
 
     adapter : dspy.adapter, default=None
         a dspy adapter e.g. dspy.adapters.ChatAdapter, dspy.adapters.JSONAdapter, defaults to LocalChatAdapter if not provided
@@ -61,15 +65,20 @@ def localllm_connect(
             model_name = lm.replace("localllm/", "")
             model_name = localllm_download_model(model_name)
             ## Case where you specify localllm/gemma-3-4b-it-Q4_K_M for example
+            if model_kwargs is None:
+                model_kwargs = dict(n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, verbose = False, chat_format = None)
         else:
             model_name = lm
+            if model_kwargs is None:
+                model_kwargs = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, 
+                                    response_format = dict(type = "text"))
         if adapter is None:
             adapter = LocalChatAdapter(trace=trace)
         if os.path.exists(model_name):
             ## Local gguf LLM model
             from llama_cpp import Llama
             transformer = Llama(model_path=model_name, **model_kwargs)
-            lm = LocalLLM(transformer)
+            lm = LocalLLM(transformer, trace = trace > 1)
             dspy.configure(lm=lm, adapter=adapter)
         else:
             ## Other API service providers
