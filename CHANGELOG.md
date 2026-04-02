@@ -3,6 +3,11 @@
 ## 0.2.1
 
 * Exported localllm_connect
+* localllm_download_model, added:
+    * Qwen3.5-9B-Q4_K_M
+    * Qwen3.5-4B-Q4_K_M
+    * Qwen3.5-2B-Q4_K_M
+    * Qwen3.5-0.8B-Q8_0
 
 ## 0.2.0
 
