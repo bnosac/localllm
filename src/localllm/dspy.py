@@ -47,7 +47,7 @@ class LocalLLM(dspy.BaseLM):
     >>> dspy.configure(lm = LocalLLM(transformer))
     >>> class Go(dspy.Signature):
     ...     sentence: str = dspy.InputField(desc = "A question")
-    ...     answer: str = dspy.OutputField(desc="A city name")
+    ...     answer:   str = dspy.OutputField(desc = "A city name")
     >>>
     >>> model = dspy.Predict(Go)
     >>> out = model(sentence="What is the capital of France")
@@ -71,8 +71,8 @@ class LocalLLM(dspy.BaseLM):
         elif messages is None:
             raise ValueError("Either prompt or messages must be provided")
         call_kwargs = {**self.kwargs, **kwargs}
-        if self.trace:
-            print("====================== START (__call__) ======================")
+        if self.trace > 1:
+            print("====================== START (LocalLLM.__call__) ======================")
             print(list(kwargs.keys()))        
             print(list(call_kwargs.keys()))
         try:
@@ -83,13 +83,13 @@ class LocalLLM(dspy.BaseLM):
             if self.trace:
                 print(e)
             out = [None]
-        if self.trace:
-            print("====================== DONE (__call__) ======================")        
+        if self.trace > 1:
+            print("====================== DONE (LocalLLM.__call__) ======================")        
         return out
 
     def forward(self, prompt=None, messages=None, **kwargs):
-        if self.trace:
-            print("====================== START (__forward__) ======================")
+        if self.trace > 1:
+            print("====================== START (LocalLLM.__forward__) ======================")
         """Forward method for regular DSPy operations"""
         if prompt is not None and messages is None:
             messages = [{"role": "user", "content": prompt}]

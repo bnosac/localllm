@@ -73,12 +73,12 @@ def localllm_connect(
                 model_kwargs = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, 
                                     response_format = dict(type = "text"))
         if adapter is None:
-            adapter = LocalChatAdapter(trace=trace)
+            adapter = LocalChatAdapter(trace = trace)
         if os.path.exists(model_name):
             ## Local gguf LLM model
             from llama_cpp import Llama
             transformer = Llama(model_path=model_name, **model_kwargs)
-            lm = LocalLLM(transformer, trace = trace > 1)
+            lm = LocalLLM(transformer, trace = trace)
             dspy.configure(lm=lm, adapter=adapter)
         else:
             ## Other API service providers
