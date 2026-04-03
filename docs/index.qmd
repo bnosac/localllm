@@ -4,7 +4,7 @@ engine: knitr
 
 # Welcome to localllm
 
-Python package localllm provides functionalities to use a Local LLM object which alongside dspy
+Python package localllm provides functionalities to use a Local LLM object alongside dspy
 
 ### Download a model
 
