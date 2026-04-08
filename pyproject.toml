@@ -8,6 +8,7 @@ readme.file = "README.md"
 readme.content-type = "text/markdown"
 requires-python = ">=3.9"
 license = "MIT"
+license-files = ["LICENSE"]
 dependencies = [
     "dspy>=3.0.0",
     "llama-cpp-python>=0.3.8",
