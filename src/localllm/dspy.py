@@ -99,6 +99,10 @@ class LocalLLM(dspy.BaseLM):
         raw = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
         return raw
 
+    def kill(self, launch_kwargs: dict[str, Any] | None = None):
+        ## self.provider.kill(self, launch_kwargs)
+        pass
+        
 
 
 
