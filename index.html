@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-baf333abd407eb98d8b56c64a19f8930.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f7919f14b89ae9a431cba0b331f0b52b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -191,8 +191,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
               'index': 0,
               'logprobs': None,
               'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x'}],
- 'created': 1775733236,
- 'id': 'cmpl-c61315fe-b73e-4be3-94f7-c3ae269c46f1',
+ 'created': 1775737386,
+ 'id': 'cmpl-36e78f13-a273-4842-b1f5-4ef44bdf71b3',
  'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf',
  'object': 'text_completion',
  'usage': {'completion_tokens': 16, 'prompt_tokens': 8, 'total_tokens': 24}}</code></pre>
@@ -742,7 +742,7 @@ graph_reserve: reserving a graph for ubatch with n_tokens =  512, n_seqs =  1, n
 sched_reserve:        CPU compute buffer size =   514.50 MiB
 sched_reserve: graph nodes  = 729
 sched_reserve: graph splits = 1
-sched_reserve: reserve took 4.81 ms, sched copies = 1
+sched_reserve: reserve took 4.46 ms, sched copies = 1
 CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
 Model metadata: {'quantize.imatrix.chunks_count': '821', 'quantize.imatrix.entries_count': '126', 'quantize.imatrix.file': '/models_out/gemma-3-270m-it-GGUF/google_gemma-3-270m-it-imatrix.gguf', 'tokenizer.ggml.add_space_prefix': 'false', 'tokenizer.chat_template': '{{ bos_token }}\n{%- if messages[0][\'role\'] == \'system\' -%}\n    {%- if messages[0][\'content\'] is string -%}\n        {%- set first_user_prefix = messages[0][\'content\'] + \'\n\n\' -%}\n    {%- else -%}\n        {%- set first_user_prefix = messages[0][\'content\'][0][\'text\'] + \'\n\n\' -%}\n    {%- endif -%}\n    {%- set loop_messages = messages[1:] -%}\n{%- else -%}\n    {%- set first_user_prefix = "" -%}\n    {%- set loop_messages = messages -%}\n{%- endif -%}\n{%- for message in loop_messages -%}\n    {%- if (message[\'role\'] == \'user\') != (loop.index0 % 2 == 0) -%}\n        {{ raise_exception("Conversation roles must alternate user/assistant/user/assistant/...") }}\n    {%- endif -%}\n    {%- if (message[\'role\'] == \'assistant\') -%}\n        {%- set role = "model" -%}\n    {%- else -%}\n        {%- set role = message[\'role\'] -%}\n    {%- endif -%}\n    {{ \'&lt;start_of_turn&gt;\' + role + \'\n\' + (first_user_prefix if loop.first else "") }}\n    {%- if message[\'content\'] is string -%}\n        {{ message[\'content\'] | trim }}\n    {%- elif message[\'content\'] is iterable -%}\n        {%- for item in message[\'content\'] -%}\n            {%- if item[\'type\'] == \'image\' -%}\n                {{ \'&lt;start_of_image&gt;\' }}\n            {%- elif item[\'type\'] == \'text\' -%}\n                {{ item[\'text\'] | trim }}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- else -%}\n        {{ raise_exception("Invalid content type") }}\n    {%- endif -%}\n    {{ \'&lt;end_of_turn&gt;\n\' }}\n{%- endfor -%}\n{%- if add_generation_prompt -%}\n    {{\'&lt;start_of_turn&gt;model\n\'}}\n{%- endif -%}\n', 'tokenizer.ggml.add_eos_token': 'false', 'general.quantization_version': '2', 'tokenizer.ggml.add_sep_token': 'false', 'gemma3.attention.key_length': '256', 'general.base_model.0.repo_url': 'https://huggingface.co/google/gemma-3-270m', 'general.license': 'gemma', 'gemma3.attention.layer_norm_rms_epsilon': '0.000001', 'gemma3.context_length': '32768', 'general.type': 'model', 'general.file_type': '7', 'gemma3.embedding_length': '640', 'general.finetune': 'it', 'gemma3.attention.head_count_kv': '1', 'tokenizer.ggml.pre': 'default', 'gemma3.rope.freq_base': '1000000.000000', 'general.base_model.count': '1', 'general.base_model.0.organization': 'Google', 'general.basename': 'gemma-3', 'tokenizer.ggml.padding_token_id': '0', 'general.architecture': 'gemma3', 'gemma3.block_count': '18', 'general.size_label': '270M', 'tokenizer.ggml.add_bos_token': 'true', 'gemma3.feed_forward_length': '2048', 'gemma3.attention.head_count': '4', 'quantize.imatrix.dataset': '/training_dir/calibration_datav5.txt', 'general.base_model.0.name': 'Gemma 3 270m', 'gemma3.attention.value_length': '256', 'gemma3.attention.sliding_window': '512', 'tokenizer.ggml.model': 'llama', 'general.name': 'Gemma 3 270m It', 'tokenizer.ggml.bos_token_id': '2', 'tokenizer.ggml.eos_token_id': '1', 'tokenizer.ggml.unknown_token_id': '3'}
 Available chat formats from metadata: chat_template.default
@@ -805,10 +805,10 @@ Using chat bos_token: &lt;bos&gt;
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>predict <span class="op">=</span> dspy.Predict(Go)</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> predict(sentence <span class="op">=</span> <span class="st">"What is the capital of Hungary"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>llama_perf_context_print:        load time =     656.73 ms
-llama_perf_context_print: prompt eval time =     654.26 ms /   158 tokens (    4.14 ms per token,   241.50 tokens per second)
-llama_perf_context_print:        eval time =     257.57 ms /    13 runs   (   19.81 ms per token,    50.47 tokens per second)
-llama_perf_context_print:       total time =     923.88 ms /   171 tokens
+<pre><code>llama_perf_context_print:        load time =     620.92 ms
+llama_perf_context_print: prompt eval time =     620.33 ms /   158 tokens (    3.93 ms per token,   254.70 tokens per second)
+llama_perf_context_print:        eval time =     265.86 ms /    13 runs   (   20.45 ms per token,    48.90 tokens per second)
+llama_perf_context_print:       total time =     895.52 ms /   171 tokens
 llama_perf_context_print:    graphs reused =         12
 LocalChatAdapter: Fallback to lenient parsing strategy
 [[ ## sentence ## ]]
