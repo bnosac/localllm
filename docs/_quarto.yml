@@ -53,3 +53,8 @@ quartodoc:
         - txt_locate_all
         - txt_locate
         - merge_spans
+    - subtitle: Traindata
+      desc: Converters to data to use for training with dspy
+      contents:
+        - name: converters.tif
+        - name: converters.convert_dspy_example
