@@ -6,6 +6,7 @@
     * from localllm.converters import tif, convert_dspy_example
     * added dependency on s3generics
     * added optional dependency on pandas for the converters
+* Bump dependency to Python >=3.10
 
 ## 0.2.1
 
