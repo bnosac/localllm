@@ -68,12 +68,12 @@ jobs:
           uv pip install --system --group dev
           uv pip install --system .
           #Rscript -e "reticulate::py_install('.[dev]')"
-          quartodoc build --config docs/_quarto.yml
+          quartodoc build --config doc/_quarto.yml
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
-          path: docs
+          path: doc
           render: true
         env:
           RETICULATE_PYTHON_ENV: /usr
