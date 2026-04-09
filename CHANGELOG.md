@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.2
+
+* Added optional converters
+    * from localllm.converters import tif, convert_dspy_example
+    * added dependency on s3generics
+    * added optional dependency on pandas for the converters
+
 ## 0.2.1
 
 * Exported localllm_connect

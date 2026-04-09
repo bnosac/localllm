@@ -2,7 +2,7 @@
 localllm: Run a local LLM alongside dspy
 """
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 from .dspy import LocalLLM, LocalChatAdapter, dspy_signature_defaults
