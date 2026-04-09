@@ -1,6 +1,6 @@
 [project]
 name = "localllm"
-version = "0.2.1"
+version = "0.2.2"
 description = "Run a local LLM alongside dspy"
 authors = [{ name = "Jan Wijffels", email = "jwijffels@bnosac.be" }]
 maintainers = [{ name = "Jan Wijffels", email = "jwijffels@bnosac.be" }]
@@ -12,6 +12,12 @@ license-files = ["LICENSE"]
 dependencies = [
     "dspy>=3.0.0",
     "llama-cpp-python>=0.3.8",
+    "s3generics"
+]
+
+[project.optional-dependencies]
+converters = [
+    "pandas"
 ]
 
 [dependency-groups]
@@ -24,7 +30,10 @@ dev = [
     "griffe<0.49",
     "dspy>=3.0.0",
     "llama-cpp-python>=0.3.8",
+    "s3generics",
+    "pandas"
 ]
+
 
 [tool.pytest.ini_options]
 minversion = "6.0"
