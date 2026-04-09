@@ -30,6 +30,8 @@ dev = [
     "griffe<0.49",
     "dspy>=3.0.0",
     "llama-cpp-python>=0.3.8",
+    "s3generics",
+    "pandas"
 ]
 
 
