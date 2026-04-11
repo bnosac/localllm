@@ -10,7 +10,8 @@ This looks like this.
 ```{python}
 #| output: false
 from localllm import localllm_connect
-llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0") 
+#llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
+llm = localllm_connect("localllm/gemma-4-e2b-it-Q8_0")
 ```
 
 ```{python}
