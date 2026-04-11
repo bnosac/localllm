@@ -59,12 +59,12 @@ out["output"]
 from localllm import localllm_download_model, LocalLLM
 from llama_cpp import Llama
 path = localllm_download_model("translategemma-4b-it-q8_0")
-```
-
-```{python}
 transformer = Llama(
     model_path = path, flash_attn = False, verbose = False,
     n_ctx = 4096, swa_full = False, seed = 4321)
+```
+
+```{python}
 llm = LocalLLM(transformer)
 messages = [
     {
