@@ -21,6 +21,12 @@ converters = [
 ]
 
 [dependency-groups]
+doc = [
+    "pyyaml", 
+    "jupyterlab", 
+    "jupytext", 
+    "jupyter"  ## Quarto documentation
+]
 dev = [
     "pre-commit>=4.0.1",
     "pytest>=8.3.4",
@@ -31,9 +37,9 @@ dev = [
     "dspy>=3.0.0",
     "llama-cpp-python>=0.3.8",
     "s3generics",
-    "pandas"
+    "pandas",
+    { include-group = "doc"},
 ]
-
 
 [tool.pytest.ini_options]
 minversion = "6.0"
