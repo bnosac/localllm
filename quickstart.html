@@ -183,11 +183,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Python package localllm provides functionalities to use a local LLM object alongside dspy. This looks like this.</p>
-<div id="e17f7c67" class="cell" data-execution_count="1">
+<div id="3fddd5a0" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_connect</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> localllm_connect(<span class="st">"localllm/LFM2.5-1.2B-Instruct-Q8_0"</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> localllm_connect(<span class="st">"localllm/gemma-4-e2b-it-Q8_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a930ae68" class="cell" data-execution_count="2">
+<div id="23513a0d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    sentence: <span class="bu">str</span>       <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
@@ -198,12 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>Prediction(
-    reasoning='The query asks for the 10 most common first names in Japan. To provide an accurate answer, I would typically need access to demographic or linguistic data sources that track name frequency in Japan. However, based on general knowledge and common naming trends, I can infer that popular names often include characters like 佐藤 (Sato), 田中 (Tanaka), 鈴木 (Suzuki), etc. For a precise list of the top 10, a detailed statistical dataset would be required.',
-    value='["佐藤", "田中", "鈴木", "高橋", "山田", "鈴木", "佐藤", "田中", "鈴木", "中村", "鈴木"]'
+    reasoning='Determining the absolute "10 most common first names in Japan" is complex as naming trends can shift, and data sources vary. However, based on general demographic data and historical popularity, certain names consistently rank high. Common Japanese names often follow traditional patterns or have meanings related to nature or virtues. I will list some of the most frequently cited and traditional popular names.',
+    value=['Sota', 'Yuki', 'Haruto', 'Ren', 'Riku', 'Hiroto', 'Kaito', 'Taro', 'Yuto', 'Asahi']
 )</code></pre>
 </div>
 </div>
-<div id="59df5e01" class="cell" data-execution_count="3">
+<div id="c0631b53" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourProgram(dspy.Signature):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    sentence:   <span class="bu">str</span>   <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    value:      <span class="bu">int</span>   <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"The answer"</span>)</span>
@@ -214,8 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Prediction(
-    value='5',
-    confidence='0.98'
+    value=5,
+    confidence=1.0
 )</code></pre>
 </div>
 </div>
