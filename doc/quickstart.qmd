@@ -20,6 +20,6 @@ class Go(dspy.Signature):
     value:    list[str] = dspy.OutputField(desc = "The answer")
 
 predict = dspy.Predict(Go)
-out = predict(sentence = "What are the 10 most common first names in Europe")
+out = predict(sentence = "What are the 10 most common first names in Japan")
 out
 ```
