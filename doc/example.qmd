@@ -1,10 +1,9 @@
 ---
 format: html
+title: Welcome to localllm
 ---
 
-# Welcome to localllm
-
-Python package localllm provides functionalities to use a Local LLM object alongside dspy
+Python package localllm provides functionalities to use a local LLM object alongside dspy
 
 ### Download a model
 
@@ -12,7 +11,6 @@ For the list of all models, look to the help of localllm_download_model
 
 ```{python}
 #| output: false
-import pprint
 from localllm import LocalLLM, LocalChatAdapter, localllm_download_model
 path = localllm_download_model("gemma-3-270m-it-Q8_0")
 ```
@@ -25,9 +23,10 @@ path
 
 ```{python}
 from llama_cpp import Llama
+import pprint
 transformer = Llama(
     model_path = path, flash_attn = False, verbose = False,
-    n_gpu_layers = -1, n_ctx = 32768, n_threads = 1, swa_full = False, seed = 4321)
+    main_gpu = 0, n_gpu_layers = -1, n_ctx = 32768, n_threads = 1, swa_full = False, seed = 4321)
 out = transformer("How much is 4x4")
 pprint.pprint(out)
 ```
@@ -46,6 +45,9 @@ class Go(dspy.Signature):
 model = dspy.Predict(Go)
 out = model(sentence="What is the capital of France")
 pprint.pprint(out)
+```
+
+```{python}
 out["output"]
 ```
 
@@ -62,7 +64,7 @@ path = localllm_download_model("translategemma-4b-it-q8_0")
 ```{python}
 transformer = Llama(
     model_path = path, flash_attn = False, verbose = False,
-    n_ctx = 0, swa_full = False, seed = 4321)
+    n_ctx = 4096, swa_full = False, seed = 4321)
 llm = LocalLLM(transformer)
 messages = [
     {
@@ -97,7 +99,10 @@ trans
 ### Directly use the model
 
 - localllm_connect downloads the model if it does not exist
-- LocalChatAdapter assumes json but falls back to parsing-based strategy if the output is malformed by the LLM
+- Small LLM's do not always adhere to provided prompt templates
+    - LocalChatAdapter assumes json but falls back to parsing-based strategy if the output is malformed by the LLM
+    - You can still inspect what the output from dspy is that the LLM gets
+
 
 ```{python}
 #| output: false
@@ -120,5 +125,8 @@ class Go(dspy.Signature):
 
 predict = dspy.Predict(Go)
 out = predict(sentence = "What is the capital of Hungary")
+```
+
+```{python}  
 out
 ```
