@@ -186,11 +186,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-a-model" class="level3">
 <h3 class="anchored" data-anchor-id="download-a-model">Download a model</h3>
 <p>For the list of all models, look to the help of localllm_download_model</p>
-<div id="114588a2" class="cell" data-execution_count="1">
+<div id="140999b5" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> LocalLLM, LocalChatAdapter, localllm_download_model</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fe028d87" class="cell" data-execution_count="2">
+<div id="ff4960e7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>'/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf'</code></pre>
@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="test-the-local-model" class="level3">
 <h3 class="anchored" data-anchor-id="test-the-local-model">Test the local model</h3>
-<div id="5b31c805" class="cell" data-execution_count="3">
+<div id="e8a0c3b1" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Llama(</span>
@@ -212,8 +212,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
               'index': 0,
               'logprobs': None,
               'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x'}],
- 'created': 1775924804,
- 'id': 'cmpl-443f0170-2ded-4e49-b0ac-ebf8652738f7',
+ 'created': 1775926329,
+ 'id': 'cmpl-f4f38c27-eb15-4d53-a875-1e983a68ac51',
  'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf',
  'object': 'text_completion',
  'usage': {'completion_tokens': 16, 'prompt_tokens': 8, 'total_tokens': 24}}</code></pre>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="use-the-model-directly-alongside-dspy" class="level3">
 <h3 class="anchored" data-anchor-id="use-the-model-directly-alongside-dspy">Use the model directly alongside dspy</h3>
 <p>Use dspy alongside the local model</p>
-<div id="1321381f" class="cell" data-execution_count="4">
+<div id="3c006fe1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dspy.configure(lm <span class="op">=</span> LocalLLM(transformer), adapter <span class="op">=</span> LocalChatAdapter())</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 )</code></pre>
 </div>
 </div>
-<div id="40ad02ad" class="cell" data-execution_count="5">
+<div id="6491c50a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>out[<span class="st">"output"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>'Paris'</code></pre>
@@ -248,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="another-example-with-a-translation-model" class="level3">
 <h3 class="anchored" data-anchor-id="another-example-with-a-translation-model">Another example with a translation model</h3>
-<div id="4a09033b" class="cell" data-execution_count="6">
+<div id="71c6d82d" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_download_model, LocalLLM</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>)</span>
@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    model_path <span class="op">=</span> path, flash_attn <span class="op">=</span> <span class="va">False</span>, verbose <span class="op">=</span> <span class="va">False</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    n_ctx <span class="op">=</span> <span class="dv">4096</span>, swa_full <span class="op">=</span> <span class="va">False</span>, seed <span class="op">=</span> <span class="dv">4321</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cd06e9e3" class="cell" data-execution_count="7">
+<div id="1c74de7d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> LocalLLM(transformer)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    {</span>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>['\nWho won the 100-meter sprint during the last Olympic Games?\n']</code></pre>
 </div>
 </div>
-<div id="4800853b" class="cell" data-execution_count="8">
+<div id="103ea97f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">Patient Profile:</span><span class="ch">\n</span><span class="st">- Name: Ms. Suzy Rickie Hackett</span><span class="ch">\n</span><span class="st">- Contact Number: 555-359-4515 (Home)</span><span class="ch">\n</span><span class="st">- Date of Birth: 1941-09-09</span><span class="ch">\n</span><span class="st">- Deceased on: 2021-08-03 at 01:47:39 (+02:00)</span><span class="ch">\n</span><span class="st">- Address: 292 Buckridge Port, Massachusetts, 01532, US</span><span class="ch">\n</span><span class="st">- Not a multiple birth</span><span class="ch">\n</span><span class="st">- Language Spoken: English (United States)</span><span class="ch">\n\n</span><span class="st">Encounter Details:</span><span class="ch">\n</span><span class="st">1. Encounter Status: Finished</span><span class="ch">\n</span><span class="st">   - Description: Well child visit procedure</span><span class="ch">\n</span><span class="st">   - Attending Doctor: Dr. Valentine Leannon</span><span class="ch">\n</span><span class="st">   - Visit START: 1941-09-09 at 20:43:56 (+02:00)</span><span class="ch">\n</span><span class="st">   - Visit END: 1941-09-09 at 20:58:56 (+02:00)</span><span class="ch">\n</span><span class="st">   - Relationship with patient: Primary performer</span><span class="ch">\n\n</span><span class="st">2. Encounter Status: Unknown</span><span class="ch">\n</span><span class="st">   - Description: Well child visit procedure</span><span class="ch">\n</span><span class="st">   - Provider Organisation: SUNRISE HEALTHCARE LLC</span><span class="ch">\n</span><span class="st">   - Visit START: 1950-09-12 at 19:43:56 (+01:00)</span><span class="ch">\n</span><span class="st">   - Visit END: 1950-09-12 at 19:58:56 (+01:00)</span><span class="ch">\n\n</span><span class="st">2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.</span><span class="ch">\n\n</span><span class="st">Organization Information:</span><span class="ch">\n</span><span class="st">- Name: SUNRISE HEALTHCARE LLC</span><span class="ch">\n</span><span class="st">- Contact Number: 6176509959</span><span class="ch">\n</span><span class="st">- Active: Yes</span><span class="ch">\n</span><span class="st">- Type: Healthcare Provider</span><span class="ch">\n\n\n</span><span class="st">"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    {</span>
@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can still inspect what the output from dspy is that the LLM gets</li>
 </ul></li>
 </ul>
-<div id="5a663bf9" class="cell" data-execution_count="9">
+<div id="719e2f33" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_connect, LocalChatAdapter</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>model_name <span class="op">=</span> <span class="st">"localllm/gemma-3-4b-it-Q4_K_M"</span></span>
@@ -314,7 +314,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                            n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_gpu_layers <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">True</span>, swa_full <span class="op">=</span> <span class="va">True</span>, seed <span class="op">=</span> <span class="dv">4321</span>),</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                       adapter <span class="op">=</span> LocalChatAdapter(trace <span class="op">=</span> <span class="dv">2</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9646fbc6" class="cell" data-execution_count="10">
+<div id="b2c5ba7e" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    value:    <span class="bu">str</span> <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"A city"</span>)</span>
@@ -329,7 +329,7 @@ Budapest
 ====================== LocalChatAdapter LLM did not provide valid structured output, fallback to lenient parsing strategy ======================</code></pre>
 </div>
 </div>
-<div id="a5754d33" class="cell" data-execution_count="11">
+<div id="95ec56f2" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>Prediction(
