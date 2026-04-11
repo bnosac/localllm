@@ -25,7 +25,9 @@ path
 
 ```{python}
 from llama_cpp import Llama
-transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)
+transformer = Llama(
+    model_path = path, flash_attn = False, verbose = False,
+    n_gpu_layers = -1, n_ctx = 32768, n_threads = 1, swa_full = False, seed = 4321)
 out = transformer("How much is 4x4")
 pprint.pprint(out)
 ```
@@ -39,12 +41,12 @@ import dspy
 dspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
-    value: str    = dspy.OutputField(desc = "A city")
+    output:   str = dspy.OutputField(desc = "A city")
 
 model = dspy.Predict(Go)
 out = model(sentence="What is the capital of France")
 pprint.pprint(out)
-out["value"]
+out["output"]
 ```
 
 
@@ -58,7 +60,9 @@ path = localllm_download_model("translategemma-4b-it-q8_0")
 ```
 
 ```{python}
-transformer = Llama(model_path=path, n_gpu_layers=-1, flash_attn = False, n_ctx = 32768, n_threads = 1, seed = 4321, verbose = False)
+transformer = Llama(
+    model_path = path, flash_attn = False, verbose = False,
+    n_ctx = 0, swa_full = False, seed = 4321)
 llm = LocalLLM(transformer)
 messages = [
     {
@@ -93,17 +97,25 @@ trans
 ### Directly use the model
 
 - localllm_connect downloads the model if it does not exist
+- LocalChatAdapter assumes json but falls back to parsing-based strategy if the output is malformed by the LLM
 
 ```{python}
 import dspy
 from localllm import localllm_connect, LocalChatAdapter
-llm = localllm_connect("localllm/gemma-3-270m-it-Q8_0", 
-                       model_kwargs = dict(n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, verbose = True),
-                       adapter = LocalChatAdapter(trace = True)) 
+model_name = "localllm/gemma-3-4b-it-Q4_K_M"
+model_name = "localllm/Qwen3-4B-Instruct-Q4_K_M"
+model_name = "localllm/LFM2.5-1.2B-Instruct-Q8_0"
+llm = localllm_connect(model_name, 
+                       model_kwargs = dict(
+                            verbose = False, 
+                            n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
+                       adapter = LocalChatAdapter(trace = 2)) 
+```
 
+```{python}                                
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
-    value: str    = dspy.OutputField(desc = "A city")
+    value:    str = dspy.OutputField(desc = "A city")
 
 predict = dspy.Predict(Go)
 out = predict(sentence = "What is the capital of Hungary")
