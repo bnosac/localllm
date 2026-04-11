@@ -1,0 +1,124 @@
+---
+format: html
+---
+
+# Welcome to localllm
+
+Python package localllm provides functionalities to use a Local LLM object alongside dspy
+
+### Download a model
+
+For the list of all models, look to the help of localllm_download_model
+
+```{python}
+#| output: false
+import pprint
+from localllm import LocalLLM, LocalChatAdapter, localllm_download_model
+path = localllm_download_model("gemma-3-270m-it-Q8_0")
+```
+
+```{python}
+path
+```
+
+### Test the local model
+
+```{python}
+from llama_cpp import Llama
+transformer = Llama(
+    model_path = path, flash_attn = False, verbose = False,
+    n_gpu_layers = -1, n_ctx = 32768, n_threads = 1, swa_full = False, seed = 4321)
+out = transformer("How much is 4x4")
+pprint.pprint(out)
+```
+
+### Use the model directly alongside dspy
+
+Use dspy alongside the local model
+
+```{python}
+import dspy
+dspy.configure(lm = LocalLLM(transformer), adapter = LocalChatAdapter())
+class Go(dspy.Signature):
+    sentence: str = dspy.InputField(desc = "A question")
+    output:   str = dspy.OutputField(desc = "A city")
+
+model = dspy.Predict(Go)
+out = model(sentence="What is the capital of France")
+pprint.pprint(out)
+out["output"]
+```
+
+
+### Another example with a translation model
+
+```{python}
+#| output: false
+from localllm import localllm_download_model, LocalLLM
+from llama_cpp import Llama
+path = localllm_download_model("translategemma-4b-it-q8_0")
+```
+
+```{python}
+transformer = Llama(
+    model_path = path, flash_attn = False, verbose = False,
+    n_ctx = 0, swa_full = False, seed = 4321)
+llm = LocalLLM(transformer)
+messages = [
+    {
+        "role": "system",
+        "content": "You are a professional Dutch (nl) to English (en) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the English translation, without any additional explanations or commentary. Please translate the following Dutch text into English:",
+    },
+    {
+        "role": "user",
+        "content": "Wie heeft tijdens de laatste Olympische spelen de 100 meter spurt gewonnen?"
+    },
+]
+llm(messages = messages)
+```
+
+```{python}
+text = "\nPatient Profile:\n- Name: Ms. Suzy Rickie Hackett\n- Contact Number: 555-359-4515 (Home)\n- Date of Birth: 1941-09-09\n- Deceased on: 2021-08-03 at 01:47:39 (+02:00)\n- Address: 292 Buckridge Port, Massachusetts, 01532, US\n- Not a multiple birth\n- Language Spoken: English (United States)\n\nEncounter Details:\n1. Encounter Status: Finished\n   - Description: Well child visit procedure\n   - Attending Doctor: Dr. Valentine Leannon\n   - Visit START: 1941-09-09 at 20:43:56 (+02:00)\n   - Visit END: 1941-09-09 at 20:58:56 (+02:00)\n   - Relationship with patient: Primary performer\n\n2. Encounter Status: Unknown\n   - Description: Well child visit procedure\n   - Provider Organisation: SUNRISE HEALTHCARE LLC\n   - Visit START: 1950-09-12 at 19:43:56 (+01:00)\n   - Visit END: 1950-09-12 at 19:58:56 (+01:00)\n\n2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.\n\nOrganization Information:\n- Name: SUNRISE HEALTHCARE LLC\n- Contact Number: 6176509959\n- Active: Yes\n- Type: Healthcare Provider\n\n\n"
+messages = [
+    {
+        "role": "system",
+        "content": "You are a professional English (en) to French (fr) translator. Your goal is to accurately convey the meaning and nuances of the original Dutch text while adhering to English grammar, vocabulary, and cultural sensitivities. Produce only the French translation, without any additional explanations or commentary. Please translate the following English text into French:",
+    },
+    {
+        "role": "user",
+        "content": text
+    },
+]
+trans = llm(messages = messages)
+trans
+```
+
+
+### Directly use the model
+
+- localllm_connect downloads the model if it does not exist
+- LocalChatAdapter assumes json but falls back to parsing-based strategy if the output is malformed by the LLM
+
+```{python}
+#| output: false
+import dspy
+from localllm import localllm_connect, LocalChatAdapter
+model_name = "localllm/gemma-3-4b-it-Q4_K_M"
+model_name = "localllm/Qwen3-4B-Instruct-Q4_K_M"
+model_name = "localllm/LFM2.5-1.2B-Instruct-Q8_0"
+llm = localllm_connect(model_name, 
+                       model_kwargs = dict(
+                            verbose = False, 
+                            n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
+                       adapter = LocalChatAdapter(trace = 2)) 
+```
+
+```{python}                                
+class Go(dspy.Signature):
+    sentence: str = dspy.InputField(desc = "A question")
+    value:    str = dspy.OutputField(desc = "A city")
+
+predict = dspy.Predict(Go)
+out = predict(sentence = "What is the capital of Hungary")
+out
+```

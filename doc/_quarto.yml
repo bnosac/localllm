@@ -15,6 +15,8 @@ website:
     left:
       - text: "Home"
         file: index.qmd
+      - text: "Get started"
+        file: example.qmd
       - text: "Reference"
         file: reference/index.qmd
     right:
