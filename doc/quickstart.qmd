@@ -25,7 +25,12 @@ out
 ```
 
 ```{python}
-predict = dspy.Predict(Go)
-out = predict(sentence = "How many r's are in strawberrry? Please provide 1 number.")
+class YourProgram(dspy.Signature):
+    sentence:   str   = dspy.InputField(desc = "A question")
+    value:      int   = dspy.OutputField(desc = "The answer")
+    confidence: float = dspy.OutputField(desc = "Give a confidence score about your answer")
+
+predict = dspy.Predict(YourProgram)
+out = predict(sentence = "How many r's can you detect in the word strawberrrry? Please provide 1 number.")
 out
 ```
