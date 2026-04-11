@@ -15,7 +15,9 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - text: "Get started"
+      - text: "Quickstart"
+        file: quickstart.qmd
+      - text: "More examples"
         file: example.qmd
       - text: "Reference"
         file: reference/index.qmd

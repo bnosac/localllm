@@ -1,0 +1,25 @@
+---
+format: html
+title: Quickstart
+---
+
+Python package localllm provides functionalities to use a local LLM object alongside dspy.
+This looks like this.
+
+
+```{python}
+#| output: false
+from localllm import localllm_connect
+llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0") 
+```
+
+```{python}
+import dspy
+class Go(dspy.Signature):
+    sentence: str = dspy.InputField(desc = "A question")
+    value:    str = dspy.OutputField(desc = "A city")
+
+predict = dspy.Predict(Go)
+out = predict(sentence = "What is the capital of Belgium")
+out
+```
