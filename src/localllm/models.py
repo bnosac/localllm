@@ -104,6 +104,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     The function creates the target directory if it doesn't exist.
     Progress is displayed during download.
     """
+    if type.startswith("localllm/"):
+        type = type.replace("localllm/", "")
 
     # Model registry - maps model types to their download URLs
     model_registry = {
