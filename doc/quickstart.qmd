@@ -10,20 +10,25 @@ This looks like this.
 ```{python}
 #| output: false
 from localllm import localllm_connect
-#llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
-llm = localllm_connect("localllm/gemma-4-e2b-it-Q8_0")
+llm = localllm_connect("localllm/gemma-4-e2b-it-Q8_0") # <1>
 ```
 
+1. ´localllm_connect´ will download the model (if it is not downloaded yet) and loads the model
+
+
 ```{python}
-import dspy
+import dspy 
 class Go(dspy.Signature):
     sentence: str       = dspy.InputField(desc = "A question")
     value:    list[str] = dspy.OutputField(desc = "The answer")
 
-predict = dspy.ChainOfThought(Go)
+predict = dspy.ChainOfThought(Go)  # <2>
 out = predict(sentence = "What are the 10 most common first names in Japan")
 out
 ```
+
+2. Once connected, you can use dspy programs which will use your local model
+
 
 ```{python}
 class YourProgram(dspy.Signature):
