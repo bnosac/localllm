@@ -165,8 +165,9 @@ class LocalChatAdapter(ChatAdapter):
             # If strict parsing fails, try progressive fallback strategies            
             try:
                 if self.trace:
-                    print("LocalChatAdapter: Fallback to lenient parsing strategy")
-                    print(completion)
+                    print("====================== LocalChatAdapter LLM did not provide valid structured output, fallback to lenient parsing strategy ======================")
+                    if self.trace <= 1:
+                        print(completion)
                 return self._lenient_parse(signature, completion, original_error=e)
             except Exception as lenient_error:
                 if self.trace:
