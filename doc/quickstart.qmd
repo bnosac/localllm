@@ -19,7 +19,13 @@ class Go(dspy.Signature):
     sentence: str       = dspy.InputField(desc = "A question")
     value:    list[str] = dspy.OutputField(desc = "The answer")
 
-predict = dspy.Predict(Go)
+predict = dspy.ChainOfThought(Go)
 out = predict(sentence = "What are the 10 most common first names in Japan")
+out
+```
+
+```{python}
+predict = dspy.Predict(Go)
+out = predict(sentence = "How many r's are in strawberrry? Please provide 1 number.")
 out
 ```
