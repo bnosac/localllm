@@ -209,8 +209,14 @@ class LocalChatAdapter(ChatAdapter):
             return self._validate_and_extract(signature, parsed)
         except (json.JSONDecodeError, ValueError, KeyError):
             pass
-        
+
         # Strategy 4: Extract fields using regex as last resort
+        try:
+            return self._parse_dspy_markers(signature, text)
+        except Exception:
+            pass
+        
+        # Strategy 5: Extract fields using regex as last resort
         try:
             return self._regex_field_extraction(signature, text)
         except Exception:
@@ -350,6 +356,60 @@ class LocalChatAdapter(ChatAdapter):
         
         return result
     
+    def _parse_dspy_markers(self, signature, text: str) -> Dict[str, Any]:
+        """
+        Parse DSPy's [[ ## field ## ]] marker format.
+        Tolerates malformed variants like [[ ## field ##] (single closing bracket).
+        """
+        output_fields = {
+            name: field
+            for name, field in signature.fields.items()
+            if hasattr(field, 'json_schema_extra') and field.json_schema_extra and field.json_schema_extra.get("__dspy_field_type") == "output"
+        }
+        if not output_fields:
+            return {}
+        # Matches on:
+        #   [[ ## field ## ]]   (well-formed)
+        #   [[ ## field ##]     (single closing bracket, no space)
+        #   [[ ## field ##]]    (no space before closing)
+        #   [ # field##]]       (and all variants of these)
+        # marker_pattern = re.compile(
+        #     r'\[\[\s*##\s*(\w+)\s*##\s*\]{1,2}\]?',
+        #     re.IGNORECASE
+        # )
+        marker_pattern = re.compile(
+            r'\[{1,3}\s*#{1,3}\s*(\w+)\s*#{1,3}\s*\]{1,3}',
+            re.IGNORECASE
+        )
+        # Split text into (field_name, content) segments
+        segments = []
+        last_end = 0
+        last_field = None
+        for match in marker_pattern.finditer(text):
+            if last_field is not None:
+                segments.append((last_field, text[last_end:match.start()].strip()))
+            last_field = match.group(1).strip()
+            last_end = match.end()
+        # Capture the final segment after the last marker
+        if last_field is not None:
+            segments.append((last_field, text[last_end:].strip()))
+        if not segments:
+            return {}
+        result = {}
+        for field_name, value in segments:
+            # Normalize field name lookup (case-insensitive)
+            matched_field = next(
+                (f for f in output_fields if f.lower() == field_name.lower()),
+                None
+            )
+            if matched_field:
+                result[matched_field] = value
+        # Fill defaults for any missing output fields
+        for field_name, field in output_fields.items():
+            if field_name not in result:
+                result[field_name] = get_default_for_type(field.annotation)
+        return result
+    
     def _regex_field_extraction(self, signature, text: str) -> Dict[str, Any]:
         """
         Last resort: extract fields using regex patterns.
@@ -368,7 +428,6 @@ class LocalChatAdapter(ChatAdapter):
                 rf'"{field_name}"\s*:\s*(\[[^\]]*\]|"[^"]*"|\d+\.?\d*|true|false|null)',
                 rf'{field_name}\s*:\s*(\[[^\]]*\]|"[^"]*"|\d+\.?\d*|true|false|null)',
             ]
-            
             found = False
             for pattern in patterns:
                 match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)

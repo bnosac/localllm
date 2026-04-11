@@ -7,6 +7,7 @@
     * added dependency on s3generics
     * added optional dependency on pandas for the converters
 * Bump dependency to Python >=3.10
+* LocalChatAdapter: more lenient parsing of the output fields [## value#] and variants
 
 ## 0.2.1
 
