@@ -16,10 +16,10 @@ llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
 ```{python}
 import dspy
 class Go(dspy.Signature):
-    sentence: str = dspy.InputField(desc = "A question")
-    value:    str = dspy.OutputField(desc = "A city")
+    sentence: str       = dspy.InputField(desc = "A question")
+    value:    list[str] = dspy.OutputField(desc = "The answer")
 
 predict = dspy.Predict(Go)
-out = predict(sentence = "What is the capital of Belgium")
+out = predict(sentence = "What are the 10 most common first names in Europe")
 out
 ```
