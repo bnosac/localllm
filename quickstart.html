@@ -183,20 +183,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Python package localllm provides functionalities to use a local LLM object alongside dspy. This looks like this.</p>
-<div id="3fddd5a0" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_connect</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#llm = localllm_connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> localllm_connect(<span class="st">"localllm/gemma-4-e2b-it-Q8_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6dccd4e4" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_connect</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> localllm_connect(<span class="st">"localllm/gemma-4-e2b-it-Q8_0"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">´localllm_connect´ will download the model (if it is not downloaded yet) and loads the model</span>
+</dd>
+</dl>
 </div>
-<div id="23513a0d" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    sentence: <span class="bu">str</span>       <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    value:    <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"The answer"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>predict <span class="op">=</span> dspy.ChainOfThought(Go)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> predict(sentence <span class="op">=</span> <span class="st">"What are the 10 most common first names in Japan"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="3c1c0fbf" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="annotated-cell-2"><pre class="sourceCode python code-annotation-code code-with-copy code-annotated"><code class="sourceCode python"><span id="annotated-cell-2-1"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy </span>
+<span id="annotated-cell-2-2"><a href="#annotated-cell-2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
+<span id="annotated-cell-2-3"><a href="#annotated-cell-2-3" aria-hidden="true" tabindex="-1"></a>    sentence: <span class="bu">str</span>       <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
+<span id="annotated-cell-2-4"><a href="#annotated-cell-2-4" aria-hidden="true" tabindex="-1"></a>    value:    <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"The answer"</span>)</span>
+<span id="annotated-cell-2-5"><a href="#annotated-cell-2-5" aria-hidden="true" tabindex="-1"></a></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-2-6" class="code-annotation-target"><a href="#annotated-cell-2-6" aria-hidden="true" tabindex="-1"></a>predict <span class="op">=</span> dspy.ChainOfThought(Go)</span>
+<span id="annotated-cell-2-7"><a href="#annotated-cell-2-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> predict(sentence <span class="op">=</span> <span class="st">"What are the 10 most common first names in Japan"</span>)</span>
+<span id="annotated-cell-2-8"><a href="#annotated-cell-2-8" aria-hidden="true" tabindex="-1"></a>out</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-2" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-2" data-code-lines="6" data-code-annotation="2">Once connected, you can use dspy programs which will use your local model</span>
+</dd>
+</dl>
+</div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>Prediction(
     reasoning='Determining the absolute "10 most common first names in Japan" is complex as naming trends can shift, and data sources vary. However, based on general demographic data and historical popularity, certain names consistently rank high. Common Japanese names often follow traditional patterns or have meanings related to nature or virtues. I will list some of the most frequently cited and traditional popular names.',
@@ -204,15 +219,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 )</code></pre>
 </div>
 </div>
-<div id="c0631b53" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourProgram(dspy.Signature):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    sentence:   <span class="bu">str</span>   <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    value:      <span class="bu">int</span>   <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"The answer"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    confidence: <span class="bu">float</span> <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"Give a confidence score about your answer"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>predict <span class="op">=</span> dspy.Predict(YourProgram)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> predict(sentence <span class="op">=</span> <span class="st">"How many r's can you detect in the word strawberrrry? Please provide 1 number."</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dc792562" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> YourProgram(dspy.Signature):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    sentence:   <span class="bu">str</span>   <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    value:      <span class="bu">int</span>   <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"The answer"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    confidence: <span class="bu">float</span> <span class="op">=</span> dspy.OutputField(desc <span class="op">=</span> <span class="st">"Give a confidence score about your answer"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>predict <span class="op">=</span> dspy.Predict(YourProgram)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> predict(sentence <span class="op">=</span> <span class="st">"How many r's can you detect in the word strawberrrry? Please provide 1 number."</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Prediction(
     value=5,

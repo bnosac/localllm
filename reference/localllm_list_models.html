@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>merge_spans – localllm</title>
+<title>localllm_list_models – localllm</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,8 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../reference/converters.tif.html" rel="next">
-<link href="../reference/txt_locate.html" rel="prev">
+<link href="../reference/dspy.LocalLLM.html" rel="next">
+<link href="../reference/localllm_download_model.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/txt_locate_all.html">Lookup utilities</a></li><li class="breadcrumb-item"><a href="../reference/merge_spans.html">merge_spans</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">Utilities</a></li><li class="breadcrumb-item"><a href="../reference/localllm_list_models.html">localllm_list_models</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -190,13 +190,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Utilities</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/localllm_download_model.html" class="sidebar-item-text sidebar-link">
@@ -205,7 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/localllm_list_models.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/localllm_list_models.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">localllm_list_models</span></a>
   </div>
 </li>
@@ -242,13 +242,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Lookup utilities</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../reference/txt_locate_all.html" class="sidebar-item-text sidebar-link">
@@ -263,7 +263,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/merge_spans.html" class="sidebar-item-text sidebar-link active">
+  <a href="../reference/merge_spans.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">merge_spans</span></a>
   </div>
 </li>
@@ -301,61 +301,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/txt_locate_all.html">Lookup utilities</a></li><li class="breadcrumb-item"><a href="../reference/merge_spans.html">merge_spans</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">Utilities</a></li><li class="breadcrumb-item"><a href="../reference/localllm_list_models.html">localllm_list_models</a></li></ol></nav></header>
 
 
 
 
-<section id="localllm.merge_spans" class="level1">
-<h1>merge_spans</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>merge_spans(text, spans, skip_spaces<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Combine TextSpan elements which are either overlapping or adjacent where only whitespace separates them.</p>
-<section id="parameters" class="level2 doc-section doc-section-parameters">
-<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 69%">
-<col style="width: 8%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>text</td>
-<td>str</td>
-<td>A text string where spans are extracted from</td>
-<td><em>required</em></td>
-</tr>
-<tr class="even">
-<td>spans</td>
-<td>List[TextSpan]</td>
-<td>A list of TextSpan objects to look for overlaps and to combine</td>
-<td><em>required</em></td>
-</tr>
-<tr class="odd">
-<td>skip_spaces</td>
-<td>bool</td>
-<td>If True, combine spans which are not overlapping but which do have only whitespace between them</td>
-<td><code>True</code></td>
-</tr>
-</tbody>
-</table>
-</section>
+<section id="localllm.localllm_list_models" class="level1">
+<h1>localllm_list_models</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>localllm_list_models()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>List all available models which you can easily download</p>
 <section id="returns" class="level2 doc-section doc-section-returns">
 <h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 10%">
-<col style="width: 23%">
-<col style="width: 66%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 85%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -367,23 +328,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td></td>
-<td>List[TextSpan]</td>
-<td>List of TextSpan objects with start/end positions</td>
+<td>dict</td>
+<td>a dictionary with all models, where each dictionary element contains source, url, filename</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="examples" class="level2 doc-section doc-section-examples">
 <h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> text <span class="op">=</span> <span class="st">"Hello world! This is a test find the world in here."</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> loc <span class="op">=</span> txt_locate_all(text, <span class="st">"world"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> combined <span class="op">=</span> merge_spans(text, loc, skip_spaces<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> loc <span class="op">=</span> txt_locate_all(text, <span class="st">"world"</span>) <span class="op">+</span> txt_locate_all(text, <span class="st">" wor"</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> loc</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>[TextSpan(text<span class="op">=</span><span class="st">'world'</span>, start<span class="op">=</span><span class="dv">6</span>, end<span class="op">=</span><span class="dv">11</span>), TextSpan(text<span class="op">=</span><span class="st">'world'</span>, start<span class="op">=</span><span class="dv">37</span>, end<span class="op">=</span><span class="dv">42</span>), TextSpan(text<span class="op">=</span><span class="st">' wor'</span>, start<span class="op">=</span><span class="dv">5</span>, end<span class="op">=</span><span class="dv">9</span>), TextSpan(text<span class="op">=</span><span class="st">' wor'</span>, start<span class="op">=</span><span class="dv">36</span>, end<span class="op">=</span><span class="dv">40</span>)]</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> combined <span class="op">=</span> merge_spans(text, loc, skip_spaces<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> combined</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>[TextSpan(text<span class="op">=</span><span class="st">' world'</span>, start<span class="op">=</span><span class="dv">5</span>, end<span class="op">=</span><span class="dv">11</span>), TextSpan(text<span class="op">=</span><span class="st">' world'</span>, start<span class="op">=</span><span class="dv">36</span>, end<span class="op">=</span><span class="dv">42</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> localllm <span class="im">import</span> localllm_list_models</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> localllm_list_models()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">list</span>(x.keys())</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>[<span class="st">'gemma-3-270m-it-qat-Q4_0'</span>, <span class="st">'gemma-3-270m-it-Q8_0'</span>, <span class="st">'gemma-3-1b-it-Q8_0'</span>, <span class="st">'gemma-3-4b-it-Q4_K_M'</span>, <span class="st">'gemma-3-12b-it-qat-Q4_0'</span>, <span class="st">'GLM-4.6V-Flash-Q4_K_M'</span>, <span class="st">'translategemma-4b-it-q8_0'</span>, <span class="st">'translategemma-12b-it-q4_k_m'</span>, <span class="st">'LFM2.5-350M-Q8_0'</span>, <span class="st">'LFM2.5-1.2B-Instruct-Q4_K_M'</span>, <span class="st">'LFM2.5-1.2B-Instruct-Q8_0'</span>, <span class="st">'Qwen3-4B-Instruct-Q4_K_M'</span>, <span class="st">'Qwen3-8B-Q4_K_M'</span>, <span class="st">'Qwen3.5-0.8B-Q8_0'</span>, <span class="st">'Qwen3.5-2B-Q4_K_M'</span>, <span class="st">'Qwen3.5-4B-Q4_K_M'</span>, <span class="st">'Qwen3.5-9B-Q4_K_M'</span>, <span class="st">'gemma-4-e2b-it-Q8_0'</span>, <span class="st">'gemma-4-E2B-it-Q4_K_M'</span>, <span class="st">'gemma-4-e4b-it-Q8_0'</span>, <span class="st">'gemma-4-E4B-it-Q4_K_M'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> x[<span class="st">'gemma-4-e2b-it-Q8_0'</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>{<span class="st">'source'</span>: <span class="st">'ggml-org'</span>, <span class="st">'url'</span>: <span class="st">'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf'</span>, <span class="st">'filename'</span>: <span class="st">'gemma-4-e2b-it-Q8_0.gguf'</span>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> pd.DataFrame.from_dict(x, orient <span class="op">=</span> <span class="st">"index"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>
@@ -792,13 +753,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reference/txt_locate.html" class="pagination-link" aria-label="txt_locate">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">txt_locate</span>
+      <a href="../reference/localllm_download_model.html" class="pagination-link" aria-label="localllm_download_model">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">localllm_download_model</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../reference/converters.tif.html" class="pagination-link" aria-label="converters.tif">
-        <span class="nav-page-text">converters.tif</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/dspy.LocalLLM.html" class="pagination-link" aria-label="dspy.LocalLLM">
+        <span class="nav-page-text">dspy.LocalLLM</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
