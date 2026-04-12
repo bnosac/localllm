@@ -45,6 +45,7 @@ quartodoc:
       desc: Download common local LLM Models
       contents:
         - localllm_download_model
+        - localllm_list_models
     - subtitle: LocalLLM alongside DSPy
       desc: Use a LocalLLM model with DSPy
       contents:

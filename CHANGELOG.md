@@ -12,6 +12,8 @@
     * gemma-4-e4b-it-Q8_0
     * gemma-4-E4B-it-Q4_K_M
     * translategemma-12b-it-Q4_K_M
+* localllm_download_model - reorder by bigger to smaller
+* Add localllm_list_models to list up the models which you can download easily
 
 ## 0.2.1
 

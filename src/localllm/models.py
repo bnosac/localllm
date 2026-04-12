@@ -3,6 +3,138 @@ import urllib.request
 from pathlib import Path
 from typing import Optional
 
+def localllm_list_models():
+    """
+    List all available models which you can easily download
+
+    Returns
+    -------
+    dict
+        a dictionary with all models, where each dictionary element contains source, url, filename
+
+    Examples
+    --------
+
+    >>> from localllm import localllm_list_models
+    >>> x = localllm_list_models()
+    >>> list(x.keys())
+    ['gemma-3-270m-it-Q8_0', 'gemma-3-270m-it-qat-Q4_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-e2b-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-e4b-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
+    >>> x['gemma-4-e2b-it-Q8_0']
+    {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf', 'filename': 'gemma-4-e2b-it-Q8_0.gguf'}
+    >>>
+    >>> import pandas as pd                               # doctest: +SKIP
+    >>> x = pd.DataFrame.from_dict(x, orient = "index")   # doctest: +SKIP
+    """
+    model_registry = {
+        "gemma-3-270m-it-Q8_0": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/google_gemma-3-270m-it-GGUF/resolve/main/google_gemma-3-270m-it-Q8_0.gguf",
+            "filename": "google_gemma-3-270m-it-Q8_0.gguf",
+        },
+        "gemma-3-270m-it-qat-Q4_0": {
+            "source": "ggml-org",
+            "url": "https://huggingface.co/ggml-org/gemma-3-270m-it-qat-GGUF/resolve/main/gemma-3-270m-it-qat-Q4_0.gguf",
+            "filename": "gemma-3-270m-it-qat-Q4_0.gguf",
+        },
+        "gemma-3-1b-it-Q8_0": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/google_gemma-3-1b-it-GGUF/resolve/main/google_gemma-3-1b-it-Q8_0.gguf",
+            "filename": "google_gemma-3-1b-it-Q8_0.gguf",
+        },
+        "gemma-3-4b-it-Q4_K_M": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/google_gemma-3-4b-it-Q4_K_M.gguf",
+            # "url": "https://huggingface.co/unsloth/gemma-3-4b-it-GGUF/resolve/main/gemma-3-4b-it-Q4_K_M.gguf",
+            "filename": "google_gemma-3-4b-it-Q4_K_M.gguf",
+        },
+        "gemma-3-12b-it-qat-Q4_0": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/google_gemma-3-12b-it-qat-GGUF/resolve/main/google_gemma-3-12b-it-qat-Q4_0.gguf",
+            "filename": "google_gemma-3-12b-it-qat-Q4_0.gguf",
+        },
+        "GLM-4.6V-Flash-Q4_K_M": {
+            "source": "ggml-org",
+            "url": "https://huggingface.co/ggml-org/GLM-4.6V-Flash-GGUF/resolve/main/GLM-4.6V-Flash-Q4_K_M.gguf",
+            "filename": "GLM-4.6V-Flash-Q4_K_M.gguf",
+        },
+        "translategemma-4b-it-q8_0": {
+            "source": "NikolayKozloff",
+            "url": "https://huggingface.co/NikolayKozloff/translategemma-4b-it-Q8_0-GGUF/resolve/main/translategemma-4b-it-q8_0.gguf",
+            "filename": "translategemma-4b-it-q8_0.gguf",
+        },
+        "translategemma-12b-it-q4_k_m": {
+            "source": "NikolayKozloff",
+            "url": "https://huggingface.co/NikolayKozloff/translategemma-12b-it-Q4_K_M-GGUF/resolve/main/translategemma-12b-it-q4_k_m.gguf",
+            "filename": "translategemma-12b-it-q4_k_m.gguf",
+        },        
+        "LFM2.5-350M-Q8_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q8_0.gguf",
+            "filename": "LFM2.5-350M-Q8_0.gguf",
+        },        
+        "LFM2.5-1.2B-Instruct-Q4_K_M": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
+            "filename": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
+        },
+        "LFM2.5-1.2B-Instruct-Q8_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q8_0.gguf",
+            "filename": "LFM2.5-1.2B-Instruct-Q8_0.gguf",
+        },
+        "Qwen3-4B-Instruct-Q4_K_M": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+            "filename": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        },        
+        "Qwen3-8B-Q4_K_M": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF/resolve/main/Qwen_Qwen3-8B-Q4_K_M.gguf",
+            "filename": "Qwen_Qwen3-8B-Q4_K_M.gguf",
+        },
+        "Qwen3.5-0.8B-Q8_0": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q8_0.gguf",
+            "filename": "Qwen3.5-0.8B-Q8_0.gguf",
+        },    
+        "Qwen3.5-2B-Q4_K_M": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-2B-Q4_K_M.gguf",
+        }, 
+        "Qwen3.5-4B-Q4_K_M": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-4B-Q4_K_M.gguf",
+        },                       
+        "Qwen3.5-9B-Q4_K_M": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
+            "filename": "Qwen3.5-9B-Q4_K_M.gguf",
+        }, 
+        "gemma-4-e2b-it-Q8_0": {
+            "source": "ggml-org",
+            "url": "https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf",
+            "filename": "gemma-4-e2b-it-Q8_0.gguf",
+        },
+        "gemma-4-E2B-it-Q4_K_M": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf",
+            "filename": "gemma-4-E2B-it-Q4_K_M.gguf",
+        },  
+        "gemma-4-e4b-it-Q8_0": {
+            "source": "ggml-org",
+            "url": "https://huggingface.co/ggml-org/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-e4b-it-Q8_0.gguf",
+            "filename": "gemma-4-e4b-it-Q8_0.gguf",
+        },                  
+        "gemma-4-E4B-it-Q4_K_M": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q4_K_M.gguf",
+            "filename": "gemma-4-E4B-it-Q4_K_M.gguf",
+        },                            
+    }
+    return model_registry
+
 
 def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optional[str] = None, overwrite: bool = False, trace: bool = True) -> str:
     """
@@ -117,114 +249,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         type = type.replace("localllm/", "")
 
     # Model registry - maps model types to their download URLs
-    model_registry = {
-        "gemma-3-270m-it-Q8_0": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/google_gemma-3-270m-it-GGUF/resolve/main/google_gemma-3-270m-it-Q8_0.gguf",
-            "filename": "google_gemma-3-270m-it-Q8_0.gguf",
-        },
-        "gemma-3-270m-it-qat-Q4_0": {
-            "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-3-270m-it-qat-GGUF/resolve/main/gemma-3-270m-it-qat-Q4_0.gguf",
-            "filename": "gemma-3-270m-it-qat-Q4_0.gguf",
-        },
-        "gemma-3-1b-it-Q8_0": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/google_gemma-3-1b-it-GGUF/resolve/main/google_gemma-3-1b-it-Q8_0.gguf",
-            "filename": "google_gemma-3-1b-it-Q8_0.gguf",
-        },
-        "gemma-3-4b-it-Q4_K_M": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/google_gemma-3-4b-it-GGUF/resolve/main/google_gemma-3-4b-it-Q4_K_M.gguf",
-            # "url": "https://huggingface.co/unsloth/gemma-3-4b-it-GGUF/resolve/main/gemma-3-4b-it-Q4_K_M.gguf",
-            "filename": "google_gemma-3-4b-it-Q4_K_M.gguf",
-        },
-        "gemma-3-12b-it-qat-Q4_0": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/google_gemma-3-12b-it-qat-GGUF/resolve/main/google_gemma-3-12b-it-qat-Q4_0.gguf",
-            "filename": "google_gemma-3-12b-it-qat-Q4_0.gguf",
-        },
-        "GLM-4.6V-Flash-Q4_K_M": {
-            "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/GLM-4.6V-Flash-GGUF/resolve/main/GLM-4.6V-Flash-Q4_K_M.gguf",
-            "filename": "GLM-4.6V-Flash-Q4_K_M.gguf",
-        },
-        "translategemma-4b-it-q8_0": {
-            "source": "NikolayKozloff",
-            "url": "https://huggingface.co/NikolayKozloff/translategemma-4b-it-Q8_0-GGUF/resolve/main/translategemma-4b-it-q8_0.gguf",
-            "filename": "translategemma-4b-it-q8_0.gguf",
-        },
-        "translategemma-12b-it-q4_k_m": {
-            "source": "NikolayKozloff",
-            "url": "https://huggingface.co/NikolayKozloff/translategemma-12b-it-Q4_K_M-GGUF/resolve/main/translategemma-12b-it-q4_k_m.gguf",
-            "filename": "translategemma-12b-it-q4_k_m.gguf",
-        },        
-        "LFM2.5-350M-Q8_0": {
-            "source": "LiquidAI",
-            "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q8_0.gguf",
-            "filename": "LFM2.5-350M-Q8_0.gguf",
-        },        
-        "LFM2.5-1.2B-Instruct-Q4_K_M": {
-            "source": "LiquidAI",
-            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
-            "filename": "LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
-        },
-        "LFM2.5-1.2B-Instruct-Q8_0": {
-            "source": "LiquidAI",
-            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q8_0.gguf",
-            "filename": "LFM2.5-1.2B-Instruct-Q8_0.gguf",
-        },
-        "Qwen3-4B-Instruct-Q4_K_M": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
-            "filename": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
-        },        
-        "Qwen3-8B-Q4_K_M": {
-            "source": "bartowski",
-            "url": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF/resolve/main/Qwen_Qwen3-8B-Q4_K_M.gguf",
-            "filename": "Qwen_Qwen3-8B-Q4_K_M.gguf",
-        },
-        "Qwen3.5-0.8B-Q8_0": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q8_0.gguf",
-            "filename": "Qwen3.5-0.8B-Q8_0.gguf",
-        },    
-        "Qwen3.5-2B-Q4_K_M": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
-            "filename": "Qwen3.5-2B-Q4_K_M.gguf",
-        }, 
-        "Qwen3.5-4B-Q4_K_M": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q4_K_M.gguf",
-            "filename": "Qwen3.5-4B-Q4_K_M.gguf",
-        },                       
-        "Qwen3.5-9B-Q4_K_M": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
-            "filename": "Qwen3.5-9B-Q4_K_M.gguf",
-        }, 
-        "gemma-4-e2b-it-Q8_0": {
-            "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf",
-            "filename": "gemma-4-e2b-it-Q8_0.gguf",
-        },
-        "gemma-4-E2B-it-Q4_K_M": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf",
-            "filename": "gemma-4-E2B-it-Q4_K_M.gguf",
-        },  
-        "gemma-4-e4b-it-Q8_0": {
-            "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-e4b-it-Q8_0.gguf",
-            "filename": "gemma-4-e4b-it-Q8_0.gguf",
-        },                  
-        "gemma-4-E4B-it-Q4_K_M": {
-            "source": "unsloth",
-            "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q4_K_M.gguf",
-            "filename": "gemma-4-E4B-it-Q4_K_M.gguf",
-        },                            
-    }
+    model_registry = localllm_list_models()
 
     # Validate model type
     if type not in model_registry:
