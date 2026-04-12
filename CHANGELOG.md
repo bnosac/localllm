@@ -8,6 +8,9 @@
     * added optional dependency on pandas for the converters
 * Bump dependency to Python >=3.10
 * LocalChatAdapter: more lenient parsing of the output fields [## value# ] and variants
+* localllm_download_model, added:
+    * gemma-4-e4b-it-Q8_0
+    * gemma-4-E4B-it-Q4_K_M
 
 ## 0.2.1
 
