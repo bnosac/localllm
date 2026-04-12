@@ -79,7 +79,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
-    >>> model_path = localllm_download_model("translategemma-12b-it-Q4_K_M", overwrite=True, trace = False)
+    >>> model_path = localllm_download_model("translategemma-12b-it-q4_k_m", overwrite=True, trace = False)
     >>> os.remove(model_path)    
     >>> model_path = localllm_download_model("LFM2.5-350M-Q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)        
