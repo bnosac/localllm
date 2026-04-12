@@ -18,7 +18,7 @@ def localllm_list_models():
     >>> from localllm import localllm_list_models
     >>> x = localllm_list_models()
     >>> list(x.keys())
-    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-e2b-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-e4b-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
+    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-e2b-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-e4b-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
     >>> x['gemma-4-e2b-it-Q8_0']
     {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf', 'filename': 'gemma-4-e2b-it-Q8_0.gguf'}
     >>>
@@ -40,6 +40,11 @@ def localllm_list_models():
             "source": "bartowski",
             "url": "https://huggingface.co/bartowski/google_gemma-3-1b-it-GGUF/resolve/main/google_gemma-3-1b-it-Q8_0.gguf",
             "filename": "google_gemma-3-1b-it-Q8_0.gguf",
+        },
+        "gemma-3-4b-it-qat-Q4_0": {
+            "source": "bartowski",
+            "url": "https://huggingface.co/bartowski/google_gemma-3-4b-it-qat-GGUF/resolve/main/google_gemma-3-4b-it-qat-Q4_0.gguf",
+            "filename": "google_gemma-3-4b-it-qat-Q4_0.gguf",
         },
         "gemma-3-4b-it-Q4_K_M": {
             "source": "bartowski",
@@ -148,6 +153,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "gemma-3-270m-it-qat-Q4_0": Google Gemma 3 270M it model (Q4_0 quantization)
         - "gemma-3-270m-it-Q8_0": Google Gemma 3 270M it model (Q8_0 quantization)
         - "gemma-3-1b-it-Q8_0": Google Gemma 3 1B it model (Q8_0 quantization)
+        - "gemma-3-4b-it-qat-Q4_0": Google Gemma 3 4b it model (Q4_0 quantization - with quantized aware training)
         - "gemma-3-4b-it-Q4_K_M": Google Gemma 3 4b it model (Q4_K_M quantization)
         - "gemma-3-12b-it-qat-Q4_0": Google Gemma 3 12B it model (Q4_0 quantization)
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
@@ -202,6 +208,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> model_path = localllm_download_model("gemma-3-270m-it-qat-Q4_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-3-1b-it-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("gemma-3-4b-it-qat-Q4_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-3-4b-it-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
