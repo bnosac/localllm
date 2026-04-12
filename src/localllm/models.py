@@ -143,7 +143,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     Parameters
     ----------
     type : str, default="gemma-3-270m-it-Q8_0"
-        The type/name of the model to download. Currently supports:
+        The type/name of the model to download. Currently supports the following models. You can either give the model name or localllm/{model_name}
 
         - "gemma-3-270m-it-qat-Q4_0": Google Gemma 3 270M it model (Q4_0 quantization)
         - "gemma-3-270m-it-Q8_0": Google Gemma 3 270M it model (Q8_0 quantization)

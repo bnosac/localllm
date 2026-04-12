@@ -12,7 +12,7 @@ For the list of all models, look to the help of localllm_download_model
 ```{python}
 #| output: false
 from localllm import LocalLLM, LocalChatAdapter, localllm_download_model
-path = localllm_download_model("gemma-3-270m-it-Q8_0")
+path = localllm_download_model("localllm/gemma-3-270m-it-Q8_0")
 ```
 
 ```{python}
@@ -58,7 +58,7 @@ out["output"]
 #| output: false
 from localllm import localllm_download_model, LocalLLM
 from llama_cpp import Llama
-path = localllm_download_model("translategemma-4b-it-q8_0")
+path = localllm_download_model("localllm/translategemma-4b-it-q8_0")
 transformer = Llama(
     model_path = path, flash_attn = False, verbose = False,
     n_ctx = 4096, swa_full = False, seed = 4321)
@@ -134,7 +134,7 @@ out
 
 ### List of models
 
-The following list of models can be easily downloaded
+The following list of models can be easily downloaded. You can use them with `localllm_connect("localllm/{model_name}")`
 
 ```{python}  
 from localllm import localllm_list_models
