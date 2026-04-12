@@ -130,3 +130,16 @@ out = predict(sentence = "What is the capital of Hungary")
 ```{python}  
 out
 ```
+
+
+### List of models
+
+The following list of models can be easily downloaded
+
+```{python}  
+from localllm import localllm_list_models
+import pandas as pd
+x = localllm_list_models()
+x = pd.DataFrame.from_dict(x, orient = "index")
+x
+```
