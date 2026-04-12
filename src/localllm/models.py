@@ -20,6 +20,7 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "gemma-3-12b-it-qat-Q4_0": Google Gemma 3 12B it model (Q4_0 quantization)
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
         - "translategemma-4b-it-q8_0": TranslateGemma 4B it model (Q8_0 quantization)
+        - "translategemma-12b-it-q4_k_m": TranslateGemma 12B it model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
@@ -77,6 +78,8 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("translategemma-12b-it-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)    
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q8_0", overwrite=True, trace = False)
@@ -150,6 +153,11 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
             "url": "https://huggingface.co/NikolayKozloff/translategemma-4b-it-Q8_0-GGUF/resolve/main/translategemma-4b-it-q8_0.gguf",
             "filename": "translategemma-4b-it-q8_0.gguf",
         },
+        "translategemma-12b-it-q4_k_m": {
+            "source": "NikolayKozloff",
+            "url": "https://huggingface.co/NikolayKozloff/translategemma-12b-it-Q4_K_M-GGUF/resolve/main/translategemma-12b-it-q4_k_m.gguf",
+            "filename": "translategemma-12b-it-q4_k_m.gguf",
+        },        
         "LFM2.5-1.2B-Instruct-Q4_K_M": {
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",

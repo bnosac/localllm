@@ -11,6 +11,7 @@
 * localllm_download_model, added:
     * gemma-4-e4b-it-Q8_0
     * gemma-4-E4B-it-Q4_K_M
+    * translategemma-12b-it-Q4_K_M
 
 ## 0.2.1
 
