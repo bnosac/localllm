@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/s3generics
+      url: https://pypi.org/p/localllm
     permissions:
       id-token: write  # Permission is mandatory for trusted publishing    
     steps:
