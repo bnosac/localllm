@@ -10,7 +10,7 @@ This looks like this.
 ```{python}
 #| output: false
 from localllm import localllm_connect
-llm = localllm_connect("localllm/gemma-4-e2b-it-Q8_0") # <1>
+llm = localllm_connect("localllm/gemma-4-E2B-it-Q8_0") # <1>
 ```
 
 1. `localllm_connect` will download the model (if it is not downloaded yet) and loads the model
