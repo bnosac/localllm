@@ -18,9 +18,9 @@ def localllm_list_models():
     >>> from localllm import localllm_list_models
     >>> x = localllm_list_models()
     >>> list(x.keys())
-    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-e2b-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-e4b-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
-    >>> x['gemma-4-e2b-it-Q8_0']
-    {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf', 'filename': 'gemma-4-e2b-it-Q8_0.gguf'}
+    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-E2B-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-E4B-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
+    >>> x['gemma-4-E2B-it-Q8_0']
+    {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q8_0.gguf', 'filename': 'gemma-4-E2B-it-Q8_0.gguf'}
     >>>
     >>> import pandas as pd                               # doctest: +SKIP
     >>> x = pd.DataFrame.from_dict(x, orient = "index")   # doctest: +SKIP
@@ -117,20 +117,20 @@ def localllm_list_models():
             "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
             "filename": "Qwen3.5-9B-Q4_K_M.gguf",
         }, 
-        "gemma-4-e2b-it-Q8_0": {
+        "gemma-4-E2B-it-Q8_0": {
             "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-e2b-it-Q8_0.gguf",
-            "filename": "gemma-4-e2b-it-Q8_0.gguf",
+            "url": "https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q8_0.gguf",
+            "filename": "gemma-4-E2B-it-Q8_0.gguf",
         },
         "gemma-4-E2B-it-Q4_K_M": {
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf",
             "filename": "gemma-4-E2B-it-Q4_K_M.gguf",
         },  
-        "gemma-4-e4b-it-Q8_0": {
+        "gemma-4-E4B-it-Q8_0": {
             "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-e4b-it-Q8_0.gguf",
-            "filename": "gemma-4-e4b-it-Q8_0.gguf",
+            "url": "https://huggingface.co/ggml-org/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q8_0.gguf",
+            "filename": "gemma-4-E4B-it-Q8_0.gguf",
         },                  
         "gemma-4-E4B-it-Q4_K_M": {
             "source": "unsloth",
@@ -168,9 +168,9 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "Qwen3.5-2B-Q4_K_M": Qwen 3.5 2B model (Q4_K_M quantization)
         - "Qwen3.5-4B-Q4_K_M": Qwen 3.5 4B model (Q4_K_M quantization)
         - "Qwen3.5-9B-Q4_K_M": Qwen 3.5 9B model (Q4_K_M quantization)
-        - "gemma-4-e2b-it-Q8_0":   Google Gemma 4 E2B Instruct model (Q8_0 quantization)
+        - "gemma-4-E2B-it-Q8_0":   Google Gemma 4 E2B Instruct model (Q8_0 quantization)
         - "gemma-4-E2B-it-Q4_K_M": Google Gemma 4 E2B Instruct model (Q4_K_M quantization)
-        - "gemma-4-e4b-it-Q8_0":   Google Gemma 4 E4B Instruct model (Q8_0 quantization)
+        - "gemma-4-E4B-it-Q8_0":   Google Gemma 4 E4B Instruct model (Q8_0 quantization)
         - "gemma-4-E4B-it-Q4_K_M": Google Gemma 4 E4B Instruct model (Q4_K_M quantization)
 
     model_dir : str or None, default=None
