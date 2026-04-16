@@ -154,21 +154,29 @@ class LocalChatAdapter(ChatAdapter):
     def parse(self, signature, completion: str) -> Dict[str, Any]:
         """
         Override parse method with fallback strategies for malformed JSON.
-        """
-        # Try the standard ChatAdapter parsing first
-        if self.trace > 1:
-            print("====================== Parsing LLM completion ======================")
-            print(completion)
-        try:            
-            return super().parse(signature, completion)
+        """        
+        try:
+            # Try the standard ChatAdapter parsing first, if it fails, print out what we got from the LLM
+            if self.trace > 1:
+                print("====================== Parsing LLM completion ======================")
+                print(completion)
+            out = super().parse(signature, completion)     
+            if self.trace > 1:
+                print(out)       
+            return out
         except (AdapterParseError, json.JSONDecodeError, Exception) as e:
             # If strict parsing fails, try progressive fallback strategies            
             try:
-                if self.trace:
-                    print("====================== LocalChatAdapter LLM did not provide valid structured output, fallback to lenient parsing strategy ======================")
+                if self.trace > 0:
+                    # If trace - indicate we fall back to lenient parsing and print out what we got from the LLM and the result of the lenient parsing
+                    # do not print out what we got from the LLM twice
+                    print("====================== ChatAdapter did not provide valid structured output, fallback to lenient parsing strategy ======================")
                     if self.trace <= 1:
                         print(completion)
-                return self._lenient_parse(signature, completion, original_error=e)
+                    out = self._lenient_parse(signature, completion, original_error=e)
+                    if self.trace > 0:
+                        print(completion)
+                return out
             except Exception as lenient_error:
                 if self.trace:
                     print("Could not leniently parse the LLM response.")
