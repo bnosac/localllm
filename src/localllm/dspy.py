@@ -5,6 +5,7 @@ from typing import Any, Dict, get_origin, get_args
 from dspy import ChatAdapter
 from dspy.adapters.baml_adapter import BAMLAdapter
 from dspy.utils.exceptions import AdapterParseError
+import pprint
 
 class LocalLLM(dspy.BaseLM):
     """
@@ -157,29 +158,32 @@ class LocalChatAdapter(ChatAdapter):
         """        
         try:
             # Try the standard ChatAdapter parsing first, if it fails, print out what we got from the LLM
-            if self.trace > 1:
-                print("====================== Parsing LLM completion ======================")
-                print(completion)
-            out = super().parse(signature, completion)     
-            if self.trace > 1:
-                print(out)       
+            out = super().parse(signature, completion)                 
+            if self.trace == 1:
+                print("====================== Result LLM completion =================================================")
+                pprint.pprint(out, width = 100)       
+                print("----------------------------------------------------------------------------------------------")
+            if self.trace == 2:
+                print("====================== Parsing LLM completion =================================================")
+                pprint.pprint(completion)
+                pprint.pprint(out, width = 100)
+                print("----------------------------------------------------------------------------------------------")
             return out
         except (AdapterParseError, json.JSONDecodeError, Exception) as e:
             # If strict parsing fails, try progressive fallback strategies            
-            try:
-                if self.trace > 0:
+            try:                
+                if self.trace == 1 or self.trace == 2:
                     # If trace - indicate we fall back to lenient parsing and print out what we got from the LLM and the result of the lenient parsing
-                    # do not print out what we got from the LLM twice
-                    print("====================== ChatAdapter did not provide valid structured output, fallback to lenient parsing strategy ======================")
-                    if self.trace <= 1:
-                        print(completion)
-                    out = self._lenient_parse(signature, completion, original_error=e)
-                    if self.trace > 0:
-                        print(completion)
+                    print("====================== LLM did not provide valid structured output, fallback to lenient parsing strategy ======================")                
+                    pprint.pprint(completion)
+                out = self._lenient_parse(signature, completion, original_error=e)
+                if self.trace > 0:
+                    pprint.pprint(out, width = 100)  
+                    print("----------------------------------------------------------------------------------------------")                     
                 return out
             except Exception as lenient_error:
                 if self.trace:
-                    print("Could not leniently parse the LLM response.")
+                    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Could not leniently parse the LLM response. !!!!!!!!!!!!!!")
                 # If all strategies fail, return default empty values
                 if self.return_defaults_on_failure:
                     return dspy_signature_defaults(signature)
