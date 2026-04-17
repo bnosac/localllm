@@ -178,7 +178,7 @@ def textmodel_gepa_classify(
     else:
         if which in ("predict", "Predict"):
             classify = dspy.Predict(module)
-        elif hich in ("chainofthought", "ChainOfThought"):
+        elif which in ("chainofthought", "ChainOfThought"):
             classify = dspy.ChainOfThought(module)
         else:
             if module is None:
