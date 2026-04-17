@@ -4,8 +4,8 @@ import pandas as pd
 from s3generics import predict, summary, coef
 from typing import Iterable, Literal, Optional, Union
 from collections.abc import Callable
-from utilities.train_test import train_test_split
-from utilities.converters import tif, convert_dspy_example
+from .utilities.train_test import train_test_split
+from .utilities.converters import tif, convert_dspy_example
 
 class TextModelGEPA:
     """
@@ -112,12 +112,11 @@ def textmodel_gepa_classify(
     >>> x = data_be_parliament()
     >>> be = pd.DataFrame.from_records(x)
     >>> be["question_theme_main"].value_counts()                      # doctest: +SKIP
-    >>> be["is_VERVOERBELEID"] = be["question_theme_main"] == "VERVOERBELEID"
     >>> be = be[be["question_theme_main"].isin(["VERVOERBELEID", "OPENBARE VEILIGHEID"])]
     >>> be = tif(be, docid_field = "doc_id", text_field = "question", target_field = "question_theme_main")
-    >>> be = be.sample(100)
     >>> list(be.columns)
     ['doc_id', 'text', 'target']
+    >>> d = be.sample(100)
     >>> 
     >>> ######################################################################################
     >>> ## Define the model and auto-tune the prompt
@@ -144,7 +143,7 @@ def textmodel_gepa_classify(
             "text": list(x), 
             "target": list(y)})
     tif_df = tif_df[~tif_df["target"].isna()]
-    examples = convert_dspy_example(tif_df, which="classification")
+    examples = convert_dspy_example(tif_df, type="classification")
     random.Random(seed).shuffle(examples)
     ## Split in holdout set of baseline evaluation / train / test
     train, test = train_test_split(examples, test_size = test_size, random_state=seed)
