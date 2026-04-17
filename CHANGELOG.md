@@ -5,6 +5,7 @@
 * import localllm_connect as connect making sure you can do 
       import localllm
       localllm.connect("localllm/modelxyz")
+* Move converters to localllm.utils.converters
 
 ## 0.2.2
 
