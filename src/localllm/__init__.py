@@ -10,8 +10,10 @@ from .models import localllm_download_model, localllm_list_models
 from .utils import txt_locate_all, txt_locate, merge_spans
 from .config import localllm_connect
 from .config import localllm_connect as connect
+from .textmodels import textmodel_gepa_classify
 
 __all__ = [
     "localllm_connect",
     "LocalLLM", "localllm_download_model", "localllm_list_models", "LocalChatAdapter", "dspy_signature_defaults",
-    "txt_locate_all", "txt_locate", "merge_spans"]
+    "txt_locate_all", "txt_locate", "merge_spans",
+    "textmodel_gepa_classify"]

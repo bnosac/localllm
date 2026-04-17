@@ -2,6 +2,7 @@
 
 ## 0.3.0
 
+* Added textmodel_gepa_classify
 * import localllm_connect as connect making sure you can do 
       import localllm
       localllm.connect("localllm/modelxyz")
