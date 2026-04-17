@@ -169,16 +169,16 @@ def textmodel_gepa_classify(
             f"""Classify the text with either one of the following categories: {options}."""
             text:   str = dspy.InputField()
             target: str = dspy.OutputField(desc=f"The classification, either one of: {options}")
-        if which in ("predict", "Predict"):
+        if which in ["predict", "Predict"]:
             classify = dspy.Predict(GEPA_Classify)
-        elif which in ("chainofthought", "ChainOfThought"):
+        elif which in ["chainofthought", "ChainOfThought"]:
             classify = dspy.ChainOfThought(GEPA_Classify)
         else: 
             raise ValueError("Provided which is not Predict/predict or ChainOfThought/chainofthought") 
     else:
-        if which in ("predict", "Predict"):
+        if which in ["predict", "Predict"]:
             classify = dspy.Predict(module)
-        elif which in ("chainofthought", "ChainOfThought"):
+        elif which in ["chainofthought", "ChainOfThought"]:
             classify = dspy.ChainOfThought(module)
         else:
             if module is None:
