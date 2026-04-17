@@ -160,11 +160,11 @@ class LocalChatAdapter(ChatAdapter):
             # Try the standard ChatAdapter parsing first, if it fails, print out what we got from the LLM
             out = super().parse(signature, completion)                 
             if self.trace == 1:
-                print("====================== Result LLM completion =================================================")
+                print("\n====================== Result LLM completion =================================================")
                 pprint.pprint(out, width = 100)       
                 print("----------------------------------------------------------------------------------------------")
             if self.trace == 2:
-                print("====================== Parsing LLM completion =================================================")
+                print("\n====================== Parsing LLM completion =================================================")
                 pprint.pprint(completion)
                 pprint.pprint(out, width = 100)
                 print("----------------------------------------------------------------------------------------------")
