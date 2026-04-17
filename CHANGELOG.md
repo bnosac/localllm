@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0
+
+* import localllm_connect as connect making sure you can do 
+      import localllm
+      localllm.connect("localllm/modelxyz")
+
 ## 0.2.2
 
 * Added optional converters

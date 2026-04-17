@@ -1,6 +1,6 @@
 [project]
 name = "localllm"
-version = "0.2.2"
+version = "0.3.0"
 description = "Run a local LLM alongside dspy"
 authors = [{ name = "Jan Wijffels", email = "jwijffels@bnosac.be" }]
 maintainers = [{ name = "Jan Wijffels", email = "jwijffels@bnosac.be" }]

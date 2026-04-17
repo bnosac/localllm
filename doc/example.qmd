@@ -100,7 +100,7 @@ trans
 
 ### Directly use the model
 
-- localllm_connect downloads the model if it does not exist
+- localllm.connect downloads the model if it does not exist
 - Small LLM's do not always adhere to provided prompt templates
     - LocalChatAdapter assumes json but falls back to parsing-based strategy if the output is malformed by the LLM
     - You can still inspect what the output from dspy is that the LLM gets
@@ -108,19 +108,20 @@ trans
 
 ```{python}
 #| output: false
-import dspy
-from localllm import localllm_connect, LocalChatAdapter
+import localllm
+from localllm import LocalChatAdapter
 model_name = "localllm/gemma-3-4b-it-Q4_K_M"
 model_name = "localllm/Qwen3-4B-Instruct-Q4_K_M"
 model_name = "localllm/LFM2.5-1.2B-Instruct-Q8_0"
-llm = localllm_connect(model_name, 
+llm = localllm.connect(model_name, 
                        model_kwargs = dict(
                             verbose = False, 
                             n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
                        adapter = LocalChatAdapter(trace = 2)) 
 ```
 
-```{python}                                
+```{python}     
+import dspy                           
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
     value:    str = dspy.OutputField(desc = "A city")
