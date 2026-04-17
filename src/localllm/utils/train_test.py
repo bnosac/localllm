@@ -2,7 +2,7 @@ import random
 import math
 from typing import Any, Optional, Sequence
 
-## Standalone implementation of sklearn's train_test_split - no external dependencies required
+## Standalone implementation of sklearn's train_test_split - to avoid external dependencies for just a splitting in train/validation/test
 def train_test_split(
     *arrays: Sequence[Any],
     test_size: Optional[float | int] = None,
