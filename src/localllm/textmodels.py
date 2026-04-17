@@ -4,8 +4,8 @@ import pandas as pd
 from s3generics import predict, summary, coef
 from typing import Iterable, Literal, Optional, Union
 from collections.abc import Callable
-from utils.train_test import train_test_split
-from utils.converters import tif, convert_dspy_example
+from utilities.train_test import train_test_split
+from utilities.converters import tif, convert_dspy_example
 
 class TextModelGEPA:
     """
@@ -108,7 +108,7 @@ def textmodel_gepa_classify(
     >>> ##
     >>> import pandas as pd    
     >>> from localllm.data import data_be_parliament
-    >>> from localllm.utils.converters import tif
+    >>> from localllm.utilities.converters import tif
     >>> x = data_be_parliament()
     >>> be = pd.DataFrame.from_records(x)
     >>> be["question_theme_main"].value_counts()                      # doctest: +SKIP
