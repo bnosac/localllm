@@ -104,6 +104,12 @@ def textmodel_gepa_classify(
     --------
 
     >>> ######################################################################################
+    >>> ## Define the model
+    >>> ##
+    >>> import localllm
+    >>> from localllm import textmodel_gepa_classify
+    >>> lm = localllm.connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
+    >>> ######################################################################################
     >>> ## Get data, define target to predict
     >>> ##
     >>> import pandas as pd    
@@ -119,7 +125,7 @@ def textmodel_gepa_classify(
     >>> d = be.sample(100)
     >>> 
     >>> ######################################################################################
-    >>> ## Define the model and auto-tune the prompt
+    >>> ## Auto-tune the prompt using GEPA
     >>> ##
     >>> import localllm
     >>> from localllm import textmodel_gepa_classify
