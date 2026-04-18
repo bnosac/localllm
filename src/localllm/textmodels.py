@@ -128,7 +128,8 @@ def textmodel_gepa_classify(
     >>> ##
     >>> ## Example to connect to a local llm directly in Python
     >>> ##
-    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")   
+    >>> dl = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
+    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")     
     >>> 
     >>> ######################################################################################
     >>> ## Get data, define target to predict
