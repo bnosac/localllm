@@ -78,7 +78,7 @@ def localllm_connect(
             ## Local gguf LLM model
             from llama_cpp import Llama
             transformer = Llama(model_path=model_name, **model_kwargs)
-            lm = LocalLLM(transformer, trace = trace)
+            lm = LocalLLM(transformer, model = os.path.basename(model_name), trace = trace)
             dspy.configure(lm=lm, adapter=adapter)
         else:
             ## Other API service providers

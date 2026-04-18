@@ -7,6 +7,8 @@ from dspy.adapters.baml_adapter import BAMLAdapter
 from dspy.utils.exceptions import AdapterParseError
 import pprint
 
+_LOCAL_LLM_MODELS_LOADED = dict()
+
 class LocalLLM(dspy.BaseLM):
     """
     Create a Local LLM object which you can use alongside dspy
@@ -63,6 +65,7 @@ class LocalLLM(dspy.BaseLM):
         self.history: list[dict[str, Any]] = []
         self.kwargs = dict(temperature=temperature, max_tokens=max_tokens, **kwargs)
         self.llm = object
+        #_LOCAL_LLM_MODELS_LOADED[model] = object ## Asign to dict globally to avoid letting dspy freeing the resource
         self.trace = trace
 
     def __call__(self, prompt=None, messages=None, **kwargs):
@@ -73,33 +76,35 @@ class LocalLLM(dspy.BaseLM):
             raise ValueError("Either prompt or messages must be provided")
         call_kwargs = {**self.kwargs, **kwargs}
         if self.trace > 1:
-            print("====================== START (LocalLLM.__call__) ======================")
+            print("====================== START (LocalLLM.__call__) ======================", flush=True)
             print(list(kwargs.keys()))        
             print(list(call_kwargs.keys()))
         try:
             response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+            #response = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)            
             # Return in the format DSPy expects: list of strings
             out = [response.choices[0].message.content]
         except Exception as e: 
             if self.trace:
-                print(e)
+                print(e, flush=True)
             out = [None]
         if self.trace > 1:
-            print("====================== DONE (LocalLLM.__call__) ======================")        
+            print("====================== DONE (LocalLLM.__call__) ======================", flush=True)        
         return out
 
     def forward(self, prompt=None, messages=None, **kwargs):
         if self.trace > 1:
-            print("====================== START (LocalLLM.__forward__) ======================")
+            print("====================== START (LocalLLM.__forward__) ======================", flush=True)
         """Forward method for regular DSPy operations"""
         if prompt is not None and messages is None:
             messages = [{"role": "user", "content": prompt}]
         elif messages is None:
             raise ValueError("Either prompt or messages must be provided")
-        call_kwargs = {**self.kwargs, **kwargs}
+        call_kwargs = {**self.kwargs, **kwargs}        
         raw = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+        #raw = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)
         return raw
-
+    
     def kill(self, launch_kwargs: dict[str, Any] | None = None):
         ## self.provider.kill(self, launch_kwargs)
         pass
