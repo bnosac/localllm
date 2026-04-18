@@ -128,7 +128,7 @@ def textmodel_gepa_classify(
     >>> ##
     >>> ## Example to connect to a local llm directly in Python
     >>> ##
-    >>> dl = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
+    >>> m = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
     >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")     
     >>> 
     >>> ######################################################################################
@@ -191,8 +191,12 @@ def textmodel_gepa_classify(
     ## All target classes, sorted
     classes = sorted({e.target for e in examples})
     ## Split in holdout set of baseline evaluation / train / test
-    train, testset = train_test_split(examples, test_size = test_size, random_state=seed)
-    trainset, valset = train_test_split(train, train_size = train_size, random_state=seed)
+    if test_size > 0:
+        train, testset = train_test_split(examples, test_size = test_size, random_state=seed)
+        trainset, valset = train_test_split(train, train_size = train_size, random_state=seed)
+    else:
+        testset = []    
+        trainset, valset = train_test_split(examples, train_size = train_size, random_state=seed)
     ## Define the module to tune
     if module is None:
         options = classes
