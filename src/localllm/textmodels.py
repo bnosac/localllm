@@ -15,6 +15,7 @@ class TextModelGEPA:
         self,
         lm: dspy.LM,
         reflection_lm: dspy.LM,
+        module = None,        
         n_train: int = None,
         n_test: int = None,
         n_validation: int = None,
@@ -30,13 +31,13 @@ class TextModelGEPA:
         self.auto = auto
         self.seed = seed        
         self.classnames: Optional[list[str]] = classnames
+        self.module = module        
         self.lm = lm
         self.reflection_lm = reflection_lm
         self.gepa_kwargs: dict = gepa_kwargs or {}        
         self.algorithm: Optional[str] = None
         self._optimized = None
         self.optimizer = None
-        self.module = None        
     def __repr__(self) -> str:
         if self._optimized is None:
             return f"TextModelGEPA(budget='{self.auto}') [not fitted]"
@@ -56,9 +57,9 @@ def eval_classification_with_feedback(gold, prediction, trace=None, pred_name=No
 
 def textmodel_gepa_classify(        
         x: Union[pd.DataFrame, Iterable[str]] = None,
-        y: Optional[Iterable] = None,
+        y: Optional[Iterable[str]] = None,
         module: dspy.Signature = None,
-        which: Literal["Predict", "ChainOfThought"] = "Predict",        
+        which: Literal["predict", "chainofthought"] = "predict",        
         reflection_lm: Optional[dspy.LM] = None,        
         metric: Union[Callable, str] = "accuracy",
         auto: Literal["light", "medium", "heavy"] = "light",
@@ -72,13 +73,14 @@ def textmodel_gepa_classify(
 
     Parameters
     ----------    
-    x : pd.DataFrame or iterable of str
-        Either a TIF-compatible DataFrame (with doc_id, text, target columns) or raw texts. If raw texts, *y* must be supplied.
-    y : iterable or None
-        Labels, required when *x* is raw text.
+    x : Union[pd.DataFrame, Iterable[str]]
+        If x is a pd.DataFrame, it should be a TIF-compatible DataFrame (with doc_id, text, target columns) 
+        If x is a list of str, you need to supply *y*
+    y : Optional[Iterable[str]] or None
+        A list of str containing the labels to predict, required when *x* is raw text.
     module: dspy.Signature 
         A dspy signature to tune, with dspy.Predict or dspy.ChainOfThought where the signature has inputfield 'text' and outputfield 'target'
-    which : {'Predict', 'ChainOfThought'}
+    which : {'predict', 'chainofthought'}
         Either Predict or ChainOfThought
     reflection_lm : dspy.LM or None
         Language model used by GEPA for reflection. Defaults to the configured dspy lm.
@@ -115,14 +117,13 @@ def textmodel_gepa_classify(
     >>> import pandas as pd    
     >>> from localllm.data import data_be_parliament
     >>> from localllm.utilities.converters import tif
-    >>> x = data_be_parliament()
-    >>> be = pd.DataFrame.from_records(x)
-    >>> be["question_theme_main"].value_counts()                      # doctest: +SKIP
+    >>> be = data_be_parliament()
+    >>> be = pd.DataFrame.from_records(be)
     >>> be = be[be["question_theme_main"].isin(["VERVOERBELEID", "OPENBARE VEILIGHEID"])]
     >>> be = tif(be, docid_field = "doc_id", text_field = "question", target_field = "question_theme_main")
     >>> list(be.columns)
     ['doc_id', 'text', 'target']
-    >>> d = be.sample(100)
+    >>> dataset = be.sample(100)
     >>> 
     >>> ######################################################################################
     >>> ## Auto-tune the prompt using GEPA
@@ -130,7 +131,7 @@ def textmodel_gepa_classify(
     >>> import localllm
     >>> from localllm import textmodel_gepa_classify
     >>> lm = localllm.connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
-    >>> model = textmodel_gepa_classify(x = d["text"], y = d["target"], auto = "light", train_size = 0.75)    
+    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, train_size = 0.75)    
     >>> 
     >>> ######################################################################################
     >>> ## Define the model and auto-tune the prompt
@@ -151,24 +152,14 @@ def textmodel_gepa_classify(
     tif_df = tif_df[~tif_df["target"].isna()]
     examples = convert_dspy_example(tif_df, type="classification")
     random.Random(seed).shuffle(examples)
-    ## Split in holdout set of baseline evaluation / train / test
-    train, test = train_test_split(examples, test_size = test_size, random_state=seed)
-    trainset, valset = train_test_split(train, train_size = train_size, random_state=seed)
+    ## All target classes, sorted
     classes = sorted({e.target for e in examples})
-    model = TextModelGEPA(
-        lm = lm,
-        reflection_lm = reflection_lm or lm,
-        classnames = classes,
-        auto = auto,
-        n_train = len(trainset),
-        n_validation = len(valset),
-        n_test = len(test),
-        seed = seed,
-        gepa_kwargs=gepa_kwargs,
-    )
-    model._data = dict(train = trainset, validation = valset, test = test)
+    ## Split in holdout set of baseline evaluation / train / test
+    train, testset = train_test_split(examples, test_size = test_size, random_state=seed)
+    trainset, valset = train_test_split(train, train_size = train_size, random_state=seed)
+    ## Define the module to tune
     if module is None:
-        options = model.classnames
+        options = classes
         #options = ", ".join(options)
         class GEPA_Classify(dspy.Signature):
             f"""Classify the text with either one of the following categories: {options}."""
@@ -190,56 +181,70 @@ def textmodel_gepa_classify(
                 raise ValueError("In module you must provide the output of dspy.ChainOfThought or dspy.Predict") 
             classify = module
     classify.set_lm(lm)
+    ## Define the module to tune
+    model = TextModelGEPA(
+        module = classify,
+        lm = lm,
+        reflection_lm = reflection_lm or lm,
+        classnames = classes,
+        auto = auto,
+        n_train = len(trainset),
+        n_validation = len(valset),
+        n_test = len(testset),
+        seed = seed,
+        gepa_kwargs=gepa_kwargs,
+    )
+    model._data = dict(train = trainset, validation = valset, test = testset)    
     if metric == "accuracy":
         metric = eval_classification_with_feedback
     optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, **gepa_kwargs)
-    model.module = classify
-    model.program = optimizer.compile(classify, trainset=trainset, valset=valset)
+    model.program = optimizer.compile(model.module, trainset=trainset, valset=valset)
     model.optimizer = optimizer
     model.algorithm = "Classification (DSPy GEPA): " + which
     return model
 
 
 @predict.register(TextModelGEPA)
-def _predict_gepa(
+def _predict_textmodelgepa(
     model: TextModelGEPA,
-    newdata: Union[Iterable[str], pd.Series],
-    which: Literal["class", "probability"] = "class",
+    newdata: Union[Iterable[str]],
     **kwargs,
 ) -> list:
-    """Predict class labels for *newdata* (iterable of strings).
-
-    ``type='probability'`` is not supported (LLMs don't expose calibrated
-    probabilities here); raises ``NotImplementedError``.
     """
-    if type == "probability":
-        raise NotImplementedError("Probability output is not supported for DSPy GEPA models.")
-    dspy.configure(lm=model.lm)
+    Predict class labels based on a GEPA-tuned classifier.
+    """
+    out = []
+    for t in newdata:
+        scores = model.program(text = t)
+        scores = scores.target
+        out.append(scores)
     return [model.program(text=t).target for t in newdata]
 
 
 @coef.register(TextModelGEPA)
-def _coef_gepa(model: TextModelGEPA, **kwargs) -> pd.DataFrame:
-    """Return the optimized instructions and few-shot demonstrations.
-
-    This is the GEPA analogue of model coefficients — what the optimizer
-    actually learned.
+def _coef_textmodelgepa(model: TextModelGEPA, **kwargs) -> pd.DataFrame:
     """
-    predictor = model.program.predict  # the inner dspy.Predict
+    Return the GEPA-optimized and few-shot demonstrations.
+    """
+    predictor = model.program.predict
     rows = []
-    # optimized instruction
+    # Fine-tuned instructions
     if hasattr(predictor, "extended_signature"):
-        rows.append({"component": "instruction", "content": predictor.extended_signature.instructions})
-    # few-shot demonstrations
+        rows.append({
+            "component": "instruction", 
+            "content": predictor.extended_signature.instructions})
+    # Few-shot demonstrations
     for i, demo in enumerate(getattr(predictor, "demos", [])):
         rows.append({
             "component": f"demo_{i+1}",
-            "content": f"[text] {demo.get('text', '')} → [target] {demo.get('target', '')}",
+            "content":   f"[text] {demo.get('text', '')} → [target] {demo.get('target', '')}",
         })
-    return pd.DataFrame(rows, columns=["component", "content"])
+    out = pd.DataFrame(rows, columns=["component", "content"])
+    return out
+
 
 @summary.register(TextModelGEPA)
-def _summary_gepa(model: TextModelGEPA, **kwargs) -> None:
+def _summary_textmodelgepa(model: TextModelGEPA, **kwargs) -> None:
     """Print a summary of the fitted GEPA model."""
     print(f"  Method       : {model.algorithm}")
     print(f"  GEPA auto    : {model.auto}")
