@@ -123,12 +123,12 @@ def textmodel_gepa_classify(
     >>> ##
     >>> ## Example connecting to a local LLM running on LMStudio or an API running e.g. on your computer
     >>> ##
-    >>> opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))    # doctest: +SKIP
+    >>> opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
     >>> lm = localllm.connect("openai/gemma-4-E2B-it-GGUF", opts)                                                                                                              # doctest: +SKIP
     >>> ##
     >>> ## Example to connect to a local llm directly in Python
     >>> ##
-    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M", opts)   
+    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")   
     >>> 
     >>> ######################################################################################
     >>> ## Get data, define target to predict
