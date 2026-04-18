@@ -61,5 +61,5 @@ quartodoc:
     - subtitle: Traindata
       desc: Converters to data to use for training with dspy
       contents:
-        - name: converters.tif
-        - name: converters.convert_dspy_example
+        - name: converters.utilities.tif
+        - name: converters.utilities.convert_dspy_example
