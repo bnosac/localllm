@@ -69,6 +69,7 @@ def textmodel_gepa_classify(
         test_size: Union[float, int] = 0.1,
         seed: int = 4321,
         track_stats: bool = True,
+        trace: bool = False,
         **gepa_kwargs
 ) -> TextModelGEPA:
     """
@@ -99,6 +100,8 @@ def textmodel_gepa_classify(
         Seed for shuffing the input data
     track_stats: bool
         Track stats on evaluation dataset
+    trace: bool
+        Boolean allowing to disable dspy logging. Defaults to True.
     **gepa_kwargs
         Forwarded to ``dspy.GEPA``.
 
@@ -116,18 +119,15 @@ def textmodel_gepa_classify(
     >>> import localllm
     >>> from localllm import textmodel_gepa_classify    
     >>> ##
-    >>> ## E.g. connecting to a local LLM running on LMStudio or an API running e.g. on your computer
+    >>> ## Example connecting to a local LLM running on LMStudio or an API running e.g. on your computer
     >>> ##
     >>> opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))    # doctest: +SKIP
     >>> lm = localllm.connect("openai/gemma-4-E2B-it-GGUF", opts)                                                                                                              # doctest: +SKIP
     >>> ##
     >>> ## Example to connect to a local llm directly in Python
     >>> ##
-    >>> opts = dict(n_ctx = 4096, n_gpu_layers = 0, n_threads = 1, flash_attn = False, verbose = False, chat_format = None)
-    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M", opts)
-    >>> # reflection model
-    >>> # opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
-    >>> # reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", opts)   
+    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M", opts)   
+    >>> 
     >>> ######################################################################################
     >>> ## Get data, define target to predict
     >>> ##
@@ -145,30 +145,36 @@ def textmodel_gepa_classify(
     >>> ######################################################################################
     >>> ## Auto-tune the prompt using GEPA
     >>> ##
-    >>> import dspy
     >>> from s3generics import summary, predict
-    >>> dspy.disable_logging() 
-    >>> dspy.disable_litellm_logging()   
-    >>> #import logging
-    >>> #logger = logging.getLogger('dspy')
-    >>> #logger.setLevel(logging.CRITICAL)
-    >>> #from rlike import Sys_setenv
-    >>> #Sys_setenv(dict(TQDM_DISABLE=1))
     >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, max_metric_calls = 10, reflection_minibatch_size = 5)
-    >>> scores = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])
-    >>> scores  
+    >>> score = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])
+    >>> score  
     ['VERVOERBELEID', 'OPENBARE VEILIGHEID']
     >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light")                                  # doctest: +SKIP
-    >>> scores = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])      # doctest: +SKIP
+    >>> score = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])       # doctest: +SKIP
     >>> summary(model)                                                                                                               # doctest: +SKIP
     Method       : Classification (DSPy GEPA): predict
     GEPA auto    : None
     Classes      : ['OPENBARE VEILIGHEID', 'VERVOERBELEID']    
     ...
+    >>> ######################################################################################
+    >>> ## Add a better reflection model which is normally a better model
+    >>> ##    
+    >>> # reflection model
+    >>> # opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
+    >>> # reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", opts)    
     """
     lm = dspy.settings.lm
     if lm is None:
         raise ValueError("You must first have configured dspy with either dspy.configure or localllm_connect")    
+    if not trace:
+        dspy.disable_logging() 
+        dspy.disable_litellm_logging()   
+        #import logging
+        #logger = logging.getLogger('dspy')
+        #logger.setLevel(logging.CRITICAL)
+        #from rlike import Sys_setenv
+        #Sys_setenv(dict(TQDM_DISABLE=1))
     if isinstance(x, pd.DataFrame):
         tif_df = x
     else:
