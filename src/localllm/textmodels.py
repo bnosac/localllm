@@ -38,6 +38,8 @@ class TextModelGEPA:
         self.algorithm: Optional[str] = None
         self.program = None
         self.optimizer = None
+        self.eval_baseline = None
+        self.eval_tuned = None
     def __repr__(self) -> str:
         if self.program is None:
             out = f"TextModelGEPA(budget='{self.auto}') [not fitted]"
@@ -230,9 +232,19 @@ def textmodel_gepa_classify(
     model._data = dict(train = trainset, validation = valset, test = testset)    
     if metric == "accuracy":
         metric = eval_classification_with_feedback
-    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, **gepa_kwargs)
+    ## Baseline evaluation on holdout testset
+    if test_size > 0:
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False)
+        testset_baseline = evaluate(model.module)   
+        model.eval_baseline = testset_baseline    
+    ## Tune module
+    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, **gepa_kwargs)    
     model.program = optimizer.compile(model.module, trainset=trainset, valset=valset)
     model.optimizer = optimizer    
+    if test_size > 0:
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False)
+        testset_tuned = evaluate(model.program)        
+        model.eval_tuned = testset_tuned    
     #max(model.program.detailed_results.val_aggregate_scores)
     model.algorithm = "Classification (DSPy GEPA): " + which
     return model
