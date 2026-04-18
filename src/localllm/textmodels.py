@@ -36,15 +36,17 @@ class TextModelGEPA:
         self.reflection_lm = reflection_lm
         self.gepa_kwargs: dict = gepa_kwargs or {}        
         self.algorithm: Optional[str] = None
-        self._optimized = None
+        self.program = None
         self.optimizer = None
     def __repr__(self) -> str:
-        if self._optimized is None:
-            return f"TextModelGEPA(budget='{self.auto}') [not fitted]"
-        return (
-            f"TextModelGEPA(budget='{self.auto}', classes={self.classnames}) "
-            f"[fitted; n_train={self.n_train}, method={self.algorithm}]"
-        )
+        if self.program is None:
+            out = f"TextModelGEPA(budget='{self.auto}') [not fitted]"
+        else:
+            out = (
+                f"TextModelGEPA(budget='{self.auto}', classes={self.classnames}) "
+                f"[fitted; n_train={self.n_train}, method={self.algorithm}]"
+            )
+        return out
 
 
 def eval_classification(example, prediction, trace=None) -> bool:
@@ -62,10 +64,11 @@ def textmodel_gepa_classify(
         which: Literal["predict", "chainofthought"] = "predict",        
         reflection_lm: Optional[dspy.LM] = None,        
         metric: Union[Callable, str] = "accuracy",
-        auto: Literal["light", "medium", "heavy"] = "light",
+        auto: Literal["light", "medium", "heavy", None] = "light",
         train_size: int = 0.75,
         test_size: Union[float, int] = 0.1,
         seed: int = 4321,
+        track_stats: bool = True,
         **gepa_kwargs
 ) -> TextModelGEPA:
     """
@@ -86,14 +89,16 @@ def textmodel_gepa_classify(
         Language model used by GEPA for reflection. Defaults to the configured dspy lm.
     metric : 'accuracy'
         Either a str with values 'accuracy' or a callable which returns how good the prediction was. Defaults to accuracy.
-    auto : {'light', 'medium', 'heavy'}
+    auto : {'light', 'medium', 'heavy', None}
         GEPA ``auto`` budget. Default ``'light'``.        
     train_size : float
         Size of the training set. Defaults to the 0.75, indicating 75% of (the size of the data x - test_size )
     test_size : int
-        Number of holdout test samples. Maximum number of training examples passed to the optimizer.
+        Number of holdout test samples.
     seed : int
         Seed for shuffing the input data
+    track_stats: bool
+        Track stats on evaluation dataset
     **gepa_kwargs
         Forwarded to ``dspy.GEPA``.
 
@@ -106,11 +111,23 @@ def textmodel_gepa_classify(
     --------
 
     >>> ######################################################################################
-    >>> ## Define the model
+    >>> ## Define the model to use
     >>> ##
     >>> import localllm
-    >>> from localllm import textmodel_gepa_classify
-    >>> lm = localllm.connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
+    >>> from localllm import textmodel_gepa_classify    
+    >>> ##
+    >>> ## E.g. connecting to a local LLM running on LMStudio or an API running e.g. on your computer
+    >>> ##
+    >>> opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))    # doctest: +SKIP
+    >>> lm = localllm.connect("openai/gemma-4-E2B-it-GGUF", opts)                                                                                                              # doctest: +SKIP
+    >>> ##
+    >>> ## Example to connect to a local llm directly in Python
+    >>> ##
+    >>> opts = dict(n_ctx = 4096, n_gpu_layers = 0, n_threads = 1, flash_attn = False, verbose = False, chat_format = None)
+    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M", opts)
+    >>> # reflection model
+    >>> # opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
+    >>> # reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", opts)   
     >>> ######################################################################################
     >>> ## Get data, define target to predict
     >>> ##
@@ -128,16 +145,26 @@ def textmodel_gepa_classify(
     >>> ######################################################################################
     >>> ## Auto-tune the prompt using GEPA
     >>> ##
-    >>> import localllm
-    >>> from localllm import textmodel_gepa_classify
-    >>> lm = localllm.connect("localllm/LFM2.5-1.2B-Instruct-Q8_0")
-    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, train_size = 0.75)    
-    >>> 
-    >>> ######################################################################################
-    >>> ## Define the model and auto-tune the prompt
-    >>> ##    
-    >>> config = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
-    >>> reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", model_kwargs = config)        
+    >>> import dspy
+    >>> from s3generics import summary, predict
+    >>> dspy.disable_logging() 
+    >>> dspy.disable_litellm_logging()   
+    >>> #import logging
+    >>> #logger = logging.getLogger('dspy')
+    >>> #logger.setLevel(logging.CRITICAL)
+    >>> #from rlike import Sys_setenv
+    >>> #Sys_setenv(dict(TQDM_DISABLE=1))
+    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, max_metric_calls = 10, reflection_minibatch_size = 5)
+    >>> scores = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])
+    >>> scores  
+    ['VERVOERBELEID', 'OPENBARE VEILIGHEID']
+    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light")                                  # doctest: +SKIP
+    >>> scores = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])      # doctest: +SKIP
+    >>> summary(model)                                                                                                               # doctest: +SKIP
+    Method       : Classification (DSPy GEPA): predict
+    GEPA auto    : None
+    Classes      : ['OPENBARE VEILIGHEID', 'VERVOERBELEID']    
+    ...
     """
     lm = dspy.settings.lm
     if lm is None:
@@ -197,9 +224,10 @@ def textmodel_gepa_classify(
     model._data = dict(train = trainset, validation = valset, test = testset)    
     if metric == "accuracy":
         metric = eval_classification_with_feedback
-    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, **gepa_kwargs)
+    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, **gepa_kwargs)
     model.program = optimizer.compile(model.module, trainset=trainset, valset=valset)
-    model.optimizer = optimizer
+    model.optimizer = optimizer    
+    #max(model.program.detailed_results.val_aggregate_scores)
     model.algorithm = "Classification (DSPy GEPA): " + which
     return model
 
@@ -226,7 +254,7 @@ def _coef_textmodelgepa(model: TextModelGEPA, **kwargs) -> pd.DataFrame:
     """
     Return the GEPA-optimized and few-shot demonstrations.
     """
-    predictor = model.program.predict
+    predictor = model.program.predictors()[0]
     rows = []
     # Fine-tuned instructions
     if hasattr(predictor, "extended_signature"):
@@ -252,10 +280,22 @@ def _summary_textmodelgepa(model: TextModelGEPA, **kwargs) -> None:
     print(f"  Train set    : {model.n_train} examples (seed={model.seed})")
     print(f"  LM (infer)   : {model.lm}")
     print(f"  LM (reflect) : {model.reflection_lm}")
-    if hasattr(model.optimizer, "stats") and model.optimizer.stats:
-        print(f"\n  Optimizer stats:")
-        for k, v in model.optimizer.stats.items():
-            print(f"    {k}: {v}")
-    print(f"\n  Optimized components:")
+    if hasattr(model.program, "detailed_results") and model.optimizer.track_stats:
+        print(f"  Optimizer stats:")
+        print(f"    - Amount of time metric is called {model.program.detailed_results.total_metric_calls}")
+        print(f"    - Best candidate:\n", model.program.detailed_results.best_candidate)
+        print(f"  Candidate scores:")
+        for i in range(len(model.program.detailed_results.candidates)):
+            print("    - Validation set aggregate evaluation score: ", model.program.detailed_results.val_aggregate_scores[i])
+            print(model.program.detailed_results.candidates[i])            
+        # pd.DataFrame(dict(
+        #     candidates = model.program.detailed_results.candidates,
+        #     score = model.program.detailed_results.val_aggregate_scores
+        # ))
+        # model.program.detailed_results.val_aggregate_scores
+        # for k, v in model.program.detailed_results.items():
+        #     print(f"    {k}: {v}")
     coef_df = coef(model)
-    print(coef_df.to_string(index=False))
+    if coef_df.shape[0] > 0:
+        print(f"\n  Optimized components:")
+        print(coef_df.to_string(index=False))
