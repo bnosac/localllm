@@ -116,7 +116,7 @@ model_name = "localllm/LFM2.5-1.2B-Instruct-Q8_0"
 llm = localllm.connect(model_name, 
                        model_kwargs = dict(
                             verbose = False, 
-                            n_ctx = 32768, n_gpu_layers = -1, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
+                            n_ctx = 32768, n_gpu_layers = 0, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
                        adapter = LocalChatAdapter(trace = 2)) 
 ```
 
