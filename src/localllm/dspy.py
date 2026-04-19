@@ -64,8 +64,8 @@ class LocalLLM(dspy.BaseLM):
         self.cache = cache
         self.history: list[dict[str, Any]] = []
         self.kwargs = dict(temperature=temperature, max_tokens=max_tokens, **kwargs)
-        self.llm = object
-        #_LOCAL_LLM_MODELS_LOADED[model] = object ## Asign to dict globally to avoid letting dspy freeing the resource
+        #self.llm = object
+        _LOCAL_LLM_MODELS_LOADED[model] = object ## Asign to dict globally to avoid letting dspy freeing the resource
         self.trace = trace
 
     def __call__(self, prompt=None, messages=None, **kwargs):
@@ -80,8 +80,8 @@ class LocalLLM(dspy.BaseLM):
             print(list(kwargs.keys()))        
             print(list(call_kwargs.keys()))
         try:
-            response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
-            #response = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)            
+            #response = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+            response = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)            
             # Return in the format DSPy expects: list of strings
             out = [response.choices[0].message.content]
         except Exception as e: 
@@ -101,8 +101,8 @@ class LocalLLM(dspy.BaseLM):
         elif messages is None:
             raise ValueError("Either prompt or messages must be provided")
         call_kwargs = {**self.kwargs, **kwargs}        
-        raw = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
-        #raw = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+        #raw = self.llm.create_chat_completion_openai_v1(messages=messages, **call_kwargs)
+        raw = _LOCAL_LLM_MODELS_LOADED[self.model].create_chat_completion_openai_v1(messages=messages, **call_kwargs)
         return raw
     
     def kill(self, launch_kwargs: dict[str, Any] | None = None):
