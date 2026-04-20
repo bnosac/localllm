@@ -259,19 +259,42 @@ def textmodel_gepa_classify(
 @predict.register(TextModelGEPA)
 def _predict_textmodelgepa(
     model: TextModelGEPA,
-    newdata: Union[Iterable[str]],
+    newdata: Iterable[str],
+    type: Literal["class", "dict", "signature"] = "class",
     **kwargs,
 ) -> list:
     """
-    Predict class labels based on a GEPA-tuned classifier.
+    Predict class labels based on a GEPA-tuned classifier or return the output of the prediction
+
+    Parameters
+    ----------
+    model : TextModelGEPA
+    newdata : Iterable[str]
+        A list of str containing new data to predict
+    type : {'class', 'dict', 'signature'}
+        ``'class'``: return list of str, based on the output of the 'target' OutputField only
+        ``'signature'``: return list of predicted signatures
+        ``'dict'``: return list of dict of the predicted signatures
+    **kwargs
+        Not used
+
+    Returns
+    -------
+    list of either str / dict or dspy.primitives.prediction.Prediction 
     """
     out = []
     for t in newdata:
         scores = model.program(text = t)
-        scores = scores.target
+        if type == "class":
+            scores = scores.target
+        elif type == "signature":
+            scores = scores
+        elif type == "dict":
+            scores = dict(scores)
+        else:
+            raise ValueError("Type should either be 'class' or 'signature'")    
         out.append(scores)
-    return [model.program(text=t).target for t in newdata]
-
+    return out
 
 @coef.register(TextModelGEPA)
 def _coef_textmodelgepa(model: TextModelGEPA, **kwargs) -> pd.DataFrame:
