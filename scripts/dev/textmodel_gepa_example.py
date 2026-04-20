@@ -38,8 +38,11 @@ dataset = be.sample(200)
 ######################################################################################
 ## Define the model to use
 ## 
-model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light", #max_metric_calls = 3, 
-                                reflection_minibatch_size = 5, reflection_lm = reflect_lm, test_size = 20, trace = True)
+model = textmodel_gepa_classify(
+    x = dataset["text"], 
+    y = dataset["target"], 
+    auto = "light", #max_metric_calls = 3, 
+    reflection_minibatch_size = 5, reflection_lm = reflect_lm, test_size = 20, trace = True)
 model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, max_metric_calls = 3, test_size = 3, num_threads = 1, trace = True)
 model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light", max_metric_calls = 3, test_size = 3, num_threads = 1, trace=True)
 model.eval_baseline
@@ -47,3 +50,6 @@ model.eval_tuned
 scores = predict(model, newdata = ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])
 
 max(model.program.detailed_results.val_aggregate_scores)
+
+import re
+be["question_themes"] = be["question_theme"].map(lambda x: [el.strip() for el in re.split(pattern = r"\|", string = x)])
