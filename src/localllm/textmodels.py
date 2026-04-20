@@ -241,16 +241,20 @@ def textmodel_gepa_classify(
         metric = eval_classification_with_feedback
     ## Baseline evaluation on holdout testset
     if test_size > 0:
-        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = num_threads)
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=trace, num_threads = num_threads)
         testset_baseline = evaluate(model.module, num_threads = num_threads)   
+        if trace:
+            print("Evaluation on baseline: ", testset_baseline)
         model.eval_baseline = testset_baseline    
     ## Tune module
     optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, num_threads = num_threads, **gepa_kwargs)    
     model.program = optimizer.compile(model.module, trainset=trainset, valset=valset)
     model.optimizer = optimizer    
     if test_size > 0:
-        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = num_threads)
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=trace, num_threads = num_threads)
         testset_tuned = evaluate(model.program, num_threads = num_threads)        
+        if trace:
+            print("Evaluation on testset: ", testset_tuned)
         model.eval_tuned = testset_tuned    
     #max(model.program.detailed_results.val_aggregate_scores)
     model.algorithm = "Classification (DSPy GEPA): " + which
