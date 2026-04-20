@@ -119,10 +119,17 @@ def textmodel_gepa_classify(
     --------
 
     >>> ######################################################################################
-    >>> ## Define the model to use
+    >>> ## Define the models to use
     >>> ##
     >>> import localllm
     >>> from localllm import localllm_download_model, textmodel_gepa_classify    
+    >>> ######################################################################################
+    >>> ## GEPA requires a reflection model and a model which for which the module is tuned. 
+    >>> ## Make sure the reflection models is defined first as the module 
+    >>> ## will use the default lm which is set lastly to tune the instructions
+    >>> ## Example below: reflection model running in LMStudio    
+    >>> opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
+    >>> reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", opts)        
     >>> ##
     >>> ## Example connecting to a local LLM running on LMStudio or an API running e.g. on your computer
     >>> ##
@@ -131,8 +138,10 @@ def textmodel_gepa_classify(
     >>> ##
     >>> ## Example to connect to a local llm directly in Python
     >>> ##
-    >>> m = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
-    >>> lm = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")     
+    >>> lm   = localllm.connect("localllm/Qwen3-4B-Instruct-Q4_K_M")                                # doctest: +SKIP
+    >>> opts = dict(n_ctx = 512, n_gpu_layers = 0, n_threads = 1, flash_attn = False, swa_full = False, verbose = False)    
+    >>> lm   = localllm.connect("localllm/gemma-3-270m-it-Q8_0", opts)
+    ...  # doctest: +ELLIPSIS
     >>> 
     >>> ######################################################################################
     >>> ## Get data, define target to predict
@@ -152,23 +161,19 @@ def textmodel_gepa_classify(
     >>> ## Auto-tune the prompt using GEPA
     >>> ##
     >>> from s3generics import summary, predict
-    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, max_metric_calls = 10, reflection_minibatch_size = 5)
+    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = None, max_metric_calls = 1, reflection_minibatch_size = 3, test_size = 0, trace = True)
+    ...  # doctest: +ELLIPSIS
     >>> score = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])
-    >>> score  
-    ['VERVOERBELEID', 'OPENBARE VEILIGHEID']
-    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light")                                  # doctest: +SKIP
+    >>> ## A more realistic example
+    >>> model = textmodel_gepa_classify(x = dataset["text"], y = dataset["target"], auto = "light", test_size = 10)                  # doctest: +SKIP
     >>> score = predict(model, ["We gaan met de trein op reis naar Blankenberge", "De politie is met man en macht op straat"])       # doctest: +SKIP
+    >>> score                                                                                                                        # doctest: +SKIP
+    ['VERVOERBELEID', 'OPENBARE VEILIGHEID']                                                                                         # doctest: +SKIP
     >>> summary(model)                                                                                                               # doctest: +SKIP
     Method       : Classification (DSPy GEPA): predict
     GEPA auto    : None
     Classes      : ['OPENBARE VEILIGHEID', 'VERVOERBELEID']    
     ...
-    >>> ######################################################################################
-    >>> ## Add a better reflection model which is normally a better model
-    >>> ##    
-    >>> # reflection model
-    >>> # opts = dict(api_base = "http://localhost:1234/v1", api_key = "none", model_type = "chat", provider = "openai", cache = True, response_format = dict(type = "text"))
-    >>> # reflection_lm = localllm.connect("openai/gemma-4-E4b-it-GGUF", opts)    
     """
     lm = dspy.settings.lm
     if lm is None:
