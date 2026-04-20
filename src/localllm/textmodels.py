@@ -296,27 +296,6 @@ def _predict_textmodelgepa(
         out.append(scores)
     return out
 
-@coef.register(TextModelGEPA)
-def _coef_textmodelgepa(model: TextModelGEPA, **kwargs) -> pd.DataFrame:
-    """
-    Return the GEPA-optimized and few-shot demonstrations.
-    """
-    predictor = model.program.predictors()[0]
-    rows = []
-    # Fine-tuned instructions
-    if hasattr(predictor, "extended_signature"):
-        rows.append({
-            "component": "instruction", 
-            "content": predictor.extended_signature.instructions})
-    # Few-shot demonstrations
-    for i, demo in enumerate(getattr(predictor, "demos", [])):
-        rows.append({
-            "component": f"demo_{i+1}",
-            "content":   f"[text] {demo.get('text', '')} → [target] {demo.get('target', '')}",
-        })
-    out = pd.DataFrame(rows, columns=["component", "content"])
-    return out
-
 
 @summary.register(TextModelGEPA)
 def _summary_textmodelgepa(model: TextModelGEPA, **kwargs) -> None:
