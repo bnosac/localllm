@@ -2,11 +2,12 @@
 
 ## 0.3.0
 
-* Added textmodel_gepa_classify
+* Added textmodel_gepa_classify and a predict function for it
 * import localllm_connect as connect making sure you can do 
       import localllm
       localllm.connect("localllm/modelxyz")
 * Move converters to localllm.utilities.converters
+* model_name in LocalLLM objects use now the name passed on to localllm_download_model, not the gguf filename
 
 ## 0.2.2
 
