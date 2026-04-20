@@ -2,7 +2,7 @@
 
 ## 0.3.0
 
-* Added textmodel_gepa_classify and a predict function for it
+* Added textmodel_gepa_classify and a predict and summary function for it
 * import localllm_connect as connect making sure you can do 
       import localllm
       localllm.connect("localllm/modelxyz")
