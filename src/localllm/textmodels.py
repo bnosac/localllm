@@ -5,7 +5,7 @@ from s3generics import predict, summary, coef
 from typing import Iterable, Literal, Optional, Union
 from collections.abc import Callable
 from .utilities.train_test import train_test_split
-from .utilities.converters import tif, convert_dspy_example
+from .utilities.converters import convert_dspy_example
 
 class TextModelGEPA:
     """
@@ -67,11 +67,11 @@ def textmodel_gepa_classify(
         reflection_lm: Optional[dspy.LM] = None,        
         metric: Union[Callable, str] = "accuracy",
         auto: Literal["light", "medium", "heavy", None] = "light",
-        train_size: int = 0.75,
+        train_size: Union[float, int] = 0.75,
         test_size: Union[float, int] = 0.1,
         seed: int = 4321,
         track_stats: bool = True,
-        num_threads: bool = 1,
+        num_threads: int = 1,
         trace: bool = False,
         **gepa_kwargs
 ) -> TextModelGEPA:
@@ -176,11 +176,6 @@ def textmodel_gepa_classify(
     if not trace:
         dspy.disable_logging() 
         dspy.disable_litellm_logging()   
-        #import logging
-        #logger = logging.getLogger('dspy')
-        #logger.setLevel(logging.CRITICAL)
-        #from rlike import Sys_setenv
-        #Sys_setenv(dict(TQDM_DISABLE=1))
     if isinstance(x, pd.DataFrame):
         tif_df = x
     else:
@@ -317,14 +312,3 @@ def _summary_textmodelgepa(model: TextModelGEPA, **kwargs) -> None:
         for i in range(len(model.program.detailed_results.candidates)):
             print("    - Validation set aggregate evaluation score: ", model.program.detailed_results.val_aggregate_scores[i])
             print(model.program.detailed_results.candidates[i])            
-        # pd.DataFrame(dict(
-        #     candidates = model.program.detailed_results.candidates,
-        #     score = model.program.detailed_results.val_aggregate_scores
-        # ))
-        # model.program.detailed_results.val_aggregate_scores
-        # for k, v in model.program.detailed_results.items():
-        #     print(f"    {k}: {v}")
-    coef_df = coef(model)
-    if coef_df.shape[0] > 0:
-        print(f"\n  Optimized components:")
-        print(coef_df.to_string(index=False))
