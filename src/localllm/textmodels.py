@@ -71,6 +71,7 @@ def textmodel_gepa_classify(
         test_size: Union[float, int] = 0.1,
         seed: int = 4321,
         track_stats: bool = True,
+        num_threads: bool = 1,
         trace: bool = False,
         **gepa_kwargs
 ) -> TextModelGEPA:
@@ -102,6 +103,8 @@ def textmodel_gepa_classify(
         Seed for shuffing the input data
     track_stats: bool
         Track stats on evaluation dataset
+    num_threads: bool
+        Number of threads to use in GEPA. Defaults to 1. Only change this if the default lm you are using is a remote lm served through an API.
     trace: bool
         Boolean allowing to disable dspy logging. Defaults to True.
     **gepa_kwargs
@@ -238,16 +241,16 @@ def textmodel_gepa_classify(
         metric = eval_classification_with_feedback
     ## Baseline evaluation on holdout testset
     if test_size > 0:
-        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = 1)
-        testset_baseline = evaluate(model.module, num_threads = 1)   
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = num_threads)
+        testset_baseline = evaluate(model.module, num_threads = num_threads)   
         model.eval_baseline = testset_baseline    
     ## Tune module
-    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, **gepa_kwargs)    
+    optimizer = dspy.GEPA(metric = metric, reflection_lm = model.reflection_lm, auto = model.auto, track_stats = track_stats, num_threads = num_threads, **gepa_kwargs)    
     model.program = optimizer.compile(model.module, trainset=trainset, valset=valset)
     model.optimizer = optimizer    
     if test_size > 0:
-        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = 1)
-        testset_tuned = evaluate(model.program, num_threads = 1)        
+        evaluate = dspy.Evaluate(devset=testset, metric=metric, display_progress=False, num_threads = num_threads)
+        testset_tuned = evaluate(model.program, num_threads = num_threads)        
         model.eval_tuned = testset_tuned    
     #max(model.program.detailed_results.val_aggregate_scores)
     model.algorithm = "Classification (DSPy GEPA): " + which
