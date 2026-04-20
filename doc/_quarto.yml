@@ -63,3 +63,7 @@ quartodoc:
       contents:
         - name: converters.utilities.tif
         - name: converters.utilities.convert_dspy_example
+    - subtitle: Textmodels
+      desc: Text models with LLM's
+      contents:
+        - textmodel_gepa_classify
