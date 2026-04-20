@@ -122,7 +122,7 @@ def textmodel_gepa_classify(
     >>> ## Define the model to use
     >>> ##
     >>> import localllm
-    >>> from localllm import textmodel_gepa_classify    
+    >>> from localllm import localllm_download_model, textmodel_gepa_classify    
     >>> ##
     >>> ## Example connecting to a local LLM running on LMStudio or an API running e.g. on your computer
     >>> ##
