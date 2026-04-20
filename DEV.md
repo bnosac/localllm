@@ -52,6 +52,8 @@ Install llama-cpp-python on Windows
 ##
 $env:CMAKE_ARGS = "-DGGML_CUDA=on"
 pip install llama-cpp-python==0.3.20 --upgrade --force-reinstall --no-cache-dir --verbose --log install-llamacpp.log
+## Linux
+CMAKE_ARGS="-DGGML_CUDA=on" pip install llama-cpp-python==0.3.20 --upgrade --force-reinstall --no-cache-dir --verbose --log install-llamacpp.log
 ```
 
 ### Note for myself
