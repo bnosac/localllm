@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>localllm_download_model – localllm</title>
+<title>utilities.tif – localllm</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,8 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../reference/localllm_list_models.html" rel="next">
-<link href="../reference/index.html" rel="prev">
+<link href="../reference/utilities.convert_dspy_example.html" rel="next">
+<link href="../reference/merge_spans.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -161,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">Utilities</a></li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">localllm_download_model</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">utilities.tif</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -190,16 +190,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Utilities</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/localllm_download_model.html" class="sidebar-item-text sidebar-link active">
+  <a href="../reference/localllm_download_model.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">localllm_download_model</span></a>
   </div>
 </li>
@@ -271,16 +271,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
  <span class="menu-text">Traindata</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/utilities.tif.html" class="sidebar-item-text sidebar-link">
+  <a href="../reference/utilities.tif.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">utilities.tif</span></a>
   </div>
 </li>
@@ -318,148 +318,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">Utilities</a></li><li class="breadcrumb-item"><a href="../reference/localllm_download_model.html">localllm_download_model</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">utilities.tif</a></li></ol></nav></header>
 
 
 
 
-<section id="localllm.localllm_download_model" class="level1">
-<h1>localllm_download_model</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>localllm_download_model(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">type</span><span class="op">=</span><span class="st">'gemma-3-270m-it-Q8_0'</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    model_dir<span class="op">=</span><span class="va">None</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    overwrite<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    trace<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Download a local gguf LLM model</p>
-<section id="parameters" class="level2 doc-section doc-section-parameters">
-<h2 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 0%">
-<col style="width: 0%">
-<col style="width: 97%">
-<col style="width: 1%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>type</td>
-<td>str</td>
-<td>The type/name of the model to download. Currently supports the following models. You can either give the model name or localllm/{model_name} - “gemma-3-270m-it-qat-Q4_0”: Google Gemma 3 270M it model (Q4_0 quantization) - “gemma-3-270m-it-Q8_0”: Google Gemma 3 270M it model (Q8_0 quantization) - “gemma-3-1b-it-Q8_0”: Google Gemma 3 1B it model (Q8_0 quantization) - “gemma-3-4b-it-qat-Q4_0”: Google Gemma 3 4b it model (Q4_0 quantization - with quantized aware training) - “gemma-3-4b-it-Q4_K_M”: Google Gemma 3 4b it model (Q4_K_M quantization) - “gemma-3-12b-it-qat-Q4_0”: Google Gemma 3 12B it model (Q4_0 quantization) - “GLM-4.6V-Flash-Q4_K_M”: GLM 4.6V Flash model (Q4_K_M quantization) - “translategemma-4b-it-q8_0”: TranslateGemma 4B it model (Q8_0 quantization) - “translategemma-12b-it-q4_k_m”: TranslateGemma 12B it model (Q4_K_M quantization) - “LFM2.5-350M-Q8_0”: LFM2.5 350M model (Q8_0 quantization) - “LFM2.5-1.2B-Instruct-Q4_K_M”: LFM2.5 1.2B Instruct model (Q4_K_M quantization) - “LFM2.5-1.2B-Instruct-Q8_0”: LFM2.5 1.2B Instruct model (Q8_0 quantization) - “Qwen3-4B-Instruct-Q4_K_M”: Qwen 3 4B model (Q4_K_M quantization) - “Qwen3-8B-Q4_K_M”: Qwen 3 8B model (Q4_K_M quantization) - “Qwen3.5-0.8B-Q8_0”: Qwen 3.5 0.8B model (Q8_0 quantization) - “Qwen3.5-2B-Q4_K_M”: Qwen 3.5 2B model (Q4_K_M quantization) - “Qwen3.5-4B-Q4_K_M”: Qwen 3.5 4B model (Q4_K_M quantization) - “Qwen3.5-9B-Q4_K_M”: Qwen 3.5 9B model (Q4_K_M quantization) - “gemma-4-E2B-it-Q8_0”: Google Gemma 4 E2B Instruct model (Q8_0 quantization) - “gemma-4-E2B-it-Q4_K_M”: Google Gemma 4 E2B Instruct model (Q4_K_M quantization) - “gemma-4-E4B-it-Q8_0”: Google Gemma 4 E4B Instruct model (Q8_0 quantization) - “gemma-4-E4B-it-Q4_K_M”: Google Gemma 4 E4B Instruct model (Q4_K_M quantization)</td>
-<td><code>"gemma-3-270m-it-Q8_0"</code></td>
-</tr>
-<tr class="even">
-<td>model_dir</td>
-<td>str or None</td>
-<td>Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR and if that environment variable does not exist, uses the default directory in the user’s home folder (~/.localllm/models/).</td>
-<td><code>None</code></td>
-</tr>
-<tr class="odd">
-<td>overwrite</td>
-<td>bool</td>
-<td>If True, re-download the model even if it already exists. If False, skip download if the model file is already present.</td>
-<td><code>False</code></td>
-</tr>
-<tr class="even">
-<td>trace</td>
-<td>bool</td>
-<td>If True, shows download progress.</td>
-<td><code>True</code></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="returns" class="level2 doc-section doc-section-returns">
-<h2 class="doc-section doc-section-returns anchored" data-anchor-id="returns">Returns</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td></td>
-<td>str</td>
-<td>Path to the downloaded model file.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="examples" class="level2 doc-section doc-section-examples">
-<h2 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">from</span> localllm <span class="im">import</span> localllm_download_model</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"not-existing-model"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> os</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> path <span class="op">=</span> os.getcwd()</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(model_dir<span class="op">=</span>path)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Downloading...</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="co">## More models</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)  <span class="co"># Clean up downloaded file</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-270m-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-1b-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-4b-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-4b-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-3-12b-it-qat-Q4_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"GLM-4.6V-Flash-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-4b-it-q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"translategemma-12b-it-q4_k_m"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)    </span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"LFM2.5-350M-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)        </span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"LFM2.5-1.2B-Instruct-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"LFM2.5-1.2B-Instruct-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3-4B-Instruct-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)    </span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3-8B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3.5-0.8B-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3.5-2B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3.5-4B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"Qwen3.5-9B-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-4-E2B-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path) </span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-4-E2B-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)     </span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-4-E4B-it-Q8_0"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)     </span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> model_path <span class="op">=</span> localllm_download_model(<span class="st">"gemma-4-E4B-it-Q4_K_M"</span>, overwrite<span class="op">=</span><span class="va">True</span>, trace <span class="op">=</span> <span class="va">False</span>)</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;&gt;</span> os.remove(model_path)            </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="notes" class="level2 doc-section doc-section-notes">
-<h2 class="doc-section doc-section-notes anchored" data-anchor-id="notes">Notes</h2>
-<p>The function creates the target directory if it doesn’t exist. Progress is displayed during download.</p>
+<section id="localllm.utilities.tif" class="level1">
+<h1>utilities.tif</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>utilities.tif(obj, <span class="op">*</span>args, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Text Interchange Formats</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -865,13 +734,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reference/index.html" class="pagination-link" aria-label="Function reference">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Function reference</span>
+      <a href="../reference/merge_spans.html" class="pagination-link" aria-label="merge_spans">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">merge_spans</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../reference/localllm_list_models.html" class="pagination-link" aria-label="localllm_list_models">
-        <span class="nav-page-text">localllm_list_models</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../reference/utilities.convert_dspy_example.html" class="pagination-link" aria-label="utilities.convert_dspy_example">
+        <span class="nav-page-text">utilities.convert_dspy_example</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

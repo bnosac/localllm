@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>converters.convert_dspy_example – localllm</title>
+<title>utilities.convert_dspy_example – localllm</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,7 +67,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../reference/converters.tif.html" rel="prev">
+<link href="../reference/textmodel_gepa_classify.html" rel="next">
+<link href="../reference/utilities.tif.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -160,7 +161,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/converters.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/converters.convert_dspy_example.html">converters.convert_dspy_example</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/utilities.convert_dspy_example.html">utilities.convert_dspy_example</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -279,14 +280,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/converters.tif.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">converters.tif</span></a>
+  <a href="../reference/utilities.tif.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">utilities.tif</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../reference/converters.convert_dspy_example.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">converters.convert_dspy_example</span></a>
+  <a href="../reference/utilities.convert_dspy_example.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">utilities.convert_dspy_example</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Textmodels</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../reference/textmodel_gepa_classify.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">textmodel_gepa_classify</span></a>
   </div>
 </li>
       </ul>
@@ -300,14 +318,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/converters.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/converters.convert_dspy_example.html">converters.convert_dspy_example</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">LocalLLM utilities</li><li class="breadcrumb-item"><a href="../reference/utilities.tif.html">Traindata</a></li><li class="breadcrumb-item"><a href="../reference/utilities.convert_dspy_example.html">utilities.convert_dspy_example</a></li></ol></nav></header>
 
 
 
 
-<section id="localllm.converters.convert_dspy_example" class="level1">
-<h1>converters.convert_dspy_example</h1>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>converters.convert_dspy_example(obj, <span class="op">*</span>args, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="localllm.utilities.convert_dspy_example" class="level1">
+<h1>utilities.convert_dspy_example</h1>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>utilities.convert_dspy_example(obj, <span class="op">*</span>args, <span class="op">**</span>kwargs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Convert to dspy examples</p>
 
 
@@ -716,11 +734,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../reference/converters.tif.html" class="pagination-link" aria-label="converters.tif">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">converters.tif</span>
+      <a href="../reference/utilities.tif.html" class="pagination-link" aria-label="utilities.tif">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">utilities.tif</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../reference/textmodel_gepa_classify.html" class="pagination-link" aria-label="textmodel_gepa_classify">
+        <span class="nav-page-text">textmodel_gepa_classify</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
