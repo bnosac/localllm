@@ -61,8 +61,8 @@ quartodoc:
     - subtitle: Traindata
       desc: Converters to data to use for training with dspy
       contents:
-        - name: converters.utilities.tif
-        - name: converters.utilities.convert_dspy_example
+        - name: utilities.tif
+        - name: utilities.convert_dspy_example
     - subtitle: Textmodels
       desc: Text models with LLM's
       contents:
