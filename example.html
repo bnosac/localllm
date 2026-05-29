@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f7919f14b89ae9a431cba0b331f0b52b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5a7edf553ce6f37e40c66d907d0f4061.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -189,11 +189,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="download-a-model" class="level3">
 <h3 class="anchored" data-anchor-id="download-a-model">Download a model</h3>
 <p>First use <code>localllm_download_model</code> to download a local model. For the list of all models which you can quickly download, look to the help of localllm_download_model.</p>
-<div id="11ad0354" class="cell" data-execution_count="1">
+<div id="10533726" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_download_model, localllm_list_models</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> localllm_download_model(<span class="st">"localllm/gemma-3-270m-it-Q8_0"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="92f8f8ef" class="cell" data-execution_count="2">
+<div id="c4d9e9cc" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>path</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>'/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf'</code></pre>
@@ -202,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="test-the-local-model" class="level3">
 <h3 class="anchored" data-anchor-id="test-the-local-model">Test the local model</h3>
-<div id="d0c3af76" class="cell" data-execution_count="3">
+<div id="5305ae4d" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Llama(</span>
@@ -214,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>{'choices': [{'finish_reason': 'length',
               'index': 0,
               'logprobs': None,
-              'text': '?\n\n4 * 4 = 16\n\nTherefore, 4x'}],
- 'created': 1776777932,
- 'id': 'cmpl-ffe94f58-e384-4dd6-9665-710f68f21e12',
+              'text': '?\n\n4x4 = 4 * 4 = 16\n\n'}],
+ 'created': 1780052730,
+ 'id': 'cmpl-7151f9b1-29f6-4630-a069-e2bca7b42156',
  'model': '/home/runner/.localllm/models/google_gemma-3-270m-it-Q8_0.gguf',
  'object': 'text_completion',
  'usage': {'completion_tokens': 16, 'prompt_tokens': 8, 'total_tokens': 24}}</code></pre>
@@ -226,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="use-the-model-directly-alongside-dspy" class="level3">
 <h3 class="anchored" data-anchor-id="use-the-model-directly-alongside-dspy">Use the model directly alongside dspy</h3>
 <p>Use dspy alongside the local model</p>
-<div id="a2a92dd7" class="cell" data-execution_count="4">
+<div id="15ea8af5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> LocalLLM, LocalChatAdapter</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>dspy.configure(lm <span class="op">=</span> LocalLLM(transformer), adapter <span class="op">=</span> LocalChatAdapter())</span>
@@ -243,7 +243,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 )</code></pre>
 </div>
 </div>
-<div id="6ebc22c4" class="cell" data-execution_count="5">
+<div id="51538922" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>out[<span class="st">"output"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>'Paris'</code></pre>
@@ -252,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="another-example-with-a-translation-model" class="level3">
 <h3 class="anchored" data-anchor-id="another-example-with-a-translation-model">Another example with a translation model</h3>
-<div id="646e754c" class="cell" data-execution_count="6">
+<div id="305a8059" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_download_model, LocalLLM</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> llama_cpp <span class="im">import</span> Llama</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> localllm_download_model(<span class="st">"localllm/translategemma-4b-it-q8_0"</span>)</span>
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    model_path <span class="op">=</span> path, flash_attn <span class="op">=</span> <span class="va">False</span>, verbose <span class="op">=</span> <span class="va">False</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    n_ctx <span class="op">=</span> <span class="dv">4096</span>, swa_full <span class="op">=</span> <span class="va">False</span>, seed <span class="op">=</span> <span class="dv">4321</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="53826e09" class="cell" data-execution_count="7">
+<div id="a494e425" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> LocalLLM(transformer)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    {</span>
@@ -277,7 +277,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>['\nWho won the 100-meter sprint during the last Olympic Games?\n']</code></pre>
 </div>
 </div>
-<div id="93a42f1f" class="cell" data-execution_count="8">
+<div id="65bfa515" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">Patient Profile:</span><span class="ch">\n</span><span class="st">- Name: Ms. Suzy Rickie Hackett</span><span class="ch">\n</span><span class="st">- Contact Number: 555-359-4515 (Home)</span><span class="ch">\n</span><span class="st">- Date of Birth: 1941-09-09</span><span class="ch">\n</span><span class="st">- Deceased on: 2021-08-03 at 01:47:39 (+02:00)</span><span class="ch">\n</span><span class="st">- Address: 292 Buckridge Port, Massachusetts, 01532, US</span><span class="ch">\n</span><span class="st">- Not a multiple birth</span><span class="ch">\n</span><span class="st">- Language Spoken: English (United States)</span><span class="ch">\n\n</span><span class="st">Encounter Details:</span><span class="ch">\n</span><span class="st">1. Encounter Status: Finished</span><span class="ch">\n</span><span class="st">   - Description: Well child visit procedure</span><span class="ch">\n</span><span class="st">   - Attending Doctor: Dr. Valentine Leannon</span><span class="ch">\n</span><span class="st">   - Visit START: 1941-09-09 at 20:43:56 (+02:00)</span><span class="ch">\n</span><span class="st">   - Visit END: 1941-09-09 at 20:58:56 (+02:00)</span><span class="ch">\n</span><span class="st">   - Relationship with patient: Primary performer</span><span class="ch">\n\n</span><span class="st">2. Encounter Status: Unknown</span><span class="ch">\n</span><span class="st">   - Description: Well child visit procedure</span><span class="ch">\n</span><span class="st">   - Provider Organisation: SUNRISE HEALTHCARE LLC</span><span class="ch">\n</span><span class="st">   - Visit START: 1950-09-12 at 19:43:56 (+01:00)</span><span class="ch">\n</span><span class="st">   - Visit END: 1950-09-12 at 19:58:56 (+01:00)</span><span class="ch">\n\n</span><span class="st">2 Procedures recorded for Ms. Suzy Rickie Hackett, both of unknown status.</span><span class="ch">\n\n</span><span class="st">Organization Information:</span><span class="ch">\n</span><span class="st">- Name: SUNRISE HEALTHCARE LLC</span><span class="ch">\n</span><span class="st">- Contact Number: 6176509959</span><span class="ch">\n</span><span class="st">- Active: Yes</span><span class="ch">\n</span><span class="st">- Type: Healthcare Provider</span><span class="ch">\n\n\n</span><span class="st">"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> [</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    {</span>
@@ -292,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>trans <span class="op">=</span> llm(messages <span class="op">=</span> messages)</span>
 <span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>trans</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>["\nProfil du patient\xa0:\n- Nom\xa0: Mme. Suzy Rickie Hackett\n- Numéro de téléphone\xa0: 555-359-4515 (Domicile)\n- Date de naissance\xa0: 09\xa0septembre 1941\n- Décédée le\xa0: 03\xa0août 2021 à 01\xa0h\xa047\xa039 (+02\xa0h)\n- Adresse\xa0: 292 Buckridge Port, Massachusetts, 01532, États-Unis\n- Pas de naissance multiple\n- Langue parlée\xa0: Anglais (États-Unis)\n\nDétails de la consultation\xa0:\n1. Statut de la consultation\xa0: Terminé\n   - Description\xa0: Consultation de routine pour un enfant en bonne santé\n   - Médecin traitant\xa0: Dr. Valentine Leannon\n   - Début de la consultation\xa0: 09\xa0septembre 1941 à 20\xa0h\xa043\xa056 (+02\xa0h)\n   - Fin de la consultation\xa0: 09\xa0septembre 1941 à 20\xa0h\xa058\xa056 (+02\xa0h)\n   - Relation avec le patient\xa0: Personne responsable\n\n2. Statut de la consultation\xa0: Inconnu\n   - Description\xa0: Consultation de routine pour un enfant en bonne santé\n   - Organisation de soins\xa0: SUNRISE HEALTHCARE LLC\n   - Début de la consultation\xa0: 12\xa0septembre 1950 à 19\xa0h\xa043\xa056 (+01\xa0h)\n   - Fin de la consultation\xa0: 12\xa0septembre 1950 à 19\xa0h\xa058\xa056 (+01\xa0h)\n\n2 Procédures enregistrées pour Mme. Suzy Rickie Hackett, dont le statut est inconnu.\n\nInformations sur l'organisation\xa0:\n- Nom\xa0: SUNRISE HEALTHCARE LLC\n- Numéro de téléphone\xa0: 6176509959\n- Actif\xa0: Oui\n- Type\xa0: Prestataire de soins de santé\n[/INST]"]</code></pre>
+<pre><code>["\nProfil du patient\xa0:\n- Nom\xa0: Mme. Suzy Rickie Hackett\n- Numéro de téléphone\xa0: 555-359-4515 (Domicile)\n- Date de naissance\xa0: 09\xa0septembre 1941\n- Décédée le\xa0: 03\xa0août 2021 à 01\xa0h\xa047\xa039 (+02\xa0h)\n- Adresse\xa0: 292 Buckridge Port, Massachusetts, 01532, États-Unis\n- Pas de naissance multiple\n- Langue parlée\xa0: Anglais (États-Unis)\n\nDétails de la consultation\xa0:\n1. Statut de la consultation\xa0: Terminé\n   - Description\xa0: Consultation de routine pour un enfant en bonne santé\n   - Médecin traitant\xa0: Dr. Valentine Leannon\n   - Début de la consultation\xa0: 09\xa0septembre 1941 à 20\xa0h\xa043\xa056 (+02\xa0h)\n   - Fin de la consultation\xa0: 09\xa0septembre 1941 à 20\xa0h\xa058\xa056 (+02\xa0h)\n   - Relation avec le patient\xa0: Personne responsable\n\n2. Statut de la consultation\xa0: Inconnu\n   - Description\xa0: Consultation de routine pour un enfant en bonne santé\n   - Organisation prestataire\xa0: SUNRISE HEALTHCARE LLC\n   - Début de la consultation\xa0: 12\xa0septembre 1950 à 19\xa0h\xa043\xa056 (+01\xa0h)\n   - Fin de la consultation\xa0: 12\xa0septembre 1950 à 19\xa0h\xa058\xa056 (+01\xa0h)\n\n2 Procédures enregistrées pour Mme. Suzy Rickie Hackett, dont le statut est inconnu.\n\nInformations sur l'organisation\xa0:\n- Nom\xa0: SUNRISE HEALTHCARE LLC\n- Numéro de téléphone\xa0: 6176509959\n- Actif\xa0: Oui\n- Type\xa0: Prestataire de soins de santé\n"]</code></pre>
 </div>
 </div>
 </section>
@@ -306,7 +306,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>You can still inspect what the output from dspy is that the LLM gets</li>
 </ul></li>
 </ul>
-<div id="93e5ee2c" class="cell" data-execution_count="9">
+<div id="15d34b66" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> localllm</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> LocalChatAdapter</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>model_name <span class="op">=</span> <span class="st">"localllm/gemma-3-4b-it-Q4_K_M"</span></span>
@@ -318,7 +318,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                            n_ctx <span class="op">=</span> <span class="dv">32768</span>, n_gpu_layers <span class="op">=</span> <span class="dv">0</span>, n_threads <span class="op">=</span> <span class="dv">1</span>, flash_attn <span class="op">=</span> <span class="va">True</span>, swa_full <span class="op">=</span> <span class="va">True</span>, seed <span class="op">=</span> <span class="dv">4321</span>),</span>
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                       adapter <span class="op">=</span> LocalChatAdapter(trace <span class="op">=</span> <span class="dv">2</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="fbc5269a" class="cell" data-execution_count="10">
+<div id="6a4a7b4e" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> dspy                           </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Go(dspy.Signature):</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    sentence: <span class="bu">str</span> <span class="op">=</span> dspy.InputField(desc <span class="op">=</span> <span class="st">"A question"</span>)</span>
@@ -333,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ----------------------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="0d1db72e" class="cell" data-execution_count="11">
+<div id="57523889" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>Prediction(
@@ -345,7 +345,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="list-of-models" class="level3">
 <h3 class="anchored" data-anchor-id="list-of-models">List of models</h3>
 <p>The following list of models can be easily downloaded. You can use them with <code>localllm_connect("localllm/{model_name}")</code></p>
-<div id="0f28aa2c" class="cell" data-execution_count="12">
+<div id="f4b414cd" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> localllm <span class="im">import</span> localllm_list_models</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> localllm_list_models()</span>
@@ -425,51 +425,56 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>LFM2.5-1.2B-Instruct-Q8_0.gguf</td>
 </tr>
 <tr class="odd">
+<th data-quarto-table-cell-role="th">LFM2.5-8B-A1B-Q4_0</th>
+<td>LiquidAI</td>
+<td>LFM2.5-8B-A1B-Q4_0.gguf</td>
+</tr>
+<tr class="even">
 <th data-quarto-table-cell-role="th">Qwen3-4B-Instruct-Q4_K_M</th>
 <td>bartowski</td>
 <td>Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th data-quarto-table-cell-role="th">Qwen3-8B-Q4_K_M</th>
 <td>bartowski</td>
 <td>Qwen_Qwen3-8B-Q4_K_M.gguf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">Qwen3.5-0.8B-Q8_0</th>
 <td>unsloth</td>
 <td>Qwen3.5-0.8B-Q8_0.gguf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th data-quarto-table-cell-role="th">Qwen3.5-2B-Q4_K_M</th>
 <td>unsloth</td>
 <td>Qwen3.5-2B-Q4_K_M.gguf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">Qwen3.5-4B-Q4_K_M</th>
 <td>unsloth</td>
 <td>Qwen3.5-4B-Q4_K_M.gguf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th data-quarto-table-cell-role="th">Qwen3.5-9B-Q4_K_M</th>
 <td>unsloth</td>
 <td>Qwen3.5-9B-Q4_K_M.gguf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">gemma-4-E2B-it-Q8_0</th>
 <td>ggml-org</td>
 <td>gemma-4-E2B-it-Q8_0.gguf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th data-quarto-table-cell-role="th">gemma-4-E2B-it-Q4_K_M</th>
 <td>unsloth</td>
 <td>gemma-4-E2B-it-Q4_K_M.gguf</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th data-quarto-table-cell-role="th">gemma-4-E4B-it-Q8_0</th>
 <td>ggml-org</td>
 <td>gemma-4-E4B-it-Q8_0.gguf</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <th data-quarto-table-cell-role="th">gemma-4-E4B-it-Q4_K_M</th>
 <td>unsloth</td>
 <td>gemma-4-E4B-it-Q4_K_M.gguf</td>
