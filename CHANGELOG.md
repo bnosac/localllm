@@ -8,6 +8,8 @@
       localllm.connect("localllm/modelxyz")
 * Move converters to localllm.utilities.converters
 * model_name in LocalLLM objects use now the name passed on to localllm_download_model, not the gguf filename
+* localllm_download_model, added:
+    * LFM2.5-8B-A1B-Q4_0
 
 ## 0.2.2
 
