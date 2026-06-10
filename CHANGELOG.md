@@ -3,13 +3,16 @@
 ## 0.3.0
 
 * Added textmodel_gepa_classify and a predict and summary function for it
-* import localllm_connect as connect making sure you can do 
+* import localllm_connect as connect making sure you can do
       import localllm
       localllm.connect("localllm/modelxyz")
 * Move converters to localllm.utilities.converters
 * model_name in LocalLLM objects use now the name passed on to localllm_download_model, not the gguf filename
 * localllm_download_model, added:
     * LFM2.5-8B-A1B-Q4_0
+    * gemma-4-E4B-it-qat-UD-Q4_K_XL
+    * gemma-4-12B-it-Q4_K_M
+    * gemma-4-12B-it-qat-UD-Q4_K_XL
 
 ## 0.2.2
 
@@ -24,7 +27,7 @@
     * gemma-4-E4B-it-Q4_K_M
     * translategemma-12b-it-Q4_K_M
     * gemma-3-4b-it-qat-Q4_0
-* localllm_download_model, renamed 
+* localllm_download_model, renamed
     * gemma-4-e2b-it-Q8_0 to gemma-4-E2B-it-Q8_0
 * localllm_download_model - reorder by bigger to smaller
 * Add localllm_list_models to list up the models which you can download easily

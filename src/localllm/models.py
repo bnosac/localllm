@@ -3,6 +3,7 @@ import urllib.request
 from pathlib import Path
 from typing import Optional
 
+
 def localllm_list_models():
     """
     List all available models which you can easily download
@@ -18,7 +19,7 @@ def localllm_list_models():
     >>> from localllm import localllm_list_models
     >>> x = localllm_list_models()
     >>> list(x.keys())
-    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'LFM2.5-8B-A1B-Q4_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-E2B-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-E4B-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M']
+    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'LFM2.5-8B-A1B-Q4_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-E2B-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-E4B-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M', 'gemma-4-E4B-it-qat-UD-Q4_K_XL', 'gemma-4-12B-it-Q4_K_M', 'gemma-4-12B-it-qat-UD-Q4_K_XL']
     >>> x['gemma-4-E2B-it-Q8_0']
     {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q8_0.gguf', 'filename': 'gemma-4-E2B-it-Q8_0.gguf'}
     >>>
@@ -35,7 +36,7 @@ def localllm_list_models():
             "source": "bartowski",
             "url": "https://huggingface.co/bartowski/google_gemma-3-270m-it-GGUF/resolve/main/google_gemma-3-270m-it-Q8_0.gguf",
             "filename": "google_gemma-3-270m-it-Q8_0.gguf",
-        },        
+        },
         "gemma-3-1b-it-Q8_0": {
             "source": "bartowski",
             "url": "https://huggingface.co/bartowski/google_gemma-3-1b-it-GGUF/resolve/main/google_gemma-3-1b-it-Q8_0.gguf",
@@ -71,12 +72,12 @@ def localllm_list_models():
             "source": "NikolayKozloff",
             "url": "https://huggingface.co/NikolayKozloff/translategemma-12b-it-Q4_K_M-GGUF/resolve/main/translategemma-12b-it-q4_k_m.gguf",
             "filename": "translategemma-12b-it-q4_k_m.gguf",
-        },        
+        },
         "LFM2.5-350M-Q8_0": {
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q8_0.gguf",
             "filename": "LFM2.5-350M-Q8_0.gguf",
-        },        
+        },
         "LFM2.5-1.2B-Instruct-Q4_K_M": {
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
@@ -91,12 +92,12 @@ def localllm_list_models():
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-8B-A1B-GGUF/resolve/main/LFM2.5-8B-A1B-Q4_0.gguf",
             "filename": "LFM2.5-8B-A1B-Q4_0.gguf",
-        },        
+        },
         "Qwen3-4B-Instruct-Q4_K_M": {
             "source": "bartowski",
             "url": "https://huggingface.co/bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF/resolve/main/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
             "filename": "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
-        },        
+        },
         "Qwen3-8B-Q4_K_M": {
             "source": "bartowski",
             "url": "https://huggingface.co/bartowski/Qwen_Qwen3-8B-GGUF/resolve/main/Qwen_Qwen3-8B-Q4_K_M.gguf",
@@ -106,22 +107,22 @@ def localllm_list_models():
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/resolve/main/Qwen3.5-0.8B-Q8_0.gguf",
             "filename": "Qwen3.5-0.8B-Q8_0.gguf",
-        },    
+        },
         "Qwen3.5-2B-Q4_K_M": {
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/Qwen3.5-2B-GGUF/resolve/main/Qwen3.5-2B-Q4_K_M.gguf",
             "filename": "Qwen3.5-2B-Q4_K_M.gguf",
-        }, 
+        },
         "Qwen3.5-4B-Q4_K_M": {
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/Qwen3.5-4B-GGUF/resolve/main/Qwen3.5-4B-Q4_K_M.gguf",
             "filename": "Qwen3.5-4B-Q4_K_M.gguf",
-        },                       
+        },
         "Qwen3.5-9B-Q4_K_M": {
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/Qwen3.5-9B-GGUF/resolve/main/Qwen3.5-9B-Q4_K_M.gguf",
             "filename": "Qwen3.5-9B-Q4_K_M.gguf",
-        }, 
+        },
         "gemma-4-E2B-it-Q8_0": {
             "source": "ggml-org",
             "url": "https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q8_0.gguf",
@@ -131,17 +132,32 @@ def localllm_list_models():
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf",
             "filename": "gemma-4-E2B-it-Q4_K_M.gguf",
-        },  
+        },
         "gemma-4-E4B-it-Q8_0": {
             "source": "ggml-org",
             "url": "https://huggingface.co/ggml-org/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q8_0.gguf",
             "filename": "gemma-4-E4B-it-Q8_0.gguf",
-        },                  
+        },
         "gemma-4-E4B-it-Q4_K_M": {
             "source": "unsloth",
             "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-GGUF/resolve/main/gemma-4-E4B-it-Q4_K_M.gguf",
             "filename": "gemma-4-E4B-it-Q4_K_M.gguf",
-        },                            
+        },
+        "gemma-4-E4B-it-qat-UD-Q4_K_XL": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q4_K_XL.gguf",
+            "filename": "gemma-4-E4B-it-qat-UD-Q4_K_XL",
+        },
+        "gemma-4-12B-it-Q4_K_M": {
+            "source": "ggml-org",
+            "url": "https://huggingface.co/ggml-org/gemma-4-12B-it-GGUF/resolve/main/gemma-4-12B-it-Q4_K_M.gguf",
+            "filename": "gemma-4-12B-it-Q4_K_M.gguf",
+        },
+        "gemma-4-12B-it-qat-UD-Q4_K_XL": {
+            "source": "unsloth",
+            "url": "https://huggingface.co/unsloth/gemma-4-12B-it-qat-GGUF/resolve/main/gemma-4-12B-it-qat-UD-Q4_K_XL.gguf",
+            "filename": "gemma-4-12B-it-qat-UD-Q4_K_XL.gguf",
+        },
     }
     return model_registry
 
@@ -164,10 +180,10 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
         - "translategemma-4b-it-q8_0": TranslateGemma 4B it model (Q8_0 quantization)
         - "translategemma-12b-it-q4_k_m": TranslateGemma 12B it model (Q4_K_M quantization)
-        - "LFM2.5-350M-Q8_0": LFM2.5 350M model (Q8_0 quantization)  
+        - "LFM2.5-350M-Q8_0": LFM2.5 350M model (Q8_0 quantization)
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
-        - "LFM2.5-8B-A1B-Q4_0": LFM2.5-8B-A1B with 1B active parameters model (Q4_0 quantization)        
+        - "LFM2.5-8B-A1B-Q4_0": LFM2.5-8B-A1B with 1B active parameters model (Q4_0 quantization)
         - "Qwen3-4B-Instruct-Q4_K_M": Qwen 3 4B model (Q4_K_M quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
         - "Qwen3.5-0.8B-Q8_0": Qwen 3.5 0.8B model (Q8_0 quantization)
@@ -178,6 +194,9 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "gemma-4-E2B-it-Q4_K_M": Google Gemma 4 E2B Instruct model (Q4_K_M quantization)
         - "gemma-4-E4B-it-Q8_0":   Google Gemma 4 E4B Instruct model (Q8_0 quantization)
         - "gemma-4-E4B-it-Q4_K_M": Google Gemma 4 E4B Instruct model (Q4_K_M quantization)
+        - "gemma-4-E4B-it-qat-UD-Q4_K_XL": Google Gemma 4 E4B Instruct model (Unsloth Dynamic Q4_K_XL quantization - with quantized aware training)
+        - "gemma-4-12B-it-Q4_K_M": Google Gemma 4 12B Instruct model (Q4_K_M quantization)
+        - "gemma-4-12B-it-qat-UD-Q4_K_XL": Google Gemma 4 12B Instruct model (Unsloth Dynamic Q4_K_XL quantization - with quantized aware training)
 
     model_dir : str or None, default=None
         Directory where the model should be stored. If None, uses the path set in environment variable LOCALLLM_MODEL_DIR
@@ -226,17 +245,17 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> model_path = localllm_download_model("translategemma-4b-it-q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("translategemma-12b-it-q4_k_m", overwrite=True, trace = False)
-    >>> os.remove(model_path)    
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-350M-Q8_0", overwrite=True, trace = False)
-    >>> os.remove(model_path)        
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q8_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-8B-A1B-Q4_0", overwrite=True, trace = False)
-    >>> os.remove(model_path)    
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3-4B-Instruct-Q4_K_M", overwrite=True, trace = False)
-    >>> os.remove(model_path)    
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3-8B-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("Qwen3.5-0.8B-Q8_0", overwrite=True, trace = False)
@@ -248,14 +267,20 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> model_path = localllm_download_model("Qwen3.5-9B-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-4-E2B-it-Q8_0", overwrite=True, trace = False)
-    >>> os.remove(model_path) 
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-4-E2B-it-Q4_K_M", overwrite=True, trace = False)
-    >>> os.remove(model_path)     
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-4-E4B-it-Q8_0", overwrite=True, trace = False)
-    >>> os.remove(model_path)     
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("gemma-4-E4B-it-Q4_K_M", overwrite=True, trace = False)
-    >>> os.remove(model_path)            
-    
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("gemma-4-E4B-it-qat-UD-Q4_K_XL", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("gemma-4-12B-it-Q4_K_M", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("gemma-4-12B-it-qat-UD-Q4_K_XL", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+
     Notes
     -----
     The function creates the target directory if it doesn't exist.
