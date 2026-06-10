@@ -16,7 +16,7 @@ dependencies = [
     "s3generics"
 ]
 
-    
+
 
 
 [project.optional-dependencies]
@@ -26,9 +26,9 @@ converters = [
 
 [dependency-groups]
 doc = [
-    "pyyaml", 
-    "jupyterlab", 
-    "jupytext", 
+    "pyyaml",
+    "jupyterlab",
+    "jupytext",
     "jupyter",  ## Quarto documentation
     "quartodoc",
     "griffe<0.49",

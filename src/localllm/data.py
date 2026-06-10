@@ -3,7 +3,8 @@ import zipfile
 import importlib_resources
 from typing import List
 from io import StringIO
-#from zipfile import ZipFile
+# from zipfile import ZipFile
+
 
 def data_be_parliament() -> List[dict]:
     """
@@ -15,7 +16,7 @@ def data_be_parliament() -> List[dict]:
       - depotdat: the date when the question was registered
       - aut_party / aut_person / aut_language: who asked the question and which political party is he/she a member of + the language of the person who asked the question
       - language: the language of the question
-      - question: the question itself 
+      - question: the question itself
       - question_theme_main: the main theme of the question
       - question_theme: a comma-separated list of all themes the question is about
       - answer: the answer given by the department of the minister
@@ -31,13 +32,13 @@ def data_be_parliament() -> List[dict]:
 
     list[dict]
         A list of dicts where each list element is a question asked in parliament.
-        The dataset has 14034 rows with 7017 questions which are both available in french and dutch. 
+        The dataset has 14034 rows with 7017 questions which are both available in french and dutch.
         The dataset has the following columns: 'doc_id', 'depotdat', 'aut_party', 'aut_person', 'aut_language', 'language', 'question', 'question_theme_main', 'question_theme', 'answer', 'answer_deptpres', 'answer_department', 'answer_subdepartment' if you convert it to pandas or polars
 
     Reference
     ---------
-    
-    http://data.dekamer.be, data is provided by http://www.dekamer.be in the public domain (CC0).    
+
+    http://data.dekamer.be, data is provided by http://www.dekamer.be in the public domain (CC0).
 
     Examples
     --------
@@ -47,7 +48,7 @@ def data_be_parliament() -> List[dict]:
     >>> import pprint
     >>> pprint.pprint(x[0], width=1000)                                       # doctest: +SKIP
     {
-      'answer': 'Ik nodig het geachte lid uit zijn vraag te stellen aan mijn collega Kris Peeters, minister van Werk en Economie (Vraag nr. 2000 van 14 februari 2018).',        
+      'answer': 'Ik nodig het geachte lid uit zijn vraag te stellen aan mijn collega Kris Peeters, minister van Werk en Economie (Vraag nr. 2000 van 14 februari 2018).',
       'answer_department': "Minister van Middenstand, Zelfstandigen, KMO's, Landbouw en Maatschappelijke Integratie",
       'answer_deptpres': '14',
       'answer_subdepartment': "Middenstand, Zelfstandigen, KMO's, Landbouw en Maatschappelijke Integratie",
@@ -61,18 +62,18 @@ def data_be_parliament() -> List[dict]:
       'question_theme': 'GEZIN  |  ALLEENSTAANDE  |  VROUW',
       'question_theme_main': ''
     }
-    >>> 
+    >>>
     >>> import polars as pl                        # doctest: +SKIP
     >>> be = pl.from_records(x)                    # doctest: +SKIP
     >>> import pandas as                           # doctest: +SKIP
     >>> be = pd.DataFrame.from_records(x)          # doctest: +SKIP
     """
-    path = importlib_resources.files("localllm") / "data" / "be_parliament.zip"        
+    path = importlib_resources.files("localllm") / "data" / "be_parliament.zip"
     path = str(path)
-    #x = pl.read_csv(ZipFile(path).open("be_parliament.csv", mode='r').read(), encoding = "utf-8", infer_schema=False)
-    with zipfile.ZipFile(path, 'r') as zip_ref:
+    # x = pl.read_csv(ZipFile(path).open("be_parliament.csv", mode='r').read(), encoding = "utf-8", infer_schema=False)
+    with zipfile.ZipFile(path, "r") as zip_ref:
         with zip_ref.open("be_parliament.csv") as csv_file:
-            csv_content = csv_file.read().decode('utf-8')
+            csv_content = csv_file.read().decode("utf-8")
             reader = csv.DictReader(StringIO(csv_content))
             x = [row for row in reader]
     return x

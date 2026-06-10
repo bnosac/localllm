@@ -7,7 +7,7 @@ Python package localllm provides functionalities to use a local LLM object along
 
 ### Download a model
 
-First use `localllm_download_model` to download a local model. 
+First use `localllm_download_model` to download a local model.
 For the list of all models which you can quickly download, look to the help of localllm_download_model.
 
 ```{python}
@@ -113,15 +113,15 @@ from localllm import LocalChatAdapter
 model_name = "localllm/gemma-3-4b-it-Q4_K_M"
 model_name = "localllm/Qwen3-4B-Instruct-Q4_K_M"
 model_name = "localllm/LFM2.5-1.2B-Instruct-Q8_0"
-llm = localllm.connect(model_name, 
+llm = localllm.connect(model_name,
                        model_kwargs = dict(
-                            verbose = False, 
+                            verbose = False,
                             n_ctx = 32768, n_gpu_layers = 0, n_threads = 1, flash_attn = True, swa_full = True, seed = 4321),
-                       adapter = LocalChatAdapter(trace = 2)) 
+                       adapter = LocalChatAdapter(trace = 2))
 ```
 
-```{python}     
-import dspy                           
+```{python}
+import dspy
 class Go(dspy.Signature):
     sentence: str = dspy.InputField(desc = "A question")
     value:    str = dspy.OutputField(desc = "A city")
@@ -130,7 +130,7 @@ predict = dspy.Predict(Go)
 out = predict(sentence = "What is the capital of Hungary")
 ```
 
-```{python}  
+```{python}
 out
 ```
 
@@ -139,7 +139,7 @@ out
 
 The following list of models can be easily downloaded. You can use them with `localllm_connect("localllm/{model_name}")`
 
-```{python}  
+```{python}
 from localllm import localllm_list_models
 import pandas as pd
 x = localllm_list_models()

@@ -17,7 +17,7 @@ llm = localllm.connect("localllm/gemma-4-E2B-it-Q8_0") # <1>
 
 
 ```{python}
-import dspy 
+import dspy
 class Go(dspy.Signature):
     sentence: str       = dspy.InputField(desc = "A question")
     value:    list[str] = dspy.OutputField(desc = "The answer")

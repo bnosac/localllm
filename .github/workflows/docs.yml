@@ -1,4 +1,4 @@
-name: docs 
+name: docs
 
 on:
   workflow_dispatch:
@@ -23,12 +23,12 @@ jobs:
           QUARTO_PYTHON: .venv/bin/python3
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build reference documentation
-        run: |  
+        run: |
           uv sync --all-extras --group dev
           uv pip install .
-          uv run quartodoc build --config doc/_quarto.yml          
+          uv run quartodoc build --config doc/_quarto.yml
       - name: Add venv to PATH
-        run: echo "$(pwd)/.venv/bin" >> $GITHUB_PATH                
+        run: echo "$(pwd)/.venv/bin" >> $GITHUB_PATH
       - name: Publish to GitHub Pages (and render)
         uses: quarto-dev/quarto-actions/publish@v2
         with:
