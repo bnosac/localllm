@@ -19,7 +19,7 @@ def localllm_list_models():
     >>> from localllm import localllm_list_models
     >>> x = localllm_list_models()
     >>> list(x.keys())
-    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-350M-Q8_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'LFM2.5-8B-A1B-Q4_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-E2B-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-E4B-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M', 'gemma-4-E4B-it-qat-UD-Q4_K_XL', 'gemma-4-12B-it-Q4_K_M', 'gemma-4-12B-it-qat-UD-Q4_K_XL']
+    ['gemma-3-270m-it-qat-Q4_0', 'gemma-3-270m-it-Q8_0', 'gemma-3-1b-it-Q8_0', 'gemma-3-4b-it-qat-Q4_0', 'gemma-3-4b-it-Q4_K_M', 'gemma-3-12b-it-qat-Q4_0', 'GLM-4.6V-Flash-Q4_K_M', 'translategemma-4b-it-q8_0', 'translategemma-12b-it-q4_k_m', 'LFM2.5-230M-Q8_0', 'LFM2.5-230M-QAD-Q4_0', 'LFM2.5-350M-Q8_0', 'LFM2.5-350M-QAD-Q4_0', 'LFM2.5-1.2B-Instruct-Q4_K_M', 'LFM2.5-1.2B-Instruct-Q8_0', 'LFM2.5-1.2B-Instruct-QAD-Q4_0', 'LFM2.5-8B-A1B-Q4_0', 'Qwen3-4B-Instruct-Q4_K_M', 'Qwen3-8B-Q4_K_M', 'Qwen3.5-0.8B-Q8_0', 'Qwen3.5-2B-Q4_K_M', 'Qwen3.5-4B-Q4_K_M', 'Qwen3.5-9B-Q4_K_M', 'gemma-4-E2B-it-Q8_0', 'gemma-4-E2B-it-Q4_K_M', 'gemma-4-E4B-it-Q8_0', 'gemma-4-E4B-it-Q4_K_M', 'gemma-4-E4B-it-qat-UD-Q4_K_XL', 'gemma-4-12B-it-Q4_K_M', 'gemma-4-12B-it-qat-UD-Q4_K_XL']
     >>> x['gemma-4-E2B-it-Q8_0']
     {'source': 'ggml-org', 'url': 'https://huggingface.co/ggml-org/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q8_0.gguf', 'filename': 'gemma-4-E2B-it-Q8_0.gguf'}
     >>>
@@ -72,12 +72,27 @@ def localllm_list_models():
             "source": "NikolayKozloff",
             "url": "https://huggingface.co/NikolayKozloff/translategemma-12b-it-Q4_K_M-GGUF/resolve/main/translategemma-12b-it-q4_k_m.gguf",
             "filename": "translategemma-12b-it-q4_k_m.gguf",
+        },              
+        "LFM2.5-230M-Q8_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-230M-GGUF/resolve/main/LFM2.5-230M-Q8_0.gguf",
+            "filename": "LFM2.5-230M-Q8_0.gguf",
         },
+        "LFM2.5-230M-QAD-Q4_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-230M-GGUF/resolve/main/LFM2.5-230M-QAD-Q4_0.gguf",
+            "filename": "LFM2.5-230M-QAD-Q4_0.gguf",
+        },                
         "LFM2.5-350M-Q8_0": {
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-Q8_0.gguf",
             "filename": "LFM2.5-350M-Q8_0.gguf",
         },
+        "LFM2.5-350M-QAD-Q4_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-350M-GGUF/resolve/main/LFM2.5-350M-QAD-Q4_0.gguf",
+            "filename": "LFM2.5-350M-QAD-Q4_0.gguf",
+        },        
         "LFM2.5-1.2B-Instruct-Q4_K_M": {
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q4_K_M.gguf",
@@ -87,6 +102,11 @@ def localllm_list_models():
             "source": "LiquidAI",
             "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-Q8_0.gguf",
             "filename": "LFM2.5-1.2B-Instruct-Q8_0.gguf",
+        },
+        "LFM2.5-1.2B-Instruct-QAD-Q4_0": {
+            "source": "LiquidAI",
+            "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Instruct-GGUF/resolve/main/LFM2.5-1.2B-Instruct-QAD-Q4_0.gguf",
+            "filename": "LFM2.5-1.2B-Instruct-QAD-Q4_0.gguf",
         },
         "LFM2.5-8B-A1B-Q4_0": {
             "source": "LiquidAI",
@@ -180,9 +200,13 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
         - "GLM-4.6V-Flash-Q4_K_M": GLM 4.6V Flash model (Q4_K_M quantization)
         - "translategemma-4b-it-q8_0": TranslateGemma 4B it model (Q8_0 quantization)
         - "translategemma-12b-it-q4_k_m": TranslateGemma 12B it model (Q4_K_M quantization)
+        - "LFM2.5-230M-Q8_0": LFM2.5 230M model (Q8_0 quantization) 
+        - "LFM2.5-230M-QAD-Q4_0": LFM2.5 230M model (Q4_0 quantization - with quantized aware training)
         - "LFM2.5-350M-Q8_0": LFM2.5 350M model (Q8_0 quantization)
+        - "LFM2.5-350M-QAD-Q4_0": LFM2.5 350M model (Q4_0 quantization - with quantized aware training)        
         - "LFM2.5-1.2B-Instruct-Q4_K_M": LFM2.5 1.2B Instruct model (Q4_K_M quantization)
         - "LFM2.5-1.2B-Instruct-Q8_0": LFM2.5 1.2B Instruct model (Q8_0 quantization)
+        - "LFM2.5-1.2B-Instruct-QAD-Q4_0": LFM2.5 1.2B Instruct model (Q4_0 quantization - with quantized aware training)
         - "LFM2.5-8B-A1B-Q4_0": LFM2.5-8B-A1B with 1B active parameters model (Q4_0 quantization)
         - "Qwen3-4B-Instruct-Q4_K_M": Qwen 3 4B model (Q4_K_M quantization)
         - "Qwen3-8B-Q4_K_M": Qwen 3 8B model (Q4_K_M quantization)
@@ -246,11 +270,19 @@ def localllm_download_model(type: str = "gemma-3-270m-it-Q8_0", model_dir: Optio
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("translategemma-12b-it-q4_k_m", overwrite=True, trace = False)
     >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-230M-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-230M-QAD-Q4_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-350M-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-350M-QAD-Q4_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q4_K_M", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-Q8_0", overwrite=True, trace = False)
+    >>> os.remove(model_path)
+    >>> model_path = localllm_download_model("LFM2.5-1.2B-Instruct-QAD-Q4_0", overwrite=True, trace = False)
     >>> os.remove(model_path)
     >>> model_path = localllm_download_model("LFM2.5-8B-A1B-Q4_0", overwrite=True, trace = False)
     >>> os.remove(model_path)

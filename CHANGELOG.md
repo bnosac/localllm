@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1
+
+* localllm_download_model, added:
+    * LFM2.5-230M-Q8_0
+    * LFM2.5-230M-QAD-Q4_0
+    * LFM2.5-350M-QAD-Q4_0
+    - LFM2.5-1.2B-Instruct-QAD-Q4_0
+
 ## 0.3.0
 
 * Added textmodel_gepa_classify and a predict and summary function for it
