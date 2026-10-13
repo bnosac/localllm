@@ -6,7 +6,8 @@
     * LFM2.5-230M-Q8_0
     * LFM2.5-230M-QAD-Q4_0
     * LFM2.5-350M-QAD-Q4_0
-    - LFM2.5-1.2B-Instruct-QAD-Q4_0
+    * LFM2.5-1.2B-Instruct-QAD-Q4_0
+    * Changed url of gemma-4-12B-it-Q4_K_M as it no longer exists in main
 
 ## 0.3.0
 

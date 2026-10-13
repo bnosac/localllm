@@ -170,7 +170,8 @@ def localllm_list_models():
         },
         "gemma-4-12B-it-Q4_K_M": {
             "source": "ggml-org",
-            "url": "https://huggingface.co/ggml-org/gemma-4-12B-it-GGUF/resolve/main/gemma-4-12B-it-Q4_K_M.gguf",
+            #"url": "https://huggingface.co/ggml-org/gemma-4-12B-it-GGUF/resolve/main/gemma-4-12B-it-Q4_K_M.gguf",
+            "url": "https://huggingface.co/ggml-org/gemma-4-12B-it-GGUF/resolve/e52c517d0d0b50751db0fa10e38c4114356c296c/gemma-4-12B-it-Q4_K_M.gguf",
             "filename": "gemma-4-12B-it-Q4_K_M.gguf",
         },
         "gemma-4-12B-it-qat-UD-Q4_K_XL": {
